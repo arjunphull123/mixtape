@@ -189,9 +189,11 @@ function populateUI(profile, tracks) {
     document.getElementById("customize-container").style.display = "flex"
     for (var i=0; i<20; i++) {
         var track = tracks.items[i]
+        var trackURL = track.external_urls['spotify']
         var trackName = track.name
         var trackArtist = getArtists(track)
         document.getElementById("track-" + (i+1)).innerHTML = trackName + " - " + trackArtist
+        document.getElementById("track-link-" + (i+1)).href = trackURL
     }
 }
 
