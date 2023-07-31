@@ -138,6 +138,7 @@ body {
   font-size: 1.5rem;
   z-index: 1000;
   backdrop-filter: blur(0.5rem);
+  -webkit-backdrop-filter: blur(0.5rem);
 }
 
 .content-container {
@@ -583,6 +584,7 @@ input {
   color: white;
   z-index: 1000;
   backdrop-filter: blur(0.5rem);
+  -webkit-backdrop-filter: blur(0.5rem);
 }
 
 .info-header {
