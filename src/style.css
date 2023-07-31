@@ -537,7 +537,7 @@ input {
 .spotify-logo {
   /*width: 4.99106rem;
   height: 1.5rem;*/
-  width: calc(var(--mw)*0.075*2);
+  width: calc(var(--mw)*0.075*3.5);
   height: auto;
   fill: #fff;
 }
