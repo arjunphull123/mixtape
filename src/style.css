@@ -306,7 +306,7 @@ input {
   display: none;
   width: 100%;
   font-size: calc(var(--mw) * 150/1000);
-  letter-spacing: calc(var(--mw) * -0.003);
+  letter-spacing: calc(var(--mw) * -0.006);
   line-height: 95%;
   padding: 0;
   padding-top: calc(var(--mw) * 0.04);
