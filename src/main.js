@@ -183,8 +183,9 @@ function populateUI(profile, tracks) {
     const today = new Date()
     var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear()
     document.getElementById('date').innerHTML = date
-    document.getElementById("cassette-title").innerText = profile.display_name + titleSuffix;
-    document.getElementById("mixtape-name-input").value = profile.display_name + titleSuffix
+    const displayName = profile.display_name.replaceAll(/\p{Emoji}/ug, '_')
+    document.getElementById("cassette-title").innerText = displayName + titleSuffix;
+    document.getElementById("mixtape-name-input").value = displayName + titleSuffix
     document.getElementById("start-container").style.display = "none"
     document.getElementById("customize-container").style.display = "flex"
     for (var i=0; i<20; i++) {
