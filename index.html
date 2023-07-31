@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>        
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+    <title>Mixtape</title>
+  </head>
+  <body>
+    <div class="body-container">
+      <div id="header" class="header">
+        <div class="info">
+          <svg id="info-button" class="info-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+            <path d="M12 24.5C5.3724 24.5 0 19.1276 0 12.5C0 5.8724 5.3724 0.5 12 0.5C18.6276 0.5 24 5.8724 24 12.5C24 19.1276 18.6276 24.5 12 24.5ZM12 22.1C14.5461 22.1 16.9879 21.0886 18.7882 19.2882C20.5886 17.4879 21.6 15.0461 21.6 12.5C21.6 9.95392 20.5886 7.51212 18.7882 5.71178C16.9879 3.91143 14.5461 2.9 12 2.9C9.45392 2.9 7.01212 3.91143 5.21178 5.71178C3.41143 7.51212 2.4 9.95392 2.4 12.5C2.4 15.0461 3.41143 17.4879 5.21178 19.2882C7.01212 21.0886 9.45392 22.1 12 22.1ZM10.8 6.5H13.2V8.9H10.8V6.5ZM10.8 11.3H13.2V18.5H10.8V11.3Z" fill="white"/>
+          </svg>
+        </div>
+        <div class="logo-header" id="logo-header">
+          mixtape
+        </div>
+
+        <a href="http://localhost:4173">
+        <div class="logout" id="logout">
+          <svg class="logout-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="25" viewBox="0 0 28 25" fill="none">
+            <path d="M6.90001 11.3H16.5V13.7H6.90001V17.3L0.900009 12.5L6.90001 7.7V11.3ZM5.70001 19.7H8.94961C10.3352 20.922 12.044 21.7182 13.871 21.9931C15.6979 22.268 17.5653 22.0099 19.2492 21.2498C20.9331 20.4897 22.3619 19.2598 23.3641 17.7078C24.3663 16.1558 24.8994 14.3475 24.8994 12.5C24.8994 10.6525 24.3663 8.84425 23.3641 7.29222C22.3619 5.7402 20.9331 4.51033 19.2492 3.7502C17.5653 2.99007 15.6979 2.73197 13.871 3.00687C12.044 3.28177 10.3352 4.078 8.94961 5.3H5.70001C6.8168 3.80861 8.26601 2.59822 9.93249 1.76497C11.599 0.93173 13.4368 0.498604 15.3 0.500003C21.9276 0.500003 27.3 5.8724 27.3 12.5C27.3 19.1276 21.9276 24.5 15.3 24.5C13.4368 24.5014 11.599 24.0683 9.93249 23.235C8.26601 22.4018 6.8168 21.1914 5.70001 19.7Z" fill="white"/>
+          </svg>
+        </div>
+        </a>
+      </div>
+      <div class="content-container" id="content-container">
+        <div class="loading" id="loading">Creating your<br>mixtape...</div>
+        <div class="info-screen">
+          <div id="header" class="info-header">
+            <div class="info">
+              <svg id="info-button" class="info-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                <path d="M12 24.5C5.3724 24.5 0 19.1276 0 12.5C0 5.8724 5.3724 0.5 12 0.5C18.6276 0.5 24 5.8724 24 12.5C24 19.1276 18.6276 24.5 12 24.5ZM12 22.1C14.5461 22.1 16.9879 21.0886 18.7882 19.2882C20.5886 17.4879 21.6 15.0461 21.6 12.5C21.6 9.95392 20.5886 7.51212 18.7882 5.71178C16.9879 3.91143 14.5461 2.9 12 2.9C9.45392 2.9 7.01212 3.91143 5.21178 5.71178C3.41143 7.51212 2.4 9.95392 2.4 12.5C2.4 15.0461 3.41143 17.4879 5.21178 19.2882C7.01212 21.0886 9.45392 22.1 12 22.1ZM10.8 6.5H13.2V8.9H10.8V6.5ZM10.8 11.3H13.2V18.5H10.8V11.3Z" fill="white"/>
+              </svg>
+            </div>
+            <div class="logo-header" id="logo-header">
+              mixtape
+            </div>
+    
+            <a href="http://localhost:4173">
+            <div class="logout" id="logout">
+              <svg class="logout-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="25" viewBox="0 0 28 25" fill="none">
+                <path d="M6.90001 11.3H16.5V13.7H6.90001V17.3L0.900009 12.5L6.90001 7.7V11.3ZM5.70001 19.7H8.94961C10.3352 20.922 12.044 21.7182 13.871 21.9931C15.6979 22.268 17.5653 22.0099 19.2492 21.2498C20.9331 20.4897 22.3619 19.2598 23.3641 17.7078C24.3663 16.1558 24.8994 14.3475 24.8994 12.5C24.8994 10.6525 24.3663 8.84425 23.3641 7.29222C22.3619 5.7402 20.9331 4.51033 19.2492 3.7502C17.5653 2.99007 15.6979 2.73197 13.871 3.00687C12.044 3.28177 10.3352 4.078 8.94961 5.3H5.70001C6.8168 3.80861 8.26601 2.59822 9.93249 1.76497C11.599 0.93173 13.4368 0.498604 15.3 0.500003C21.9276 0.500003 27.3 5.8724 27.3 12.5C27.3 19.1276 21.9276 24.5 15.3 24.5C13.4368 24.5014 11.599 24.0683 9.93249 23.235C8.26601 22.4018 6.8168 21.1914 5.70001 19.7Z" fill="white"/>
+              </svg>
+            </div>
+            </a>
+          </div>
+          <div class="info-content">
+            <p class="info-head">welcome to mixtape</p>
+            <p class="info-text">mixtape creates a virtual cassette loaded with your top Spotify songs.</p>
+            <p class="info-text">You can choose a time range, color, and label for your mixtape.</p>
+            <p class="info-text">We do not store your data. For more information, check out our Privacy Policy or contact us.</p>
+            <p id="close-info" class="info-text close-button">Close</p>
+            <p class="info-text made-by">made by <a class="made-by" href="https://www.instagram.com/arjunphull/">arjun phull</a></p>
+          </div>
+
+        </div>
+        <div class="start-container" id="start-container">
+          <div class="hero">
+            <h1>Show off your top tracks like it's 1989</h1>
+          </div>
+          <div class="log-in-button" id="log-in-button">
+            <svg class="spotify-icon" xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+              <path class="bg-color" d="M8.5 0C4.1 0 0.5 3.6 0.5 8C0.5 12.4 4.1 16 8.5 16C12.9 16 16.5 12.4 16.5 8C16.5 3.6 12.94 0 8.5 0ZM11.5 11.72C9.62 10.56 7.26 10.32 4.46 10.96C4.18 11.04 3.94 10.84 3.86 10.6C3.78 10.32 3.98 10.08 4.22 10C7.26 9.32 9.9 9.6 11.98 10.88C12.26 11 12.3 11.32 12.18 11.56C12.02 11.8 11.74 11.88 11.5 11.72ZM12.3 9.56C10.14 8.24 6.86 7.84 4.34 8.64C4.02 8.72 3.66 8.56 3.58 8.24C3.5 7.92 3.66 7.56 3.98 7.48C6.9 6.6 10.5 7.04 12.98 8.56C13.22 8.68 13.34 9.08 13.14 9.36C12.94 9.64 12.58 9.76 12.3 9.56ZM3.94 6.2C3.54 6.32 3.14 6.08 3.02 5.72C2.9 5.32 3.14 4.92 3.5 4.8C6.34 3.96 11.02 4.12 13.98 5.88C14.34 6.08 14.46 6.56 14.26 6.92C14.06 7.2 13.58 7.32 13.22 7.12C10.66 5.6 6.38 5.44 3.94 6.2Z" fill="#6EA2D2"/>
+            </svg>
+            <p>Log in with Spotify</p>
+          </div>
+        </div>
+        <div class="customize-container" id="customize-container">
+          <h1 class="customize">Customize your<br>mixtape</h1>
+          <div class="controls">
+            <div class="time-range-options">
+              <div id="short-term" class="time-range-option active">Last month</div>
+              <div id="medium-term" class="time-range-option">Last 6 months</div>
+              <div id="long-term" class="time-range-option">All time</div>
+            </div>
+            <div class="color-options">
+              <div id="color-1" class="color-button active">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                  <circle class="color-1" cx="12.5" cy="12.5" r="12.5" fill="#D9D9D9"/>
+                </svg>
+              </div>
+              <div id="color-2" class="color-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                  <circle class="color-2" cx="12.5" cy="12.5" r="12.5" fill="#D9D9D9"/>
+                </svg>
+              </div>
+              <div id="color-3" class="color-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                  <circle class="color-3" cx="12.5" cy="12.5" r="12.5" fill="#D9D9D9"/>
+                </svg>
+              </div>
+              <div id="color-4" class="color-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                  <circle class="color-4" cx="12.5" cy="12.5" r="12.5" fill="#D9D9D9"/>
+                </svg>
+              </div>
+              <div id="color-5" class="color-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                  <circle class="color-5" cx="12.5" cy="12.5" r="12.5" fill="#D9D9D9"/>
+                </svg>
+              </div>
+              <div id="color-6" class="color-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                  <circle class="color-6" cx="12.5" cy="12.5" r="12.5" fill="#D9D9D9"/>
+                </svg>
+              </div>
+            </div>
+            <input type="text" id="mixtape-name-input">
+          </div>
+          <p class="scroll-down">Scroll down, screenshot, and share!</p>
+          <div class="save-and-share" id="save-and-share">Download</div>
+        </div>
+        <div class="mixtape-container" id="mixtape-container">
+          
+          <h1 id="mix-head" class="mix-head">Check out my<br>top tracks</h1>
+          <h1 id="mix-tag" class="mix-tag">Get yours at mixtape.github.io/app</h1>
+
+          <div class="tracklist" id="tracklist">
+            <img class="case" src="cassette-shell.png" alt="">
+            <img class="blank-tracklist" src="blank-tracklist.png" alt="">
+            <div class="track-card" id="track-card">
+              <div class="top-section">
+                <div class="a-side">
+                  <p class="side-label">A</p>
+                </div>
+                <div class="b-side">
+                  <p class="side-label">B</p>
+                  <div class="date-time">
+                    <p class="b-side-meta" id="date">12/31/89</p>
+                    <p class="b-side-meta" id="time">Last 6 months</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <p class="track" id="track-1">
+                  Look Away - Chicago
+                </p>
+
+                <p class="track" id="track-11">
+                  Right Here Waiting - Richard Marx
+                </p>
+              </div>
+              <div class="row">
+                <p class="track" id="track-2">
+                  My Prerogative - Bobby Brown
+                </p>
+                
+                <p class="track" id="track-12">
+                  Waiting For a Star to Fall - Boy Meets Girl
+                </p>
+              </div>
+              <div class="row">
+                <p class="track" id="track-3">
+                  Every Rose Has Its Thorn - Poison
+                </p>
+                
+                <p class="track" id="track-13">
+                  Lost in Your Eyes - Debbie Gibson
+                </p>
+              </div>
+              <div class="row">
+                <p class="track" id="track-4">
+                  Straight Up - Paula Abdul
+                </p>
+                
+                <p class="track" id="track-14">
+                  Don't Wanna Lose You
+                </p>
+              </div>
+              <div class="row">
+                <p class="track" id="track-5">
+                  Miss You Much - Janet Jackson
+                </p>
+                
+                <p class="track" id="track-15">
+                  Heaven - Warrant
+                </p>
+              </div>
+              <div class="row">
+                <p class="track" id="track-6">
+                  Cold Hearted - Paula Abdul
+                </p>
+                
+                <p class="track" id="track-16">
+                  Girl I'm Gonna Miss You - Milli Vanilli
+                </p>
+              </div>
+              <div class="row">
+                <p class="track" id="track-7">
+                  Wind Beneath My Wings - Bette Midler
+                </p>
+                
+                <p class="track" id="track-17">
+                  The Look - Roxette
+                </p>
+              </div>
+              <div class="row">
+                <p class="track" id="track-8">
+                  Girl You Know It's True - Milli Vanilli
+                </p>
+                
+                <p class="track" id="track-18">
+                  She Drives Me Crazy - Fine Young Cannibals
+                </p>
+              </div>
+              <div class="row">
+                <p class="track" id="track-9">
+                  Baby, I Love Your Way/Freebird Medley - Will to Power
+                </p>
+                
+                <p class="track" id="track-19">
+                  On Our Own - Bobby Brown
+                </p>
+              </div>
+              <div class="row">
+                <p class="track" id="track-10">
+                  Giving You the Best That I Got - Anita Baker
+                </p>
+                
+                <p class="track" id="track-20">
+                  Two Hearts - Phil Collins
+                </p>
+              </div>
+            </div>
+
+            <img src="white-texture.png" alt="" class="texture white">
+            <img src="black-texture.png" alt="" class="texture black">
+          </div>
+
+          <img src="scotch.png" alt="" class="cassette" id="cassette">
+          <p class="cassette-title" id="cassette-title">Best of '89</p>
+          
+          <div class="mixtape-footer">
+            
+            <svg class="spotify-logo" xmlns="http://www.w3.org/2000/svg" width="34" height="32" viewBox="0 0 17 16" fill="none">
+              <path d="M8.5 0C4.1 0 0.5 3.6 0.5 8C0.5 12.4 4.1 16 8.5 16C12.9 16 16.5 12.4 16.5 8C16.5 3.6 12.94 0 8.5 0ZM11.5 11.72C9.62 10.56 7.26 10.32 4.46 10.96C4.18 11.04 3.94 10.84 3.86 10.6C3.78 10.32 3.98 10.08 4.22 10C7.26 9.32 9.9 9.6 11.98 10.88C12.26 11 12.3 11.32 12.18 11.56C12.02 11.8 11.74 11.88 11.5 11.72ZM12.3 9.56C10.14 8.24 6.86 7.84 4.34 8.64C4.02 8.72 3.66 8.56 3.58 8.24C3.5 7.92 3.66 7.56 3.98 7.48C6.9 6.6 10.5 7.04 12.98 8.56C13.22 8.68 13.34 9.08 13.14 9.36C12.94 9.64 12.58 9.76 12.3 9.56ZM3.94 6.2C3.54 6.32 3.14 6.08 3.02 5.72C2.9 5.32 3.14 4.92 3.5 4.8C6.34 3.96 11.02 4.12 13.98 5.88C14.34 6.08 14.46 6.56 14.26 6.92C14.06 7.2 13.58 7.32 13.22 7.12C10.66 5.6 6.38 5.44 3.94 6.2Z" fill="white"/>
+            </svg>
+
+            <p class="logo small">mixtape</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+      </div>
+    </div>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>

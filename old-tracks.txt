@@ -1,0 +1,107 @@
+div class="container">
+    <img class="blank-tracklist" src="blank-tracklist.png" alt="">
+    <div class="track-card" id="track-card">
+      <div class="top-section">
+        <div class="a-side">
+          <p class="side-label">A</p>
+        </div>
+        <div class="b-side">
+          <p class="side-label">B</p>
+          <div class="date-time">
+            <p class="b-side-meta" id="date">07/28/23</p>
+            <p class="b-side-meta" id="time">Last month</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <p class="track" id="track-1">
+          Enchanted (Taylor’s Version) - Taylor Swift
+        </p>
+
+        <p class="track" id="track-11">
+          Popular (with Playboi Carti & Madonna) - Music from the HBO Original Series - The Weeknd, Playboi Carti, Madonna
+        </p>
+      </div>
+      <div class="row">
+        <p class="track" id="track-2">
+          Sparks Fly (Taylor’s Version) - Taylor Swift
+        </p>
+        
+        <p class="track" id="track-12">
+          Mean (Taylor’s Version) - Taylor Swift
+        </p>
+      </div>
+      <div class="row">
+        <p class="track" id="track-3">
+          Back to December (Taylor’s Version) - Taylor Swift
+        </p>
+        
+        <p class="track" id="track-13">
+          No Heart - 21 Savage, Metro Boomin
+        </p>
+      </div>
+      <div class="row">
+        <p class="track" id="track-4">
+          United in Grief - Kendrick Lamar
+        </p>
+        
+        <p class="track" id="track-14">
+          Speak Now (Taylor’s Version) - Taylor Swift
+        </p>
+      </div>
+      <div class="row">
+        <p class="track" id="track-5">
+          N95 - Kendrick Lamar
+        </p>
+        
+        <p class="track" id="track-15">
+          Traitor - Olivia Rodrigo
+        </p>
+      </div>
+      <div class="row">
+        <p class="track" id="track-6">
+          Oh U Went (feat. Drake) - Young Thug, Drake
+        </p>
+        
+        <p class="track" id="track-16">
+          Rich Spirit - Kendrick Lamar
+        </p>
+      </div>
+      <div class="row">
+        <p class="track" id="track-7">
+          Worldwide Steppers - Kendrick Lamar
+        </p>
+        
+        <p class="track" id="track-17">
+          Bitch, Don’t Kill My Vibe - Kendrick Lamar
+        </p>
+      </div>
+      <div class="row">
+        <p class="track" id="track-8">
+          Father Time (feat. Sampha) - Kendrick Lamar, Sampha
+        </p>
+        
+        <p class="track" id="track-18">
+          All Too Well (10 Minute Version) (Taylor’s Version) (From The Vault) - Taylor Swift
+        </p>
+      </div>
+      <div class="row">
+        <p class="track" id="track-9">
+          ELEMENT. - Kendrick Lamar
+        </p>
+        
+        <p class="track" id="track-19">
+          Rich - Interlude - Kendrick Lamar
+        </p>
+      </div>
+      <div class="row">
+        <p class="track" id="track-10">
+          Love Story (Taylor’s Version) - Taylor Swift
+        </p>
+        
+        <p class="track" id="track-20">
+          Dear John (Taylor’s Version) - Taylor Swift
+        </p>
+      </div>
+    </div>
+  </div>
