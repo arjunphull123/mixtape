@@ -1,0 +1,15 @@
+if (!code) {
+    document.getElementById("log-in-button").addEventListener("click", function() {
+        redirectToAuthCodeFlow(clientId)
+    })
+} else {
+    const loadingScreen = document.getElementById("loading")
+    loadingScreen.style.display = "flex"
+    const accessToken = await getAccessToken(clientId, code);
+    window.profile = await fetchProfile(accessToken);
+    window.tracksShort = await fetchTracksShort(accessToken);
+    window.tracksMedium = await fetchTracksMedium(accessToken);
+    window.tracksLong = await fetchTracksLong(accessToken);
+    populateUI(window.profile, window.tracksShort);
+    loadingScreen.style.display = "none"
+}
