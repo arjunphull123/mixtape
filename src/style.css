@@ -175,7 +175,7 @@ h1 {
   font-style: normal;
   font-weight: 700;
   line-height: 110%; /* 2.0625rem */
-  letter-spacing: -0.05625rem;
+  letter-spacing: -2%;
   width: 100%;
   max-width: 400px;
   color: #FFF;
