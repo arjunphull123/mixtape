@@ -262,11 +262,15 @@ function downloadImage() {
         }
     );
     */
+   const vp = document.getElementById("viewport").getAttribute("content");
+   document.getElementById("viewport").setAttribute("content", "width=1600");
    const mixtape = document.getElementById("mixtape-container")
    console.log("Saving...")
    html2canvas(mixtape).then(function(canvas) {
     canvas.toBlob(function(blob) {
         saveAs(blob, "mixtape.png")
+    }).then(function() {
+        document.getElementById("viewport").setAttribute("content", vp)
     })
 })
 }
