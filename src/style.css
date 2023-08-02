@@ -352,9 +352,19 @@ input {
   cursor: pointer;
 }
 
-#download {
-  display: none;
+.preview {
+  position: absolute;
+  top: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 900px;
+  height: 1600px;
+  background-color: green;
+  --mw: 900px;
 }
+
 
 .mixtape-container {
   display: flex;
@@ -370,7 +380,6 @@ input {
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
   margin-bottom: 3rem;
   /*border: calc(var(--mw) * 5/1000) solid #FFF;*/
-  
 }
 
 .cassette-container {
