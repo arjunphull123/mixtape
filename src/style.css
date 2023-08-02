@@ -370,7 +370,7 @@ input {
   display: flex;
   position: relative;
   width: var(--mw);
-  aspect-ratio: 9:16;
+  aspect-ratio: 9/16;
   height: auto;
   padding: calc(0.0375 * var(--mw));
   flex-direction: column;
