@@ -255,24 +255,11 @@ document.querySelectorAll('.color-button').forEach(btn => {
 })
 
 function downloadImage() {
-    /*
     var card = document.getElementById("mixtape-container")
     domtoimage.toBlob(card).then(function (blob) {
             window.saveAs(blob, 'mixtape.png');
         }
     );
-    */
-   const vp = document.getElementById("viewport").getAttribute("content");
-   document.getElementById("viewport").setAttribute("content", "width=1600");
-   const mixtape = document.getElementById("mixtape-container")
-   console.log("Saving...")
-   html2canvas(mixtape).then(function(canvas) {
-    canvas.toBlob(function(blob) {
-        saveAs(blob, "mixtape.png")
-    }).then(function() {
-        document.getElementById("viewport").setAttribute("content", vp)
-    })
-})
 }
 
 document.getElementById('download').addEventListener("click", downloadImage)
