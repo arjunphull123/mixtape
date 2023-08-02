@@ -264,13 +264,11 @@ function downloadImage() {
     */
    const mixtape = document.getElementById("mixtape-container")
    console.log("Saving...")
-   html2canvas(mixtape, {
-    onrendered: function(canvas) {
-        var img = canvas.toDataURL()
-        window.open(img)
-    }
-   })
-
+   html2canvas(mixtape).then(function(canvas) {
+    canvas.toBlob(function(blob) {
+        saveAs(blob, "mixtape.png")
+    })
+})
 }
 
 document.getElementById('download').addEventListener("click", downloadImage)
