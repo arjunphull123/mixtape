@@ -703,6 +703,9 @@ a:visited {
     margin-top: 0;
   }
 
+  .mixtape-container {
+    aspect-ratio: initial;
+  }
 
   h1 {
     width: var(--mw);
