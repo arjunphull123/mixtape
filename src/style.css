@@ -335,7 +335,7 @@ input {
 }
 
 .save-and-share {
-  display: none;
+  display: flex;
   padding: 0.5rem 0.625rem;
   justify-content: center;
   align-items: center;
