@@ -263,6 +263,7 @@ function downloadImage() {
     );
     */
    const mixtape = document.getElementById("mixtape-container")
+   console.log("Saving...")
    html2canvas(mixtape, {
     onrendered: function(canvas) {
         var img = canvas.toDataURL()
@@ -272,7 +273,7 @@ function downloadImage() {
 
 }
 
-document.getElementById('save-and-share').addEventListener("click", downloadImage)
+document.getElementById('download').addEventListener("click", downloadImage)
 
 
 
