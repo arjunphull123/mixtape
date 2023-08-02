@@ -336,10 +336,6 @@ input {
   font-size: 0.75rem;
 }
 
-#download {
-  display: none;
-}
-
 .save-and-share {
   display: none;
   padding: 0.5rem 0.625rem;
@@ -731,7 +727,7 @@ a:visited {
     justify-content: space-between;
   }
 
-  #download {
+  .save-and-share {
     display: flex;
   }
 
