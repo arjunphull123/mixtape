@@ -1,5 +1,6 @@
 import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
+import html2canvas from 'html2canvas';
 
 const clientId = "4b027ab3c8dd4b1f9ef6d083d0b51fb5"; // Replace with your client ID
 const params = new URLSearchParams(window.location.search);
@@ -254,11 +255,21 @@ document.querySelectorAll('.color-button').forEach(btn => {
 })
 
 function downloadImage() {
+    /*
     var card = document.getElementById("mixtape-container")
     domtoimage.toBlob(card).then(function (blob) {
             window.saveAs(blob, 'mixtape.png');
         }
     );
+    */
+   const mixtape = document.getElementById("mixtape-container")
+   html2canvas(mixtape, {
+    onrendered: function(canvas) {
+        var img = canvas.toDataURL()
+        window.open(img)
+    }
+   })
+
 }
 
 document.getElementById('save-and-share').addEventListener("click", downloadImage)
