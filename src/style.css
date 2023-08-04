@@ -488,6 +488,7 @@ input {
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  opacity: 0%;
 }
 
 .date-time {
