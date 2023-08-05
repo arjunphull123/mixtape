@@ -409,6 +409,10 @@ input {
   font-size: calc(var(--mw) * 6/100);
   top: calc(var(--mw) * 8/100);
   left: calc(var(--mw) * 19/100);
+  max-width: calc(var(--mw) * 0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: 600;
   font-family: "Ugly Dave";
   opacity: 77.5%;

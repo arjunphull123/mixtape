@@ -8,7 +8,7 @@ const code = params.get("code");
 
 var timeRange = "short_term"
 window.timeRange = "short-term"
-var titleSuffix = "'s Mix Vol. 1"
+var titleSuffix = "'s Mix Vol. 1".toLowerCase()
 let accessToken, profile, tracksShort, tracksMedium, tracksLong, recommended
 
 document.getElementById('mixtape-container').style.aspectRatio = "none"
@@ -244,8 +244,8 @@ function populateUI(profile, tracks) {
     var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear()
     document.getElementById('date').innerHTML = date
     const displayName = profile.display_name.replaceAll(/\p{Emoji}/ug, '')
-    document.getElementById("cassette-title").innerText = displayName + titleSuffix;
-    document.getElementById("mixtape-name-input").value = displayName + titleSuffix
+    document.getElementById("cassette-title").innerText = displayName.toLowerCase() + titleSuffix;
+    document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + titleSuffix
     document.getElementById("start-container").style.display = "none"
     document.getElementById("customize-container").style.display = "flex"
     for (var i=0; i<20; i++) {
