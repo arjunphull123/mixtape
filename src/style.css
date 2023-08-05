@@ -378,7 +378,6 @@ input {
   display: flex;
   position: relative;
   width: var(--mw);
-  aspect-ratio: 9/16;
   height: auto;
   padding: calc(0.0375 * var(--mw));
   flex-direction: column;
@@ -390,6 +389,12 @@ input {
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
   margin-bottom: 3rem;
   /*border: calc(var(--mw) * 5/1000) solid #FFF;*/
+}
+
+.on-share {
+  .mixtape-container {
+    aspect-ratio: 9/16;
+  }
 }
 
 .cassette-container {
@@ -712,6 +717,12 @@ a:visited {
 
   .mixtape-container {
     aspect-ratio: initial;
+  }
+
+  .on-share {
+    .mixtape-container {
+      aspect-ratio: initial;
+    }
   }
 
   h1 {
