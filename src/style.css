@@ -406,10 +406,10 @@ input {
 .cassette-title {
   position: absolute;
   text-align: left;
-  font-size: calc(var(--mw) * 6/100);
+  font-size: calc(var(--mw) * 5/100);
   top: calc(var(--mw) * 8/100);
   left: calc(var(--mw) * 19/100);
-  max-width: calc(var(--mw) * 0.8);
+  max-width: calc(var(--mw) * 0.75);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
