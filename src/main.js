@@ -281,7 +281,7 @@ function createPlaylist() {
         "short-term": 'My top tracks from the last month.',
         "medium-term": 'My top tracks from the last six months.', 
         "long-term": 'My top tracks of all time.',
-        "recommended": "mixedify's recommendations for me."
+        "recommend": "mixedify's recommendations for me."
     }
 
     const playlist = toPlaylist(trackList, document.getElementById('mixtape-name-input').value, `${timeTags[window.timeRange]} Generated on ${document.getElementById('date').innerHTML} by mixedify. Get yours at www.mixedify.netlify.app!`)
