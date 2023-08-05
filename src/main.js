@@ -9,7 +9,7 @@ const code = params.get("code");
 var timeRange = "short_term"
 window.timeRange = "short-term"
 var titleSuffix = "'s Mix Vol. 1"
-let accessToken, profile, tracksShort, tracksMedium, tracksLong
+let accessToken, profile, tracksShort, tracksMedium, tracksLong, recommended
 
 // Logout handling
 function removesessionStorage() {
@@ -51,29 +51,40 @@ if (!code) { // on first login
         profile = await fetchProfile(accessToken);
         sessionStorage.setItem('profile', JSON.stringify(profile))
     }
+    window.profile = JSON.parse(sessionStorage.getItem('profile'))
+
     if (sessionStorage.getItem('tracksShort')) {
         tracksShort = JSON.parse(sessionStorage.getItem('tracksShort'))
     } else {
         tracksShort = await fetchTracksShort(accessToken);
         sessionStorage.setItem('tracksShort', JSON.stringify(tracksShort))
     }
+    window.tracksShort = JSON.parse(sessionStorage.getItem('tracksShort'))
+
     if (sessionStorage.getItem('tracksMedium')) {
         tracksMedium = JSON.parse(sessionStorage.getItem('tracksMedium'))
     } else {
         tracksMedium = await fetchTracksMedium(accessToken);
         sessionStorage.setItem('tracksMedium', JSON.stringify(tracksMedium))
-    }if (sessionStorage.getItem('tracksLong')) {
+    }
+    window.tracksMedium = JSON.parse(sessionStorage.getItem('tracksMedium'))
+
+    if (sessionStorage.getItem('tracksLong')) {
         tracksLong = JSON.parse(sessionStorage.getItem('tracksLong'))
     } else {
         tracksLong = await fetchTracksLong(accessToken);
         sessionStorage.setItem('tracksLong', JSON.stringify(tracksLong))
     }
-    // set window attributes
-    window.profile = JSON.parse(sessionStorage.getItem('profile'))
-    window.tracksShort = JSON.parse(sessionStorage.getItem('tracksShort'))
-    window.tracksMedium = JSON.parse(sessionStorage.getItem('tracksMedium'))
     window.tracksLong = JSON.parse(sessionStorage.getItem('tracksLong'))
 
+    if (sessionStorage.getItem('recommended')) {
+        recommended = JSON.parse(sessionStorage.getItem('tracksLong'))
+    } else {
+        recommended = await fetchRecommended(accessToken, JSON.parse(sessionStorage.getItem('tracksShort')));
+        sessionStorage.setItem('recommended', JSON.stringify(recommended))
+    }
+    window.recommended = JSON.parse(sessionStorage.getItem('recommended'))
+    
     // populate UI
     populateUI(window.profile, window.tracksShort);
 
@@ -95,7 +106,7 @@ async function redirectToAuthCodeFlow(clientId) {
     const params = new URLSearchParams();
     params.append("client_id", clientId);
     params.append("response_type", "code");
-    params.append("redirect_uri", "https://mixedify.netlify.app");
+    params.append("redirect_uri", "http://localhost:5173");
     params.append("scope", "user-top-read playlist-modify-private");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
@@ -129,7 +140,7 @@ async function getAccessToken(clientId, code) {
     params.append("client_id", clientId);
     params.append("grant_type", "authorization_code");
     params.append("code", code);
-    params.append("redirect_uri", "https://mixedify.netlify.app");
+    params.append("redirect_uri", "http://localhost:5173");
     params.append("code_verifier", verifier);
 
     const result = await fetch("https://accounts.spotify.com/api/token", {
@@ -168,6 +179,19 @@ async function fetchTracksMedium(token) {
 
 async function fetchTracksLong(token) {
     const result = await fetch("https://api.spotify.com/v1/me/top/tracks?time_range=long_term", {
+        method: "GET", headers: { Authorization: `Bearer ${token}` }
+    });
+
+    return await result.json();
+}
+
+async function fetchRecommended(token, tracks) {
+    var seeds = ""
+    tracks.items.slice(0,5).forEach(track => {
+        seeds += track.id + ','
+    })
+    seeds = seeds.slice(0,-1)
+    const result = await fetch(`https://api.spotify.com/v1/recommendations?seed_tracks=${seeds}`, {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
@@ -221,7 +245,11 @@ function populateUI(profile, tracks) {
     document.getElementById("start-container").style.display = "none"
     document.getElementById("customize-container").style.display = "flex"
     for (var i=0; i<20; i++) {
-        var track = tracks.items[i]
+        try {
+            var track = tracks.items[i]
+        } catch (error) {
+            var track = tracks.tracks[i]
+        }
         var trackURL = track.external_urls['spotify']
         var trackName = track.name
         var trackArtist = getArtists(track)
@@ -266,8 +294,8 @@ document.querySelectorAll('.time-range-option').forEach(btn => {
             this.classList.add("active")
             timeRange = this.id
             window.timeRange = timeRange
-            const tracksDict = {"short-term": window.tracksShort, "medium-term": window.tracksMedium, "long-term": window.tracksLong}
-            const timeRangeDict = {"short-term": "Last month", "medium-term": "Last 6 months", "long-term": "All time"}
+            const tracksDict = {"short-term": window.tracksShort, "medium-term": window.tracksMedium, "long-term": window.tracksLong, "recommend": window.recommended}
+            const timeRangeDict = {"short-term": "Last month", "medium-term": "Last 6 months", "long-term": "All time", "recommend": "Recommended for me"}
             populateUI(window.profile, tracksDict[timeRange])
             document.getElementById("time").innerHTML = timeRangeDict[timeRange]
         }

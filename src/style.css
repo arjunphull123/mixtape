@@ -265,6 +265,9 @@ h1 {
   border-radius: 2.5rem;
   border: 1px solid #FFF;
   cursor: pointer;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: white;
 }
 
 .time-range-option.active {
@@ -736,6 +739,15 @@ a:visited {
 
   .download {
     display: flex;
+    font-size: 1rem;
+  }
+
+  .time-range-option {
+    font-size: 1rem;
+  }
+
+  input {
+    font-size: 1rem;
   }
 
   .mobile-create-playlist {
