@@ -269,10 +269,10 @@ function createPlaylist() {
     document.getElementById('create-playlist').innerHTML = "Creating..."
     document.getElementById('create-playlist-mobile').innerHTML = "Creating..."
     console.log("Creating playlist with time range:" + window.timeRange)
-    const tracksDict = {"short-term": window.tracksShort, "medium-term": window.tracksMedium, "long-term": window.tracksLong, "recommend": window.recommended.tracks}
+    const tracksDict = {"short-term": window.tracksShort.items, "medium-term": window.tracksMedium.items, "long-term": window.tracksLong.items, "recommend": window.recommended.tracks}
     const tracks = tracksDict[window.timeRange]
     var trackList = ""
-        tracks.items.forEach(track => {
+        tracks.forEach(track => {
             trackList += track.uri + ','
         })
     trackList = trackList.slice(0, -1)
