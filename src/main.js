@@ -11,9 +11,7 @@ window.timeRange = "short-term"
 var titleSuffix = "'s Mix Vol. 1"
 let accessToken, profile, tracksShort, tracksMedium, tracksLong, recommended
 
-if (document.body.classList.contains('on-share')) {
-    document.body.classList.remove('on-share')
-}
+document.getElementById('mixtape-container').style.aspectRatio = "none"
 
 // Logout handling
 function removesessionStorage() {
@@ -96,6 +94,7 @@ if (!code) { // on first login
     if (window.innerWidth < 500) {
         document.getElementById("mix-head").style.display = "block"
         document.getElementById("mix-tag").style.display = "block"
+        document.getElementById("mixtape-container").style.aspectRatio = "9/16"
     }
     document.querySelector("body").classList.remove("lock-scroll")
     loadingScreen.style.display = "none"

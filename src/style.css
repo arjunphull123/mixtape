@@ -391,12 +391,6 @@ input {
   /*border: calc(var(--mw) * 5/1000) solid #FFF;*/
 }
 
-.on-share {
-  .mixtape-container {
-    aspect-ratio: 9/16;
-  }
-}
-
 .cassette-container {
   position: relative;
 }
@@ -717,12 +711,6 @@ a:visited {
 
   .mixtape-container {
     aspect-ratio: initial;
-  }
-
-  .on-share {
-    .mixtape-container {
-      aspect-ratio: initial;
-    }
   }
 
   h1 {
