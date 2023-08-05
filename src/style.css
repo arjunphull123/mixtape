@@ -344,7 +344,7 @@ input {
   font-size: 0.75rem;
 }
 
-.download {
+.download, .mobile-create-playlist {
   display: none;
   padding: 0.5rem 0.625rem;
   justify-content: center;
@@ -360,6 +360,15 @@ input {
   font-weight: 700;
   line-height: normal;
   cursor: pointer;
+}
+
+.download-options {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.mobile-create-playlist {
+  display: flex;
 }
 
 .preview {
@@ -741,6 +750,10 @@ a:visited {
 
   .download {
     display: flex;
+  }
+
+  .mobile-create-playlist {
+    display: none;
   }
 
   .scroll-down {

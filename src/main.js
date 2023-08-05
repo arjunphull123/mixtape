@@ -6,40 +6,39 @@ const clientId = "4b027ab3c8dd4b1f9ef6d083d0b51fb5"; // Replace with your client
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 
-
-
 var timeRange = "short_term"
+window.timeRange = "short-term"
 var titleSuffix = "'s Mix Vol. 1"
 let accessToken, profile, tracksShort, tracksMedium, tracksLong
 
+// Logout handling
 function removesessionStorage() {
     sessionStorage.clear()
 }
-
 document.getElementById('logout').addEventListener("click", removesessionStorage)
 
+// Info screen handling
 var infoButton = document.getElementById('info-button')
 var closeInfoButton = document.getElementById('close-info')
-
 infoButton.addEventListener("click", function() {
     const body = document.querySelector('body')
     body.classList.toggle('show-info')
 })
-
 closeInfoButton.addEventListener("click", function() {
     const body = document.querySelector('body')
     body.classList.remove('show-info')
 })
 
 
-
-if (!code) {
+// Auth flow and API calls
+if (!code) { // on first login
     document.getElementById("log-in-button").addEventListener("click", function() {
         redirectToAuthCodeFlow(clientId)
     })
-} else {
+} else { //after auth
     const loadingScreen = document.getElementById("loading")
     loadingScreen.style.display = "flex"
+    // pull data from sessionStorage if there, otherwise add it
     if (sessionStorage.getItem('accessToken')) {
         accessToken = JSON.parse(sessionStorage.getItem('accessToken'))
     } else {
@@ -69,12 +68,16 @@ if (!code) {
         tracksLong = await fetchTracksLong(accessToken);
         sessionStorage.setItem('tracksLong', JSON.stringify(tracksLong))
     }
+    // set window attributes
     window.profile = JSON.parse(sessionStorage.getItem('profile'))
     window.tracksShort = JSON.parse(sessionStorage.getItem('tracksShort'))
     window.tracksMedium = JSON.parse(sessionStorage.getItem('tracksMedium'))
     window.tracksLong = JSON.parse(sessionStorage.getItem('tracksLong'))
+
+    // populate UI
     populateUI(window.profile, window.tracksShort);
 
+    // control mobile tag text
     if (window.innerWidth < 500) {
         document.getElementById("mix-head").style.display = "block"
         document.getElementById("mix-tag").style.display = "block"
@@ -93,7 +96,7 @@ async function redirectToAuthCodeFlow(clientId) {
     params.append("client_id", clientId);
     params.append("response_type", "code");
     params.append("redirect_uri", "https://mixedify.netlify.app");
-    params.append("scope", "user-top-read");
+    params.append("scope", "user-top-read playlist-modify-private");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
 
@@ -171,6 +174,34 @@ async function fetchTracksLong(token) {
     return await result.json();
 }
 
+async function toPlaylist(tracksUri, name, desc){
+
+    const playlist = await fetchWebApi(
+      `v1/users/${window.profile.id}/playlists`, 'POST', {
+        "name": name,
+        "description": desc,
+        "public": false
+    })
+  
+    await fetchWebApi(
+      `v1/playlists/${playlist.id}/tracks?uris=${tracksUri}`,
+      'POST'
+    );
+  
+    return playlist;
+  }
+
+  async function fetchWebApi(endpoint, method, body) {
+    const res = await fetch(`https://api.spotify.com/${endpoint}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      method,
+      body:JSON.stringify(body)
+    });
+    return await res.json();
+  }
+
 function getArtists(track) {
     var artists = track.artists
     var artistString = ""
@@ -199,6 +230,33 @@ function populateUI(profile, tracks) {
     }
 }
 
+// create playlist handling
+document.getElementById('create-playlist').addEventListener("click", createPlaylist)
+document.getElementById('create-playlist-mobile').addEventListener("click", createPlaylist)
+function createPlaylist() {
+    document.getElementById('create-playlist').innerHTML = "Creating..."
+    document.getElementById('create-playlist-mobile').innerHTML = "Creating..."
+    console.log("Creating playlist with time range:" + window.timeRange)
+    const tracksDict = {"short-term": window.tracksShort, "medium-term": window.tracksMedium, "long-term": window.tracksLong}
+    const tracks = tracksDict[window.timeRange]
+    var trackList = ""
+    tracks.items.forEach(track => {
+        trackList += track.uri + ','
+    })
+    trackList = trackList.slice(0, -1)
+
+    const timeTags = {"short-term": 'My top tracks from the last month.', "medium-term": 'My top tracks from the last six months.', "long-term": 'My top tracks of all time.'}
+
+    const playlist = toPlaylist(trackList, document.getElementById('mixtape-name-input').value, `${timeTags[window.timeRange]} Generated on ${document.getElementById('date').innerHTML} by mixedify. Get yours at www.mixedify.netlify.app!`)
+    playlist.then(pl => {
+        console.log(pl)
+        window.open(pl.external_urls.spotify, "_blank")
+        document.getElementById('create-playlist').innerHTML = "Create playlist"
+        document.getElementById('create-playlist-mobile').innerHTML = "Create playlist"
+    })
+}
+
+// time range handling
 document.querySelectorAll('.time-range-option').forEach(btn => {
     btn.addEventListener("click", function() {
         if (!this.classList.contains("active")) {
@@ -207,6 +265,7 @@ document.querySelectorAll('.time-range-option').forEach(btn => {
             })
             this.classList.add("active")
             timeRange = this.id
+            window.timeRange = timeRange
             const tracksDict = {"short-term": window.tracksShort, "medium-term": window.tracksMedium, "long-term": window.tracksLong}
             const timeRangeDict = {"short-term": "Last month", "medium-term": "Last 6 months", "long-term": "All time"}
             populateUI(window.profile, tracksDict[timeRange])
@@ -215,11 +274,13 @@ document.querySelectorAll('.time-range-option').forEach(btn => {
     })
 })
 
+// auto update mixtape title
 document.getElementById("mixtape-name-input").addEventListener("input", updateTitle)
 function updateTitle(e) {
     document.getElementById("cassette-title").innerHTML = e.target.value
 }
 
+// color button handling
 if (!sessionStorage.getItem('cardBg')) {
     sessionStorage.setItem('cardBg', window.getComputedStyle(document.documentElement).getPropertyValue("--card-bg"))
 }
@@ -254,6 +315,7 @@ document.querySelectorAll('.color-button').forEach(btn => {
     })
 })
 
+// non-mobile: save image handling
 function downloadImage() {
     var card = document.getElementById("mixtape-container")
     domtoimage.toBlob(card).then(function (blob) {
@@ -261,10 +323,7 @@ function downloadImage() {
         }
     );
 }
-
 document.getElementById('download').addEventListener("click", downloadImage)
-
-
 
 
 /*
