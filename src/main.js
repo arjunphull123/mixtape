@@ -11,8 +11,8 @@ window.timeRange = "short-term"
 var titleSuffix = "'s Mix Vol. 1"
 let accessToken, profile, tracksShort, tracksMedium, tracksLong, recommended
 
-if (document.classList.contains('on-share')) {
-    document.classList.remove('on-share')
+if (document.body.classList.contains('on-share')) {
+    document.body.classList.remove('on-share')
 }
 
 // Logout handling
@@ -240,7 +240,7 @@ function getArtists(track) {
 }
 
 function populateUI(profile, tracks) {
-    document.classList.add('on-share')
+    document.body.classList.add('on-share')
     const today = new Date()
     var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear()
     document.getElementById('date').innerHTML = date
