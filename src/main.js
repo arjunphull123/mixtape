@@ -11,7 +11,9 @@ window.timeRange = "short-term"
 var titleSuffix = "'s Mix Vol. 1"
 let accessToken, profile, tracksShort, tracksMedium, tracksLong, recommended
 
-document.classList.remove('on-share')
+if (document.classList.contains('on-share')) {
+    document.classList.remove('on-share')
+}
 
 // Logout handling
 function removesessionStorage() {
