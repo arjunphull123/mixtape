@@ -132,7 +132,7 @@ body {
 }
 
 .loading {
-  position: absolute;
+  position: fixed;
   display: none;
   justify-content: center;
   align-items: center;
@@ -371,20 +371,6 @@ input {
   display: flex;
 }
 
-.preview {
-  position: absolute;
-  top: 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 900px;
-  height: 1600px;
-  background-color: green;
-  --mw: 900px;
-}
-
-
 .mixtape-container {
   display: flex;
   position: relative;
@@ -604,7 +590,7 @@ input {
 }
 
 .info-screen {
-  position: absolute;
+  position: fixed;
   display: none;
   justify-content: center;
   align-items: center;
