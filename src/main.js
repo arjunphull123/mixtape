@@ -94,7 +94,7 @@ if (!code) { // on first login
     if (window.innerWidth < 500) {
         document.getElementById("mix-head").style.display = "block"
         document.getElementById("mix-tag").style.display = "block"
-        document.getElementById("mixtape-container").style.aspectRatio = "9/16"
+        //document.getElementById("mixtape-container").style.aspectRatio = "9/16"
     }
     document.querySelector("body").classList.remove("lock-scroll")
     loadingScreen.style.display = "none"
