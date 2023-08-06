@@ -714,7 +714,7 @@ a:visited {
   }
 
   .mixtape-container {
-    aspect-ratio: initial;
+    aspect-ratio: auto;
   }
 
   h1 {

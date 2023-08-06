@@ -11,7 +11,7 @@ window.timeRange = "short-term"
 var titleSuffix = "'s Mix Vol. 1".toLowerCase()
 let accessToken, profile, tracksShort, tracksMedium, tracksLong, recommended
 
-document.getElementById('mixtape-container').style.aspectRatio = "none"
+document.getElementById('mixtape-container').style.aspectRatio = "auto"
 
 // Logout handling
 function removesessionStorage() {
@@ -239,7 +239,6 @@ function getArtists(track) {
 }
 
 function populateUI(profile, tracks) {
-    document.body.classList.add('on-share')
     const today = new Date()
     var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear()
     document.getElementById('date').innerHTML = date
@@ -248,6 +247,7 @@ function populateUI(profile, tracks) {
     document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + titleSuffix
     document.getElementById("start-container").style.display = "none"
     document.getElementById("customize-container").style.display = "flex"
+    document.getElementById("mixtape-container").style.aspectRatio = "9/16"
     for (var i=0; i<20; i++) {
         try {
             var track = tracks.items[i]
@@ -287,14 +287,7 @@ function createPlaylist() {
     const playlist = toPlaylist(trackList, document.getElementById('mixtape-name-input').value, `${timeTags[window.timeRange]} Generated on ${document.getElementById('date').innerHTML} by mixedify. Get yours at www.mixedify.netlify.app!`)
     playlist.then(pl => {
         console.log(pl)
-        var linkElement = document.createElement('a');
-        linkElement.id = 'playlistLink';
-        window.document.body.appendChild(linkElement);
-        var link = document.getElementById('playlistLink');
-        link.setAttribute('href', pl.external_urls.spotify);
-        link.setAttribute('target', '_blank');
-        link.setAttribute('rel', 'noreferrer noopener');
-        link.click();
+        setTimeout(() => {window.open(pl.external_urls.spotify, "_blank")})
         document.body.removeChild(link)
         document.getElementById('create-playlist').innerHTML = "Create playlist"
         document.getElementById('create-playlist-mobile').innerHTML = "Create playlist"
