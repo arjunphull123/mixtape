@@ -247,7 +247,7 @@ function populateUI(profile, tracks) {
     document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + titleSuffix
     document.getElementById("start-container").style.display = "none"
     document.getElementById("customize-container").style.display = "flex"
-    document.getElementById("mixtape-container").style.aspectRatio = "9/16"
+    //document.getElementById("mixtape-container").style.aspectRatio = "9/16"
     for (var i=0; i<20; i++) {
         try {
             var track = tracks.items[i]
