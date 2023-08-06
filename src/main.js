@@ -290,7 +290,7 @@ function createPlaylist() {
         var linkElement = document.createElement('a');
         linkElement.id = 'playlistLink';
         window.document.body.appendChild(linkElement);
-        var link = document.getElementById('link');
+        var link = document.getElementById('playlistLink');
         link.setAttribute('href', pl.external_urls.spotify);
         link.setAttribute('target', '_blank');
         link.setAttribute('rel', 'noreferrer noopener');
