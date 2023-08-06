@@ -28,14 +28,14 @@
   --bg-color: var(--bg-color-1); /* #6ea2d2; */
   --color-1: rgba(173, 151, 129, 1)/*#cdb59d*/;
   --color-2: rgba(91, 152, 210, 1)/*#5b98d2*/;
-  --color-3: rgba(237, 50, 50, 1)/*#ed3232*/;
+  --color-3: rgba(254, 70, 165, 1)/*#ed3232*/;
   --color-4: rgba(2, 101, 36, 1)/*#026524*/;
   --color-5: rgba(13, 0, 125, 1)/*#0d007d*/;
   --color-6: rgba(0, 0, 0, 1)/*#000000*/;
 
   --bg-color-1: rgba(205, 181, 157, 0.75)/*#cdb59d*/;
   --bg-color-2: rgba(91, 152, 210, 0.80)/*#5b98d2*/;
-  --bg-color-3: rgba(237, 50, 50, 0.75)/*#ed3232*/;
+  --bg-color-3: rgba(254, 70, 165, 0.80)/*#ed3232*/;
   --bg-color-4: rgba(2, 101, 36, 0.90)/*#026524*/;
   --bg-color-5: rgba(13, 0, 125, 0.90)/*#0d007d*/;
   --bg-color-6: rgba(0, 0, 0, 0.90)/*#000000*/;
@@ -533,7 +533,7 @@ input {
   font-size: calc(var(--mw) * 24/1000);
   font-style: normal;
   font-weight: 400;
-  line-height: 100%; /* 19.2px */
+  line-height: 105%; /* 19.2px */
   text-decoration: none;
 }
 

@@ -326,7 +326,7 @@ if (!sessionStorage.getItem('bgColor')) {
     sessionStorage.setItem('bgColor', window.getComputedStyle(document.documentElement).getPropertyValue("--bg-color"))
 }
 if (!sessionStorage.getItem('activeColor')) {
-    sessionStorage.setItem('activeColor', 'color-1')
+    sessionStorage.setItem('activeColor', 'color-3')
 }
 document.documentElement.style.setProperty("--card-bg", sessionStorage.getItem('cardBg'))
 document.documentElement.style.setProperty("--bg-color", sessionStorage.getItem('bgColor'))
