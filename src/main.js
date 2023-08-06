@@ -287,7 +287,15 @@ function createPlaylist() {
     const playlist = toPlaylist(trackList, document.getElementById('mixtape-name-input').value, `${timeTags[window.timeRange]} Generated on ${document.getElementById('date').innerHTML} by mixedify. Get yours at www.mixedify.netlify.app!`)
     playlist.then(pl => {
         console.log(pl)
-        window.open(pl.external_urls.spotify, "_blank")
+        var linkElement = document.createElement('a');
+        linkElement.id = 'playlistLink';
+        window.document.body.appendChild(linkElement);
+        var link = document.getElementById('link');
+        link.setAttribute('href', pl.external_urls.spotify);
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noreferrer noopener');
+        link.click();
+        document.body.removeChild(link)
         document.getElementById('create-playlist').innerHTML = "Create playlist"
         document.getElementById('create-playlist-mobile').innerHTML = "Create playlist"
     })
