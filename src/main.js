@@ -288,7 +288,6 @@ function createPlaylist() {
     playlist.then(pl => {
         console.log(pl)
         setTimeout(() => {window.open(pl.external_urls.spotify, "_blank")})
-        document.body.removeChild(link)
         document.getElementById('create-playlist').innerHTML = "Create playlist"
         document.getElementById('create-playlist-mobile').innerHTML = "Create playlist"
     })
