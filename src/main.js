@@ -245,6 +245,7 @@ function populateUI(profile, tracks) {
     const displayName = profile.display_name.replaceAll(/\p{Emoji}/ug, '')
     document.getElementById("cassette-title").innerText = displayName.toLowerCase() + titleSuffix;
     document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + titleSuffix
+
     document.getElementById("start-container").style.display = "none"
     document.getElementById("customize-container").style.display = "flex"
     //document.getElementById("mixtape-container").style.aspectRatio = "9/16"
@@ -307,6 +308,10 @@ document.querySelectorAll('.time-range-option').forEach(btn => {
             const timeRangeDict = {"short-term": "Last month", "medium-term": "Last 6 months", "long-term": "All time", "recommend": "Recommended for me"}
             populateUI(window.profile, tracksDict[timeRange])
             document.getElementById("time").innerHTML = timeRangeDict[timeRange]
+            if (document.getElementById("time").innerHTML = "Recommended for me") {
+                document.getElementById("cassette-title").innerText = displayName.toLowerCase() + "'s song recs";
+                document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + "'s song recs"
+            }
         }
     })
 })
