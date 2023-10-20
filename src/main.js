@@ -314,8 +314,8 @@ document.querySelectorAll('.time-range-option').forEach(btn => {
 
 document.getElementById("recommend").addEventListener("click", function() {
     const displayName = profile.display_name.replaceAll(/\p{Emoji}/ug, '')
-    document.getElementById("cassette-title").innerText = displayName.toLowerCase() + "'s song recs";
-    document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + "'s song recs"
+    document.getElementById("cassette-title").innerText = "recs for " + displayName.toLowerCase();
+    document.getElementById("mixtape-name-input").value = "recs for " + displayName.toLowerCase()s"
 })
 
 document.getElementById("short-term").addEventListener("click", function() {
