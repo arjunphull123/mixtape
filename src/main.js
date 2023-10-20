@@ -313,6 +313,7 @@ document.querySelectorAll('.time-range-option').forEach(btn => {
 })
 
 document.getElementById("recommend").addEventListener("click", function() {
+    const displayName = profile.display_name.replaceAll(/\p{Emoji}/ug, '')
     document.getElementById("cassette-title").innerText = displayName.toLowerCase() + "'s song recs";
     document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + "'s song recs"
 })
