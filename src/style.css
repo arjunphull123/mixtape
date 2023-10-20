@@ -152,6 +152,10 @@ body {
   -webkit-backdrop-filter: blur(0.5rem);
 }
 
+.p-load {
+  font-family: "Ugly Dave";
+}
+
 .content-container {
   display: flex;
   flex-direction: column;
