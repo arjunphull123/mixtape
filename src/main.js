@@ -308,12 +308,13 @@ document.querySelectorAll('.time-range-option').forEach(btn => {
             const timeRangeDict = {"short-term": "Last month", "medium-term": "Last 6 months", "long-term": "All time", "recommend": "Recommended for me"}
             populateUI(window.profile, tracksDict[timeRange])
             document.getElementById("time").innerHTML = timeRangeDict[timeRange]
-            if (document.getElementById("time").innerHTML = "Recommended for me") {
-                document.getElementById("cassette-title").innerText = displayName.toLowerCase() + "'s song recs";
-                document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + "'s song recs"
-            }
         }
     })
+})
+
+document.getElementById("recommend").addEventListener("click", function() {
+    document.getElementById("cassette-title").innerText = displayName.toLowerCase() + "'s song recs";
+    document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + "'s song recs"
 })
 
 // auto update mixtape title
