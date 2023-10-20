@@ -8,7 +8,7 @@ const code = params.get("code");
 
 var timeRange = "short_term"
 window.timeRange = "short-term"
-var titleSuffix = "'s Mix Vol. 1".toLowerCase()
+var titleSuffix = "'s past month".toLowerCase()
 let accessToken, profile, tracksShort, tracksMedium, tracksLong, recommended
 
 document.getElementById('mixtape-container').style.aspectRatio = "auto"
@@ -316,6 +316,24 @@ document.getElementById("recommend").addEventListener("click", function() {
     const displayName = profile.display_name.replaceAll(/\p{Emoji}/ug, '')
     document.getElementById("cassette-title").innerText = displayName.toLowerCase() + "'s song recs";
     document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + "'s song recs"
+})
+
+document.getElementById("short-term").addEventListener("click", function() {
+    const displayName = profile.display_name.replaceAll(/\p{Emoji}/ug, '')
+    document.getElementById("cassette-title").innerText = displayName.toLowerCase() + "'s past month";
+    document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + "'s past month"
+})
+
+document.getElementById("medium-term").addEventListener("click", function() {
+    const displayName = profile.display_name.replaceAll(/\p{Emoji}/ug, '')
+    document.getElementById("cassette-title").innerText = displayName.toLowerCase() + "'s mix vol. 1";
+    document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + "'s mix vol. 1"
+})
+
+document.getElementById("long-term").addEventListener("click", function() {
+    const displayName = profile.display_name.replaceAll(/\p{Emoji}/ug, '')
+    document.getElementById("cassette-title").innerText = displayName.toLowerCase() + "'s all-time favs";
+    document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + "'s all-time favs"
 })
 
 // auto update mixtape title
