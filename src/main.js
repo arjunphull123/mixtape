@@ -281,7 +281,7 @@ function createPlaylist() {
     const timeTags = {
         "short-term": 'My top tracks from the last month.',
         "medium-term": 'My top tracks from the last six months.', 
-        "long-term": 'My top tracks of all time.',
+        "long-term": 'My top tracks from the last year.',
         "recommend": "mixedify's recommendations for me."
     }
 
@@ -305,7 +305,7 @@ document.querySelectorAll('.time-range-option').forEach(btn => {
             timeRange = this.id
             window.timeRange = timeRange
             const tracksDict = {"short-term": window.tracksShort, "medium-term": window.tracksMedium, "long-term": window.tracksLong, "recommend": window.recommended}
-            const timeRangeDict = {"short-term": "Last month", "medium-term": "Last 6 months", "long-term": "All time", "recommend": "Recommended for me"}
+            const timeRangeDict = {"short-term": "Last month", "medium-term": "Last 6 months", "long-term": "Last 12 months", "recommend": "Recommended for me"}
             populateUI(window.profile, tracksDict[timeRange])
             document.getElementById("time").innerHTML = timeRangeDict[timeRange]
         }
@@ -332,8 +332,8 @@ document.getElementById("medium-term").addEventListener("click", function() {
 
 document.getElementById("long-term").addEventListener("click", function() {
     const displayName = profile.display_name.replaceAll(/\p{Emoji}/ug, '')
-    document.getElementById("cassette-title").innerText = displayName.toLowerCase() + "'s all-time favs";
-    document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + "'s all-time favs"
+    document.getElementById("cassette-title").innerText = displayName.toLowerCase() + "'s past year";
+    document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + "'s past year"
 })
 
 // auto update mixtape title
