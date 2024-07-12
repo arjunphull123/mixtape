@@ -219,8 +219,6 @@ async function fetchRecommended(token, tracks) {
     // maybe this could be a random five? or your first track, plus a random from 2-5, 6-10, 11-15, and 16-20?
     var seeds = ""
 
-    console.log(tracks)
-
     // randInt function, returns a random integer between min and max inclusive
     function randInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1) ) + min;
