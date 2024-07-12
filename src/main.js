@@ -229,7 +229,13 @@ async function fetchRecommended(token, tracks) {
     var recIndices = []
     recIndices.push(0, randInt(1,4), randInt(5,9), randInt(10,14), randInt(15,19))
 
+    var recTracks = []
+    recIndices.forEach(i => (
+        recTracks.push(tracks.items[i])
+    ))
+
     console.log(recIndices)
+    console.log(recTracks)
 
     tracks.items.slice(0,5).forEach(track => {
         seeds += track.id + ','
@@ -356,6 +362,9 @@ document.querySelectorAll('.time-range-option').forEach(btn => {
             window.timeRange = timeRange
             const tracksDict = {"short-term": window.tracksShort, "medium-term": window.tracksMedium, "long-term": window.tracksLong, "recommend": window.recommended}
             const timeRangeDict = {"short-term": "Last month", "medium-term": "Last 6 months", "long-term": "Last 12 months", "recommend": "Recommended for me"}
+
+            // add handling for re-recommendations if the recommendations button is clicked
+
             populateUI(window.profile, tracksDict[timeRange])
             document.getElementById("time").innerHTML = timeRangeDict[timeRange]
         }
