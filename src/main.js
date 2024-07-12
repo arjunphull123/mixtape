@@ -220,7 +220,17 @@ async function fetchRecommended(token, tracks) {
     var seeds = ""
 
     console.log(tracks)
-    
+
+    // randInt function, returns a random integer between min and max inclusive
+    function randInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) ) + min;
+    }
+
+    var recIndices = []
+    recIndices.push(0, randInt(1,4), randInt(5,9), randInt(10,14), randInt(15,19))
+
+    console.log(recIndices)
+
     tracks.items.slice(0,5).forEach(track => {
         seeds += track.id + ','
     })
