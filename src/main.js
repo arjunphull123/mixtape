@@ -234,10 +234,7 @@ async function fetchRecommended(token, tracks) {
         recTracks.push(tracks.items[i])
     ))
 
-    console.log(recIndices)
-    console.log(recTracks)
-
-    tracks.items.slice(0,5).forEach(track => {
+    recTracks.forEach(track => {
         seeds += track.id + ','
     })
     seeds = seeds.slice(0,-1)
