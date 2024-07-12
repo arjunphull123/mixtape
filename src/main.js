@@ -357,7 +357,7 @@ async function updateRecs() {
     populateUI(window.profile, tracksDict[timeRange])
 }
 
-document.getElementById('refresh-rec').addEventListener('onclick', function() {
+document.getElementById('refresh-rec').addEventListener('click', function() {
     console.log('refresh clicked')
     updateRecs()
 })
