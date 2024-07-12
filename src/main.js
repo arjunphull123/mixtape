@@ -348,13 +348,17 @@ function createPlaylist() {
 // function for updating recommencations
 
 async function updateRecs() {
+    console.log('fetching new recommendations')
     const newRecommended = await fetchRecommended(accessToken, JSON.parse(sessionStorage.getItem('tracksShort')));
     sessionStorage.setItem('recommended', JSON.stringify(newRecommended))
     window.recommended = JSON.parse(sessionStorage.getItem('recommended'))
+    console.log("New recommendations:")
+    console.log(window.recommended)
     populateUI(window.profile, tracksDict[timeRange])
 }
 
 document.getElementById('refresh-rec').addEventListener('onclick', function() {
+    console.log('refresh clicked')
     updateRecs()
 })
 
