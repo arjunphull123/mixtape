@@ -354,7 +354,7 @@ async function updateRecs() {
     window.recommended = JSON.parse(sessionStorage.getItem('recommended'))
     console.log("New recommendations:")
     console.log(window.recommended)
-    populateUI(window.profile, tracksDict[timeRange])
+    populateUI(window.profile, window.recommended.tracks)
 }
 
 document.getElementById('refresh-rec').addEventListener('click', function() {
