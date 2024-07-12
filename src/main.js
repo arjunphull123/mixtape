@@ -347,6 +347,14 @@ function createPlaylist() {
     })
 }
 
+// function for updating recommencations
+
+async function updateRecs() {
+    const newRecommended = await fetchRecommended(accessToken, JSON.parse(sessionStorage.getItem('tracksShort')));
+    sessionStorage.setItem('recommended', JSON.stringify(newRecommended))
+    window.recommended = JSON.parse(sessionStorage.getItem('recommended'))
+}
+
 // time range handling
 document.querySelectorAll('.time-range-option').forEach(btn => {
     btn.addEventListener("click", function() {
@@ -361,6 +369,9 @@ document.querySelectorAll('.time-range-option').forEach(btn => {
             const timeRangeDict = {"short-term": "Last month", "medium-term": "Last 6 months", "long-term": "Last 12 months", "recommend": "Recommended for me"}
 
             // add handling for re-recommendations if the recommendations button is clicked
+            if (this.id == 'refresh-rec') {
+                updateRecs()
+            }
 
             populateUI(window.profile, tracksDict[timeRange])
             document.getElementById("time").innerHTML = timeRangeDict[timeRange]
