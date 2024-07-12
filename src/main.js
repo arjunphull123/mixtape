@@ -2,18 +2,22 @@ import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
 import html2canvas from 'html2canvas';
 
+// Setting up API key and params for Spotify API
 const clientId = "4b027ab3c8dd4b1f9ef6d083d0b51fb5"; // Replace with your client ID
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 
+// Initialize the default time range for data shown
 var timeRange = "short_term"
 window.timeRange = "short-term"
 var titleSuffix = "'s past month".toLowerCase()
 let accessToken, profile, tracksShort, tracksMedium, tracksLong, recommended
 
+// Make mixtape scale
 document.getElementById('mixtape-container').style.aspectRatio = "auto"
 
 // Logout handling
+// This function clears session storage, essentially wiping user data from browser
 function removesessionStorage() {
     sessionStorage.clear()
 }
@@ -22,10 +26,12 @@ document.getElementById('logout').addEventListener("click", removesessionStorage
 // Info screen handling
 var infoButton = document.getElementById('info-button')
 var closeInfoButton = document.getElementById('close-info')
+
 infoButton.addEventListener("click", function() {
     const body = document.querySelector('body')
     body.classList.toggle('show-info')
 })
+
 closeInfoButton.addEventListener("click", function() {
     const body = document.querySelector('body')
     body.classList.remove('show-info')
@@ -33,20 +39,25 @@ closeInfoButton.addEventListener("click", function() {
 
 
 // Auth flow and API calls
-if (!code) { // on first login
+if (!code) { // on first login - if there is no code object
     document.getElementById("log-in-button").addEventListener("click", function() {
-        redirectToAuthCodeFlow(clientId)
+        redirectToAuthCodeFlow(clientId) // this starts login flow
     })
-} else { //after auth
+} else { // after user auth
     const loadingScreen = document.getElementById("loading")
-    loadingScreen.style.display = "flex"
-    // pull data from sessionStorage if there, otherwise add it
+    loadingScreen.style.display = "flex" // display the loading screen
+    // pull data from sessionStorage if there, otherwise add data to sessionStorage
+    // this serves as local, in browser, short term user data storage
     if (sessionStorage.getItem('accessToken')) {
         accessToken = JSON.parse(sessionStorage.getItem('accessToken'))
     } else {
         accessToken = await getAccessToken(clientId, code);
         sessionStorage.setItem('accessToken', JSON.stringify(accessToken))
     }
+
+    // then, for each, pull the data from sessionStorage and store to the window
+    // this allows for the page to be refreshed without losing data
+
     if (sessionStorage.getItem('profile')) {
         profile = JSON.parse(sessionStorage.getItem('profile'))
     } else {
@@ -90,22 +101,30 @@ if (!code) { // on first login
     // populate UI
     populateUI(window.profile, window.tracksShort);
 
-    // control mobile tag text
+    // control mobile tag text (mobile breakpoints)
     if (window.innerWidth < 500) {
         document.getElementById("mix-head").style.display = "block"
         document.getElementById("mix-tag").style.display = "block"
         //document.getElementById("mixtape-container").style.aspectRatio = "9/16"
     }
+
+    // make the body scrollable
     document.querySelector("body").classList.remove("lock-scroll")
+
+    // hide the loading screen now that the content is loaded
     loadingScreen.style.display = "none"
 }
 
 async function redirectToAuthCodeFlow(clientId) {
+    // This function starts authentication flow
+
+    // create a code verifier and store it to sessionStorage
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
 
     sessionStorage.setItem("verifier", verifier);
 
+    // authorize API calls -- redirects to Spotify auth screen
     const params = new URLSearchParams();
     params.append("client_id", clientId);
     params.append("response_type", "code");
@@ -117,6 +136,7 @@ async function redirectToAuthCodeFlow(clientId) {
     document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
 
+// From Spotify:
 function generateCodeVerifier(length) {
     let text = '';
     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -127,6 +147,7 @@ function generateCodeVerifier(length) {
     return text;
 }
 
+// From Spotify:
 async function generateCodeChallenge(codeVerifier) {
     const data = new TextEncoder().encode(codeVerifier);
     const digest = await window.crypto.subtle.digest('SHA-256', data);
@@ -136,6 +157,7 @@ async function generateCodeChallenge(codeVerifier) {
         .replace(/=+$/, '');
 }
 
+// From Spotify:
 async function getAccessToken(clientId, code) {
     const verifier = sessionStorage.getItem("verifier");
 
@@ -157,6 +179,7 @@ async function getAccessToken(clientId, code) {
 }
 
 async function fetchProfile(token) {
+    // Calls API and requests profile name
     const result = await fetch("https://api.spotify.com/v1/me/", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
@@ -165,6 +188,7 @@ async function fetchProfile(token) {
 }
 
 async function fetchTracksShort(token) {
+    // Calls API and requests short-term tracks
     const result = await fetch("https://api.spotify.com/v1/me/top/tracks?time_range=short_term", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
@@ -173,6 +197,7 @@ async function fetchTracksShort(token) {
 }
 
 async function fetchTracksMedium(token) {
+    // Calls API and requests medium-term tracks
     const result = await fetch("https://api.spotify.com/v1/me/top/tracks?time_range=medium_term", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
@@ -181,6 +206,7 @@ async function fetchTracksMedium(token) {
 }
 
 async function fetchTracksLong(token) {
+    // Calls API and requests long-term tracks
     const result = await fetch("https://api.spotify.com/v1/me/top/tracks?time_range=long_term", {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
@@ -189,11 +215,15 @@ async function fetchTracksLong(token) {
 }
 
 async function fetchRecommended(token, tracks) {
+    // concatenate IDs of the first five tracks with commas
+    // maybe this could be a random five? or your first track, plus a random from 2-5, 6-10, 11-15, and 16-20?
     var seeds = ""
     tracks.items.slice(0,5).forEach(track => {
         seeds += track.id + ','
     })
     seeds = seeds.slice(0,-1)
+
+    // Call recommendations endpoint with first five tracks as recommendations
     const result = await fetch(`https://api.spotify.com/v1/recommendations?seed_tracks=${seeds}`, {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
@@ -202,7 +232,7 @@ async function fetchRecommended(token, tracks) {
 }
 
 async function toPlaylist(tracksUri, name, desc){
-
+    // Creates a playlist with the tracks inputted
     const playlist = await fetchWebApi(
       `v1/users/${window.profile.id}/playlists`, 'POST', {
         "name": name,
@@ -230,6 +260,7 @@ async function toPlaylist(tracksUri, name, desc){
   }
 
 function getArtists(track) {
+    // gets the artists for a track, comma-separated
     var artists = track.artists
     var artistString = ""
     artists.forEach(artist => {
@@ -239,16 +270,22 @@ function getArtists(track) {
 }
 
 function populateUI(profile, tracks) {
+    // get today's date in MM/DD/YYYY
     const today = new Date()
     var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear()
     document.getElementById('date').innerHTML = date
+
+    // get the user's display name and set the mixtape's title
     const displayName = profile.display_name.replaceAll(/\p{Emoji}/ug, '')
     document.getElementById("cassette-title").innerText = displayName.toLowerCase() + titleSuffix;
     document.getElementById("mixtape-name-input").value = displayName.toLowerCase() + titleSuffix
 
+    // hide the start page and show customize options
     document.getElementById("start-container").style.display = "none"
     document.getElementById("customize-container").style.display = "flex"
     //document.getElementById("mixtape-container").style.aspectRatio = "9/16"
+
+    // parse each track within tracks to get the Spotify URL, track name, and artists
     for (var i=0; i<20; i++) {
         try {
             var track = tracks.items[i]
