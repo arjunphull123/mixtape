@@ -359,7 +359,8 @@ async function updateRecs() {
 document.getElementById('refresh-rec').addEventListener('click', function() {
     console.log('refresh clicked')
     updateRecs()
-    populateUI(window.profile, window.recommended.tracks)
+    const tracksDict = {"short-term": window.tracksShort, "medium-term": window.tracksMedium, "long-term": window.tracksLong, "recommend": window.recommended}
+    populateUI(window.profile, tracksDict[timeRange])
 })
 
 // time range handling
