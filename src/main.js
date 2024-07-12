@@ -361,7 +361,7 @@ document.getElementById('refresh-rec').addEventListener('onclick', function() {
 // time range handling
 document.querySelectorAll('.time-range-option').forEach(btn => {
     btn.addEventListener("click", function() {
-        if (!this.classList.contains("active")) and (!this.id == 'refresh-rec') {
+        if (!this.classList.contains("active")) {
             document.querySelectorAll('.time-range-option').forEach(btn => {
                 btn.classList.remove("active")
             })
