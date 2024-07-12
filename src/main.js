@@ -351,12 +351,17 @@ async function updateRecs() {
     const newRecommended = await fetchRecommended(accessToken, JSON.parse(sessionStorage.getItem('tracksShort')));
     sessionStorage.setItem('recommended', JSON.stringify(newRecommended))
     window.recommended = JSON.parse(sessionStorage.getItem('recommended'))
+    populateUI(window.profile, tracksDict[timeRange])
 }
+
+document.getElementById('refresh-rec').addEventListener('onclick', function() {
+    updateRecs()
+})
 
 // time range handling
 document.querySelectorAll('.time-range-option').forEach(btn => {
     btn.addEventListener("click", function() {
-        if (!this.classList.contains("active")) {
+        if (!this.classList.contains("active")) and (!this.id == 'refresh-rec') {
             document.querySelectorAll('.time-range-option').forEach(btn => {
                 btn.classList.remove("active")
             })
@@ -365,12 +370,6 @@ document.querySelectorAll('.time-range-option').forEach(btn => {
             window.timeRange = timeRange
             const tracksDict = {"short-term": window.tracksShort, "medium-term": window.tracksMedium, "long-term": window.tracksLong, "recommend": window.recommended}
             const timeRangeDict = {"short-term": "Last month", "medium-term": "Last 6 months", "long-term": "Last 12 months", "recommend": "Recommended for me"}
-
-            // add handling for re-recommendations if the recommendations button is clicked
-            if (this.id == 'refresh-rec') {
-                updateRecs()
-            }
-
             populateUI(window.profile, tracksDict[timeRange])
             document.getElementById("time").innerHTML = timeRangeDict[timeRange]
         }
