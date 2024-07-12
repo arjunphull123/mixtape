@@ -218,6 +218,9 @@ async function fetchRecommended(token, tracks) {
     // concatenate IDs of the first five tracks with commas
     // maybe this could be a random five? or your first track, plus a random from 2-5, 6-10, 11-15, and 16-20?
     var seeds = ""
+
+    console.log(tracks)
+    
     tracks.items.slice(0,5).forEach(track => {
         seeds += track.id + ','
     })
