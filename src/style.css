@@ -384,6 +384,11 @@ input {
   gap: 0.75rem;
 }
 
+.mobile-download-options {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .mobile-create-playlist {
   display: flex;
 }
@@ -765,6 +770,12 @@ a:visited {
 
   input {
     font-size: 1rem;
+    color: white;
+  }
+
+  .mix-link {
+    display: flex;
+    gap: 0.75rem;
   }
 
   .mobile-create-playlist {
@@ -779,6 +790,60 @@ a:visited {
     display: flex;
   }
 }
+
+input.link {
+  width: 20rem;
+  font-size: 0.85rem;
+}
+
+.share-popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none; /* Hide by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's on top */
+  backdrop-filter: blur(10px); /* Adding the blur effect */
+}
+
+.show-popup .share-popup {
+  display: flex;
+}
+
+.show-popup .header, .show-popup .start-container, .show-popup .customize-container, .show-popup .mixtape-container {
+  opacity: 0.3; /* Dim the content behind the popup */
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: white; /* Text color */
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+
+.close-popup {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 24px;
+  color: white; /* Ensure it is visible on the background */
+  text-shadow: 0 0 10px rgba(0,0,0,0.5); /* Optional: enhances visibility */
+}
+
+
+
 
 @media only screen and (min-width: 1024px) {
   h1 {

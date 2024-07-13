@@ -2,6 +2,34 @@ import domtoimage from 'dom-to-image'
 import { saveAs } from 'file-saver'
 import html2canvas from 'html2canvas';
 
+// Firebase init:
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore"
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBhHdbyP7hy2V4xlG9S_i9G62emf9mvIfI",
+  authDomain: "mixedify-40e2e.firebaseapp.com",
+  projectId: "mixedify-40e2e",
+  storageBucket: "mixedify-40e2e.appspot.com",
+  messagingSenderId: "1076825373232",
+  appId: "1:1076825373232:web:4c34f4277dd6f4bdc7cbf5"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// Regular functionality:
+
 // Setting up API key and params for Spotify API
 const clientId = "4b027ab3c8dd4b1f9ef6d083d0b51fb5"; // Replace with your client ID
 const params = new URLSearchParams(window.location.search);
@@ -128,7 +156,7 @@ async function redirectToAuthCodeFlow(clientId) {
     const params = new URLSearchParams();
     params.append("client_id", clientId);
     params.append("response_type", "code");
-    params.append("redirect_uri", "https://mixedify.netlify.app");
+    params.append("redirect_uri", "http://localhost:5173");
     params.append("scope", "user-top-read playlist-modify-private");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
@@ -165,7 +193,7 @@ async function getAccessToken(clientId, code) {
     params.append("client_id", clientId);
     params.append("grant_type", "authorization_code");
     params.append("code", code);
-    params.append("redirect_uri", "https://mixedify.netlify.app");
+    params.append("redirect_uri", "http://localhost:5173");
     params.append("code_verifier", verifier);
 
     const result = await fetch("https://accounts.spotify.com/api/token", {
@@ -345,7 +373,7 @@ function createPlaylist() {
     })
 }
 
-// function for updating recommencations
+// function for updating recommendations
 
 async function updateRecs() {
     console.log('fetching new recommendations')
@@ -467,6 +495,130 @@ function downloadImage() {
     );
 }
 document.getElementById('download').addEventListener("click", downloadImage)
+
+
+// Firebase handling
+
+const burnAndShare = [document.getElementById('burn-and-share'), document.getElementById('burn-and-share-mobile')]
+
+function generateHash(mixtapeData) {
+    // Construct a string from the critical parts of the mixtape data
+    const tracksString = mixtapeData.tracks.slice(0, 5).map(track => track.href).join("");
+    const dataString = `${mixtapeData.date}${mixtapeData.time}${mixtapeData.mixtapeTitle}${tracksString}`;
+
+    // Convert the data string to a base64 string using btoa and handle UTF-8 properly
+    const base64String = btoa(encodeURIComponent(dataString).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode('0x' + p1);
+    }));
+
+    // Return the base64 encoded string, potentially truncated to manage size
+    return base64String.substring(0, 32); // you might adjust the length as needed
+}
+
+burnAndShare.forEach(btn => {
+    btn.addEventListener('click', async function () {
+        const mixtapeData = collectMixtapeData();
+        const mixtapeHash = await generateHash(mixtapeData);  // Assuming generateHash() returns a hash string
+
+        const isDuplicate = await checkForDuplicate(mixtapeHash, db);
+        let docId;
+
+        if (!isDuplicate) {
+            const docRef = await addDoc(collection(db, "mixtapes"), { ...mixtapeData, hash: mixtapeHash });
+            docId = docRef.id;
+            console.log("Document written with ID: ", docId);
+        } else {
+            docId = await getExistingDocumentId(mixtapeHash, db);
+            console.log("Existing document ID: ", docId);
+        }
+
+        showPopup(docId);  // Call to show the popup
+    })
+});
+
+async function checkForDuplicate(mixtapeHash, db) {
+    const mixtapesCollection = collection(db, "mixtapes");
+    const q = query(mixtapesCollection, where("hash", "==", mixtapeHash));
+    const querySnapshot = await getDocs(q);
+    return !querySnapshot.empty; // Returns true if any document exists with this hash
+}
+
+async function getExistingDocumentId(mixtapeHash, db) {
+    const mixtapesCollection = collection(db, "mixtapes");
+    const q = query(mixtapesCollection, where("hash", "==", mixtapeHash));
+    const querySnapshot = await getDocs(q);
+    return querySnapshot.docs[0].id;  // Return the ID of the first document matching the hash
+}
+
+
+function collectMixtapeData() {
+    const mixtapeData = {
+        date: document.getElementById('date').textContent,
+        time: document.getElementById('time').textContent,
+        tracks: [],
+        mixtapeTitle: document.getElementById('cassette-title').textContent
+    }
+
+    for (let i = 1; i <= 20; i++) {
+        const trackLink = document.getElementById(`track-link-${i}`);
+        const track = document.getElementById(`track-${i}`);
+
+        if (track && trackLink) {
+            mixtapeData.tracks.push({
+                href: trackLink.href,
+                trackName: track.textContent
+            });
+        }
+    }
+
+    return mixtapeData
+}
+
+async function getMixtapeDataByID(docID) {
+    const mixtapeDoc = doc(db, "mixtapes", docID)
+    const docSnapshot = await getDoc(mixtapeDoc)
+
+    if (docSnapshot.exists()) {
+        console.log("Mixtape data:", docSnapshot.data())
+    } else {
+        console.log("No mixtape found")
+    }
+}
+
+function showPopup(docId) {
+    const popup = document.createElement('div');
+    popup.className = 'share-popup';
+
+    const content = `
+        <div class="popup-content">
+            <p class="info-head">Nice mix!</p>
+            <p class="info-text">Copy the link below and share with a friend:</p>
+            <input class="link" type="text" id="mixtape-link" value="https://mixedify.netlify.app/mix/${docId}" readonly>
+            <div class='download' id="close-popup">Back</div>
+        </div>
+    `;
+    popup.innerHTML = content;
+    document.body.appendChild(popup);
+
+    // Close popup functionality
+    const closeButtons = popup.querySelectorAll('#close-popup');
+    closeButtons.forEach(button => button.addEventListener('click', () => {
+        document.body.classList.remove('show-popup');
+        document.body.removeChild(popup);
+    }));
+
+    // Show the popup
+    document.body.classList.add('show-popup');
+}
+
+function getDocumentIdFromUrl() {
+    const pathSegments = window.location.pathname.split('/')
+    if (pathSegments[1] === 'mix' & pathSegments.length === 3) {
+        return pathSegments[2]
+    }
+    return null
+}
+
 
 
 /*
