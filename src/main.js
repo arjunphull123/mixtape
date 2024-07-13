@@ -156,7 +156,7 @@ async function redirectToAuthCodeFlow(clientId) {
     const params = new URLSearchParams();
     params.append("client_id", clientId);
     params.append("response_type", "code");
-    params.append("redirect_uri", "http://localhost:5173");
+    params.append("redirect_uri", "https://mixedify.netlify.app");
     params.append("scope", "user-top-read playlist-modify-private");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
@@ -193,7 +193,7 @@ async function getAccessToken(clientId, code) {
     params.append("client_id", clientId);
     params.append("grant_type", "authorization_code");
     params.append("code", code);
-    params.append("redirect_uri", "http://localhost:5173");
+    params.append("redirect_uri", "https://mixedify.netlify.app");
     params.append("code_verifier", verifier);
 
     const result = await fetch("https://accounts.spotify.com/api/token", {
@@ -593,7 +593,7 @@ function showPopup(docId) {
         <div class="popup-content">
             <p class="info-head">Nice mix!</p>
             <p class="info-text">Copy the link below and share with a friend:</p>
-            <input class="link" type="text" id="mixtape-link" value="https://mixedify.netlify.app/mix/${docId}" readonly>
+            <input class="link" type="text" id="mixtape-link" value="https://mixedify.netlify.app/mix/?id=${docId}" readonly>
             <div class='download' id="close-popup">Back</div>
         </div>
     `;
@@ -610,33 +610,3 @@ function showPopup(docId) {
     // Show the popup
     document.body.classList.add('show-popup');
 }
-
-function getDocumentIdFromUrl() {
-    const pathSegments = window.location.pathname.split('/')
-    if (pathSegments[1] === 'mix' & pathSegments.length === 3) {
-        return pathSegments[2]
-    }
-    return null
-}
-
-
-
-/*
-- for desktop, use dom-to-image. For mobile, create a screenshot-format-button that makes the card full-screen, and then tell the user to screenshot.
-- error handling for api calls - if resource not found, pass and display an error message
-- pre-populate the home screen with Billboard Top Hits (if there is an API?)
-- DONE make some sort of loading screen
-- Info screen
-
-make new colors that are full alpha. 
-make that the background for the content-container
-
-
-Future functionality:
-- Build your own mixtape by track
-    Spotify search
-    Start over completely
-- Be able to send links to mixtapes
-- TOp hits by year
-*/
-

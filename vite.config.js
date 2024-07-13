@@ -1,18 +1,20 @@
-import { resolve } from 'path';
 import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 export default defineConfig({
-  base: '',
+  base: '/',
+  publicDir: 'public',
   build: {
-    target: 'esnext',
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
         privacy: resolve(__dirname, 'privacy/index.html'),
+        mix: resolve(__dirname, 'mix/index.html')
       }
     }
   },
   server: {
-    historyApiFallback: true  // Use true to redirect all not explicitly handled paths to index.html
+    historyApiFallback: true
   }
 });
+
