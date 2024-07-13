@@ -358,7 +358,7 @@ async function updateRecs() {
 document.getElementById('refresh-rec').addEventListener('click', function() {
     if (timeRange == 'recommend') {
         console.log('refreshing...')
-        this.innerHTML = "Refreshing..."
+        document.getElementById('refresh-rec').innerHTML = "Refreshing..."
 
         const populateRecs = async () => {
             await updateRecs()
@@ -367,7 +367,7 @@ document.getElementById('refresh-rec').addEventListener('click', function() {
         }
     
         populateRecs()
-        this.innerHTML = "Refresh recs"
+        document.getElementById('refresh-rec').innerHTML = "Refresh recs"
     }
 })
 
