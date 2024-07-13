@@ -5,6 +5,7 @@ export default defineConfig({
   base: '/',
   publicDir: 'public',
   build: {
+    target: 'esnext',
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
