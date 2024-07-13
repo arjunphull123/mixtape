@@ -352,16 +352,15 @@ async function updateRecs() {
     const newRecommended = await fetchRecommended(accessToken, JSON.parse(sessionStorage.getItem('tracksShort')));
     sessionStorage.setItem('recommended', JSON.stringify(newRecommended))
     window.recommended = JSON.parse(sessionStorage.getItem('recommended'))
-    console.log("New recommendations:")
-    console.log(window.recommended)
+    return window.recommended
 }
 
 document.getElementById('refresh-rec').addEventListener('click', function() {
     if (timeRange == 'recommend') {
         console.log('refreshing...')
-        updateRecs()
+        const newTracks = updateRecs()
         console.log('Now populating UI')
-        populateUI(window.profile, window.recommended)
+        populateUI(window.profile, newTracks)
     }
 })
 
