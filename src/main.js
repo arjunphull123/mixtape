@@ -358,9 +358,9 @@ async function updateRecs() {
 document.getElementById('refresh-rec').addEventListener('click', function() {
     if (timeRange == 'recommend') {
         console.log('refreshing...')
-        const newTracks = updateRecs()
+        await updateRecs()
         console.log('Now populating UI')
-        populateUI(window.profile, newTracks)
+        populateUI(window.profile, window.recommended)
     }
 })
 
