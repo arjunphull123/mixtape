@@ -284,7 +284,7 @@ h1 {
   color: white;
 }
 
-.time-range-option.active, .refresh:active {
+.time-range-option.active, .refresh.active {
   background: #FFF;
   color: var(--card-bg);
 }
