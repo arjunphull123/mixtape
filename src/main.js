@@ -156,7 +156,7 @@ async function redirectToAuthCodeFlow(clientId) {
     const params = new URLSearchParams();
     params.append("client_id", clientId);
     params.append("response_type", "code");
-    params.append("redirect_uri", "https://mixedify.netlify.app");
+    params.append("redirect_uri", "http://localhost:5173");
     params.append("scope", "user-top-read playlist-modify-private");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
@@ -193,7 +193,7 @@ async function getAccessToken(clientId, code) {
     params.append("client_id", clientId);
     params.append("grant_type", "authorization_code");
     params.append("code", code);
-    params.append("redirect_uri", "https://mixedify.netlify.app");
+    params.append("redirect_uri", "http://localhost:5173");
     params.append("code_verifier", verifier);
 
     const result = await fetch("https://accounts.spotify.com/api/token", {
@@ -593,7 +593,7 @@ function showPopup(docId) {
         <div class="popup-content">
             <p class="info-head">Nice mix!</p>
             <p class="info-text">Copy the link below and share with a friend:</p>
-            <input class="link" type="text" id="mixtape-link" value="https://mixedify.netlify.app/mix/?id=${docId}" readonly>
+            <input class="link" type="text" id="mixtape-link" value="http://localhost:5173/mix/?id=${docId}" readonly>
             <div class='download' id="close-popup">Back</div>
         </div>
     `;
