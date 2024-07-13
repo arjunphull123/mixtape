@@ -361,7 +361,7 @@ document.getElementById('refresh-rec').addEventListener('click', function() {
     updateRecs()
     const tracksDict = {"short-term": window.tracksShort, "medium-term": window.tracksMedium, "long-term": window.tracksLong, "recommend": window.recommended}
     console.log(timeRange)
-    // populateUI(window.profile, tracksDict[timeRange])
+    populateUI(window.profile, tracksDict[timeRange])
 })
 
 // time range handling
