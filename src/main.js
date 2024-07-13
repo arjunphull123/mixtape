@@ -376,6 +376,7 @@ document.getElementById('refresh-rec').addEventListener('click', function() {
 
 // time range handling
 document.querySelectorAll('.time-range-option').forEach(btn => {
+    const displayName = profile.display_name.replaceAll(/\p{Emoji}/ug, '')
     btn.addEventListener("click", function() {
         if (!this.classList.contains("active")) {
             document.querySelectorAll('.time-range-option').forEach(btn => {
@@ -385,7 +386,7 @@ document.querySelectorAll('.time-range-option').forEach(btn => {
             timeRange = this.id
             window.timeRange = timeRange
             const tracksDict = {"short-term": window.tracksShort, "medium-term": window.tracksMedium, "long-term": window.tracksLong, "recommend": window.recommended}
-            const timeRangeDict = {"short-term": "Last month", "medium-term": "Last 6 months", "long-term": "Last 12 months", "recommend": "Recommended for me"}
+            const timeRangeDict = {"short-term": "Last month", "medium-term": "Last 6 months", "long-term": "Last 12 months", "recommend": "Recommended for " + displayName.toLowerCase()}
             populateUI(window.profile, tracksDict[timeRange])
             document.getElementById("time").innerHTML = timeRangeDict[timeRange]
         }
