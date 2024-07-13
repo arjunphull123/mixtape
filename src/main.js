@@ -395,6 +395,8 @@ document.getElementById('refresh-rec').addEventListener('click', function() {
             console.log('Now populating UI')
             populateUI(window.profile, window.recommended)
             refresh.innerHTML = "Refresh recs"
+            document.getElementById("cassette-title").innerText = "recs for " + displayName.toLowerCase();
+            document.getElementById("mixtape-name-input").value = "recs for " + displayName.toLowerCase();
             refresh.classList.remove('active')
         }
     
