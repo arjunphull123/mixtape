@@ -10,7 +10,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         privacy: resolve(__dirname, 'privacy/index.html'),
-        mix: resolve(__dirname, 'mix/index.html')
+        mix: resolve(__dirname, 'mix/index.html'),
+        create: resolve(__dirname, 'create/index.html'),
       }
     }
   },

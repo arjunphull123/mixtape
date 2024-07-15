@@ -14,48 +14,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
-
-let mixtapeData
-
-if (id) {
-    populateUI(id)
-}
-
-async function getMixtapeData(mixtapeId) {
-    const mixtapeRef = doc(db, "mixtapes", mixtapeId); // Adjust "mixtapes" to your specific collection name
-    try {
-        const mixtapeSnap = await getDoc(mixtapeRef);
-        if (mixtapeSnap.exists()) {
-            mixtapeData = mixtapeSnap.data();
-            return mixtapeData
-        } else {
-            console.log("No such document!");
-            return
-        }
-    } catch (error) {
-        console.error("Error getting document:", error);
-    }
-}
-
-async function populateUI(mixtapeId) {
-    document.getElementById('loading').style.display = "flex"
-    await getMixtapeData(mixtapeId)
-    document.getElementById('date').innerText = mixtapeData.date
-    document.getElementById('time').innerText = mixtapeData.time
-    document.getElementById('cassette-title').innerText = mixtapeData.mixtapeTitle
-
-    for (var i=0; i<20; i++) {
-        const track = mixtapeData.tracks[i]
-        document.getElementById("track-"+(i+1)).innerHTML = track.trackName
-        document.getElementById("track-link-"+(i+1)).href = track.href
-    }
-
-    document.getElementById('loading').style.display = "none"
-}
+// Write handling that will add tracks one by one to the mixtape
+// Write API calls to search for a track
 
   
+
 // Info screen handling
 var infoButton = document.getElementById('info-button')
 var closeInfoButton = document.getElementById('close-info')
