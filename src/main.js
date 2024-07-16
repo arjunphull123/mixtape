@@ -507,7 +507,7 @@ const burnAndShare = [document.getElementById('burn-and-share'), document.getEle
 function generateHash(mixtapeData) {
     // Construct a string from the critical parts of the mixtape data
     const tracksString = mixtapeData.tracks.slice(0, 5).map(track => track.href).join("");
-    const dataString = `${mixtapeData.date}${mixtapeData.time}${mixtapeData.mixtapeTitle}${tracksString}`;
+    const dataString = `${mixtapeData.date}${mixtapeData.time}${mixtapeData.mixtapeTitle}${mixtapeData.activeColor}${tracksString}`;
 
     // Convert the data string to a base64 string using btoa and handle UTF-8 properly
     const base64String = btoa(encodeURIComponent(dataString).replace(/%([0-9A-F]{2})/g, function(match, p1) {
@@ -554,11 +554,22 @@ async function getExistingDocumentId(mixtapeHash, db) {
 
 
 function collectMixtapeData() {
+    const cardBg = sessionStorage.getItem('cardBg')
+    const bgColor = sessionStorage.getItem('bgColor')
+    const activeColor = sessionStorage.getItem('activeColor')
+
+    console.log(cardBg)
+    console.log(bgColor)
+    console.log(activeColor)
+
     const mixtapeData = {
         date: document.getElementById('date').textContent,
         time: document.getElementById('time').textContent,
         tracks: [],
-        mixtapeTitle: document.getElementById('cassette-title').textContent
+        mixtapeTitle: document.getElementById('cassette-title').textContent,
+        cardBg: cardBg,
+        bgColor: bgColor,
+        activeColor: activeColor
     }
 
     for (let i = 1; i <= 20; i++) {
