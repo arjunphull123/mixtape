@@ -806,7 +806,8 @@ input.link {
   justify-content: center;
   align-items: center;
   z-index: 1000; /* Ensure it's on top */
-  backdrop-filter: blur(10px); /* Adding the blur effect */
+  backdrop-filter: blur(0.5rem);
+  -webkit-backdrop-filter: blur(0.5rem);
 }
 
 .show-popup .share-popup {

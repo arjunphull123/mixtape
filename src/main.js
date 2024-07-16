@@ -156,7 +156,7 @@ async function redirectToAuthCodeFlow(clientId) {
     const params = new URLSearchParams();
     params.append("client_id", clientId);
     params.append("response_type", "code");
-    params.append("redirect_uri", "http://localhost:5173");
+    params.append("redirect_uri", "https://mixedify.netlify.app");
     params.append("scope", "user-top-read playlist-modify-private");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
@@ -193,7 +193,7 @@ async function getAccessToken(clientId, code) {
     params.append("client_id", clientId);
     params.append("grant_type", "authorization_code");
     params.append("code", code);
-    params.append("redirect_uri", "http://localhost:5173");
+    params.append("redirect_uri", "https://mixedify.netlify.app");
     params.append("code_verifier", verifier);
 
     const result = await fetch("https://accounts.spotify.com/api/token", {
@@ -577,25 +577,42 @@ function collectMixtapeData() {
 
 function showPopup(docId) {
     const popup = document.createElement('div');
+    const link = "https://mixedify.netlify.app/mix/?id=" + docId
     popup.className = 'share-popup';
 
     const content = `
         <div class="popup-content">
-            <p class="info-head">Nice mix!</p>
-            <p class="info-text">Copy the link below and share with a friend:</p>
-            <input class="link" type="text" id="mixtape-link" value="http://localhost:5173/mix/?id=${docId}" readonly>
-            <div class='download' id="close-popup">Back</div>
+                <p class="info-head">Nice mix!</p>
+                <p class="info-text">Copy the link below and share with a friend:</p>
+                <input type="text" id="mixtape-link" value="https://mixedify.netlify.app/mix/?id=${docId}" readonly>
+                <div class='download-options'>
+                    <div class='download' id="copy">Copy Link</div>
+                    <div class='download' id="close-popup">Close</div>
+                </div>
+
+                <div class='mobile-download-options'>
+                    <div class="mobile-create-playlist" id="mobile-copy">Copy Link</div>
+                    <div class="mobile-create-playlist" id="mobile-close-popup">Close</div>
+                </div>
         </div>
     `;
     popup.innerHTML = content;
     document.body.appendChild(popup);
 
     // Close popup functionality
-    const closeButtons = popup.querySelectorAll('#close-popup');
+    const closeButtons = popup.querySelectorAll('#close-popup, #mobile-close-popup');
     closeButtons.forEach(button => button.addEventListener('click', () => {
         document.body.classList.remove('show-popup');
         document.body.removeChild(popup);
     }));
+
+     // Copy link  functionality
+     const copyButtons = popup.querySelectorAll('#copy, #mobile-copy');
+     copyButtons.forEach(button => button.addEventListener('click', () => {
+         navigator.clipboard.writeText(link)
+         button.innerHTML = "Copied!"
+         setTimeout(() => {button.innerHTML = "Copy Link"}, 1500)
+     }));
 
     // Show the popup
     document.body.classList.add('show-popup');
