@@ -1,6 +1,10 @@
 const { readFile } = require('fs').promises;
 const path = require('path');
 
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore"
+
 const firebaseConfig = {
   apiKey: "AIzaSyBhHdbyP7hy2V4xlG9S_i9G62emf9mvIfI",
   authDomain: "mixedify-40e2e.firebaseapp.com",
