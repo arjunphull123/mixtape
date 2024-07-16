@@ -68,6 +68,8 @@ async function populateUI(mixtapeId) {
         document.getElementById("track-link-"+(i+1)).href = track.href
     }
 
+    document.getElementById('meta-title').content = mixtapeData.mixtapeTitle
+
     document.getElementById('loading').style.display = "none"
 }
 
