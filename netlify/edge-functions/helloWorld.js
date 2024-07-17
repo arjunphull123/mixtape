@@ -1,3 +1,13 @@
-export default () => new Response("Hello world");
+export default async (request, context) => {
+    const url = new URL(request.url)
+    
+    // Get the page content.
+    const response = await context.next()
+    const page = await response.text()
 
-export const config = { path: "/test" };
+    console.log("Hello, world")
+    
+    return new Response(page, response);
+}
+
+export const config = { path: "/mix/" };
