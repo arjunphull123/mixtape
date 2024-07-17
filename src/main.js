@@ -1,6 +1,5 @@
 import domtoimage from 'dom-to-image'
-import { saveAs } from 'file-saver'
-import html2canvas from 'html2canvas';
+
 
 // Firebase init:
 
