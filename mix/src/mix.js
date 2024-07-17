@@ -60,7 +60,7 @@ async function populateUI(mixtapeId) {
     document.getElementById('time').innerText = mixtapeData.time
     document.getElementById('cassette-title').innerText = mixtapeData.mixtapeTitle
 
-    document.title = mixtapeData.mixtapeTitle
+    document.title = mixtapeData.mixtapeTitle + ' - mixedify'
 
     for (var i=0; i<20; i++) {
         const track = mixtapeData.tracks[i]
