@@ -1,4 +1,4 @@
-export async function onRequest(event) {
+export default async function onRequest(event) {
     const { request } = event;
     const url = new URL(request.url);
     const id = url.searchParams.get("id");
@@ -12,20 +12,22 @@ export async function onRequest(event) {
                 throw new Error(`Failed to fetch title: ${response.status}`);
             }
             const data = await response.json();
-            const { title } = data;
+            const title = data.title;
 
             let html = await event.response.text();
             html = html.replace(/<meta id="meta-title" property="og:title" content=".*?"/, `<meta id="meta-title" property="og:title" content="${title}"`);
             return new Response(html, {
-                ...event.response,
+                status: 200,
                 headers: {
-                    ...event.response.headers,
                     'Content-Type': 'text/html; charset=utf-8'
-                }
+                },
+                body: html
             });
         } catch (error) {
             console.error('Error updating meta title:', error);
             return new Response('Internal Server Error', { status: 500 });
         }
+    } else {
+        return new Response('Not Found', { status: 404 });
     }
 }
