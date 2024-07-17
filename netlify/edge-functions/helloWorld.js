@@ -22,7 +22,7 @@ export default async (request, context) => {
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     
-    const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(url.search);
     const id = params.get("id");
     console.log(id)
     
