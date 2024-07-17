@@ -42,20 +42,6 @@ async function getMixtapeData(mixtapeId) {
 async function populateUI(mixtapeId) {
     document.getElementById('loading').style.display = "flex"
     await getMixtapeData(mixtapeId)
-
-    // colors to sessionStorage
-    sessionStorage.setItem('activeColor', mixtapeData.activeColor)
-    sessionStorage.setItem('cardBg', mixtapeData.cardBg)
-    sessionStorage.setItem('bgColor', mixtapeData.bgColor)
-
-    // set colors
-    document.documentElement.style.setProperty("--card-bg", sessionStorage.getItem('cardBg'))
-    document.documentElement.style.setProperty("--bg-color", sessionStorage.getItem('bgColor'))
-    document.querySelectorAll('.color-button').forEach(btn => {
-        btn.classList.remove("active")
-    })
-    document.getElementById(sessionStorage.getItem('activeColor')).classList.add('active')    
-
     document.getElementById('date').innerText = mixtapeData.date
     document.getElementById('time').innerText = mixtapeData.time
     document.getElementById('cassette-title').innerText = mixtapeData.mixtapeTitle
