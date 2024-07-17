@@ -1,25 +1,31 @@
-import { get } from 'https';
-
-export function onRequest(event) {
+export async function onRequest(event) {
     const { request } = event;
     const url = new URL(request.url);
     const id = url.searchParams.get("id");
 
     if (id) {
         const apiUrl = `https://${request.headers.get("host")}/.netlify/functions/getTitle?id=${id}`;
-        get(apiUrl, res => {
-            let data = '';
-            res.on('data', chunk => {
-                data += chunk;
+        
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch title: ${response.status}`);
+            }
+            const data = await response.json();
+            const { title } = data;
+
+            let html = await event.response.text();
+            html = html.replace(/<meta id="meta-title" property="og:title" content=".*?"/, `<meta id="meta-title" property="og:title" content="${title}"`);
+            return new Response(html, {
+                ...event.response,
+                headers: {
+                    ...event.response.headers,
+                    'Content-Type': 'text/html; charset=utf-8'
+                }
             });
-            res.on('end', () => {
-                const { title } = JSON.parse(data);
-                let html = event.response.body.toString();
-                html = html.replace(/<meta id="meta-title" property="og:title" content=".*?"/, `<meta id="meta-title" property="og:title" content="${title}"`);
-                event.respondWith(new Response(html, event.response));
-            });
-        }).on('error', err => {
-            console.error(err);
-        });
+        } catch (error) {
+            console.error('Error updating meta title:', error);
+            return new Response('Internal Server Error', { status: 500 });
+        }
     }
 }
