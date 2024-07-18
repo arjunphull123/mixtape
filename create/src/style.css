@@ -285,6 +285,24 @@
     width: 75vw;
     max-width: 400px;
   }
+
+  .search-result {
+    display: flex;
+    padding: 0.5rem 0.625rem;
+    justify-content: left;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 2.5rem;
+    border: 1px solid #FFF;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.75rem;
+    color: white;
+    width: 75vw;
+    max-width: 400px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
   
   .time-range-option.active, .refresh.active, .search-result:active {
     background: #FFF;
@@ -769,6 +787,12 @@
       opacity: 15%;
     }
   }
+
+  .creating {
+    .color-options, .mobile-download-options, .download-options, #mixtape-name-input {
+      display: none;
+    }
+  }
   
   @media only screen and (min-width: 500px) { 
   
@@ -811,6 +835,10 @@
   
     .time-range-option, .refresh, .search-result {
       font-size: 1rem;
+    }
+
+    .search-result {
+      font-size: 0.75rem;
     }
   
     input {

@@ -6,7 +6,6 @@ import domtoimage from 'dom-to-image'
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { doc, setDoc, getDoc } from "firebase/firestore"
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 
 
@@ -64,6 +63,9 @@ closeInfoButton.addEventListener("click", function() {
     body.classList.remove('show-info')
 })
 
+document.getElementById('create-mix').addEventListener("click", function() {
+    window.location.href = "https://mixedify.netlify.app/create"
+})
 
 // Auth flow and API calls
 if (!code) { // on first login - if there is no code object
@@ -203,6 +205,7 @@ async function getAccessToken(clientId, code) {
     });
 
     const { access_token } = await result.json();
+    console.log(access_token)
     return access_token;
 }
 

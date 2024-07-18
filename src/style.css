@@ -215,6 +215,12 @@ h1 {
   height: 1rem;
 }
 
+.log-in-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
 .log-in-button {
   display: flex;
   padding: 0.5rem 0.625rem;
@@ -224,6 +230,7 @@ h1 {
   border-radius: 2.5rem;
   background: #FFF;
   cursor: pointer;
+  height: 1rem;
 
   color: var(--card-bg);
   text-align: center;
@@ -752,6 +759,7 @@ a:visited {
 
   .log-in-button {
     font-size: 1rem;
+    height: 1.5rem;
   }
 
   .body-container {

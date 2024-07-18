@@ -75,18 +75,15 @@
           <h1 class="customize">Create a mixtape</h1>
           <p class="subtitle">Search for a track below and burn it to your mixtape.
             <br>Once you burn a track, you can't remove it (just like IRL).
-            <br>But don't worry, you can always start over :)
+            <br>But don't worry, you can reload the page to start over :)
           </p>
-          <p class="subtitle" id="tracks left">20 tracks left</p>
+          <p class="subtitle" id="tracks-left">20 tracks left</p>
           <div class="controls">
             <div class="search">
               <input type="text" id="search-for-tracks" placeholder="Search for tracks...">
-              <div class="search-button">Search</div>
+              <div class="search-button" id="searchButton">Search</div>
             </div>
-            <div class="search-results">
-              <div class="search-result">Mona Lisa - Kendrick Lamar</div>
-              <div class="search-result">Mona Lisa - Kendrick Lamar</div>
-              <div class="search-result">Mona Lisa - Kendrick Lamar</div>
+            <div class="search-results" id="search-results">
             </div>
             <div class="color-options">
               <div id="color-1" class="color-button active">
@@ -123,14 +120,12 @@
             <input type="text" id="mixtape-name-input" placeholder="Name your mix...">
           </div>
           <div class="mobile-download-options">
-            <div class="mobile-create-playlist" id="create-playlist-mobile">Open in Spotify</div>
             <div class="mobile-create-playlist" id="burn-and-share-mobile">Burn and share</div>
           </div>
           
             <p class="scroll-down">Scroll down to screenshot and share</p>
           <div class="download-options">
             <div class="download" id="download">Download</div>
-            <div class="download" id="create-playlist">Open in Spotify</div>
             <div class="download" id="burn-and-share">Burn and share</div>
           </div>
 
@@ -271,7 +266,7 @@
 
           <div class="cassette-container">
             <img src="/scotch.png" alt="" class="cassette" id="cassette">
-            <p class="cassette-title" id="cassette-title">Best of '89</p>
+            <p class="cassette-title" id="cassette-title">awesome mix vol. 1</p>
           </div>
           <div class="mixtape-footer">
             
