@@ -71,6 +71,7 @@ if (!code) { // on first login - if there is no code object
         redirectToAuthCodeFlow(clientId) // this starts login flow
     })
 } else { // after user auth
+    document.title = "Customize your mixtape - mixedify"
     const loadingScreen = document.getElementById("loading")
     loadingScreen.style.display = "flex" // display the loading screen
     // pull data from sessionStorage if there, otherwise add data to sessionStorage
