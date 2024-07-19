@@ -657,7 +657,7 @@ input {
   top: 0;
   left: 0;
   color: white;
-  z-index: 1000;
+  z-index: 10000;
   backdrop-filter: blur(0.5rem);
   -webkit-backdrop-filter: blur(0.5rem);
 }
