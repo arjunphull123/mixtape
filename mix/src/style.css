@@ -130,6 +130,11 @@
     letter-spacing: -0.05rem;
     line-height: normal;
   }
+
+  .logo {
+    aspect-ratio: auto;
+    height: 1rem;
+  }
   
   .ss-me {
     font-size: 0.75rem;
