@@ -38,8 +38,12 @@ var ua = navigator.userAgent || navigator.vendor || window.opera
 var isInstagram = (ua.indexOf('Instagram') > -1) ? true : false
 var isSnapchat = (ua.indexOf('Snapchat') > -1) ? true : false
 
-if (isInstagram || isSnapchat) {
+if (isInstagram) {
     document.body.classList.add('show-insta')
+}
+
+if (isSnapchat) {
+    document.body.classList.add('show-snap')
 }
 
 // Initialize the default time range for data shown
