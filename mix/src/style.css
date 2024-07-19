@@ -131,10 +131,7 @@
     line-height: normal;
   }
 
-  .logo {
-    aspect-ratio: auto;
-    height: 1rem;
-  }
+  
   
   .ss-me {
     font-size: 0.75rem;
@@ -607,6 +604,8 @@
     height: auto;
     fill: #fff;
   }
+
+  
   
   .logo {
     color: #FFF;
@@ -615,6 +614,11 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+  }
+
+  .logo {
+    aspect-ratio: auto;
+    height: 1rem;
   }
   
   .logo.small {
