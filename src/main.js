@@ -38,7 +38,7 @@ var ua = navigator.userAgent || navigator.vendor || window.opera
 var isInstagram = (ua.indexOf('Instagram') > -1) ? true : false
 var isSnapchat = (ua.indexOf('Snapchat') > -1) ? true : false
 
-if (isInstagram) {
+if (isInstagram || isSnapchat) {
     document.body.classList.add('show-insta')
 }
 
