@@ -807,6 +807,10 @@
   
   @media only screen and (min-width: 500px) { 
 
+    .subtitle {
+      max-width: 35vw;
+    }
+
     .p-load {
       letter-spacing: -0.075rem;
     }
