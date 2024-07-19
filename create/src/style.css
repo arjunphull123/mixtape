@@ -639,6 +639,11 @@
     font-weight: 700;
     line-height: normal;
   }
+
+  .logo {
+    aspect-ratio: auto;
+    height: 1rem;
+  }
   
   .logo.small {
     font-size: calc(var(--mw)*0.55 / 10);
