@@ -127,7 +127,7 @@ body {
   font-size: 1.75rem;
   font-style: normal;
   font-weight: 700;
-  letter-spacing: -0.05rem;
+  letter-spacing: -0.1rem;
   line-height: normal;
 }
 
@@ -733,6 +733,10 @@ a:visited {
 }
 
 @media only screen and (min-width: 500px) { 
+
+  .logo-header {
+    letter-spacing: -0.05rem;
+  }
 
   .content-container {
     /*flex-direction: row;*/

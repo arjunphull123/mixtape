@@ -796,6 +796,10 @@
   
   @media only screen and (min-width: 500px) { 
   
+    .logo-header {
+      letter-spacing: -0.05rem;
+    }
+
     .content-container {
       /*flex-direction: row;*/
       margin-top: 0;
@@ -920,9 +924,7 @@
     text-shadow: 0 0 10px rgba(0,0,0,0.5); /* Optional: enhances visibility */
   }
   
-  
-  
-  
+
   @media only screen and (min-width: 1024px) {
     h1 {
       font-size: 3.5rem;

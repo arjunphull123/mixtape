@@ -735,6 +735,10 @@
   
   @media only screen and (min-width: 500px) { 
   
+    .logo-header {
+      letter-spacing: -0.05rem;
+    }
+
     .content-container {
       /*flex-direction: row;*/
       margin-top: 0;
