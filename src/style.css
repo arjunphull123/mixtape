@@ -593,6 +593,14 @@ input {
   fill: #fff;
 }
 
+.logo-footer {
+  /*width: 4.99106rem;
+  height: 1.5rem;*/
+  width: calc(var(--mw)*0.075*2.25);
+  height: auto;
+  fill: #fff;
+}
+
 .logo {
   color: #FFF;
   text-align: center;
