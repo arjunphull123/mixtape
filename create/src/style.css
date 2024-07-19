@@ -390,6 +390,7 @@
   .subtitle {
     color: white;
     text-align: center;
+    max-width: 80vw;
   }
 
   .shown {
@@ -703,6 +704,7 @@
   .info-head {
     font-size: 2rem;
     font-weight: 600;
+    letter-spacing: -0.15rem;
     font-family: "Ugly Dave";
   }
   
@@ -877,6 +879,10 @@
   
     .footer {
       display: flex;
+    }
+
+    .info-head {
+      letter-spacing: -0.075rem;
     }
   }
   
