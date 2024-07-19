@@ -646,6 +646,22 @@ input {
   -webkit-backdrop-filter: blur(0.5rem);
 }
 
+.insta-screen {
+  position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  color: white;
+  z-index: 1000;
+  backdrop-filter: blur(0.5rem);
+  -webkit-backdrop-filter: blur(0.5rem);
+}
+
 .info-header {
   position: absolute;
   top: 0;
@@ -734,6 +750,16 @@ a:visited {
 
 .show-info {
   .info-screen {
+    display: flex;
+  }
+
+  .header, .start-container, .customize-container, .mixtape-container {
+    opacity: 15%;
+  }
+}
+
+.show-insta {
+  .insta-screen {
     display: flex;
   }
 

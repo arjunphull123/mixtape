@@ -37,7 +37,7 @@ const code = params.get("code");
 var ua = navigator.userAgent || navigator.vendor || window.opera
 var isInstagram = (ua.indexOf('Instagram') > -1) ? true : false
 if (isInstagram) {
-    alert("Opened in the Instagram browser")
+    body.classList.add('show-insta')
 }
 
 // Initialize the default time range for data shown
