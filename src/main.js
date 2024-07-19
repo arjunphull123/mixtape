@@ -523,6 +523,7 @@ function generateHash(mixtapeData) {
 
 burnAndShare.forEach(btn => {
     btn.addEventListener('click', async function () {
+        btn.innerHTML = "Burning..."
         const mixtapeData = collectMixtapeData();
         const mixtapeHash = await generateHash(mixtapeData);  // Assuming generateHash() returns a hash string
         const isDuplicate = await checkForDuplicate(mixtapeHash, db);
@@ -537,6 +538,7 @@ burnAndShare.forEach(btn => {
             console.log("Existing document ID: ", docId);
         }
 
+        btn.innerHTML = "Burn and share"
         showPopup(docId);  // Call to show the popup
     })
 });
