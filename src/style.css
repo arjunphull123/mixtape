@@ -223,8 +223,8 @@ h1 {
 
 .log-in-button {
   display: flex;
-  padding: 0.5rem 0.625rem;
-  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  justify-content: left;
   align-items: center;
   gap: 0.625rem;
   border-radius: 2.5rem;
