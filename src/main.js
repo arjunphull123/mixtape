@@ -33,6 +33,13 @@ const clientId = "4b027ab3c8dd4b1f9ef6d083d0b51fb5"; // Replace with your client
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 
+// Instagram check:
+var ua = navigator.userAgent || navigator.vendor || window.opera
+var isInstagram = (ua.indexOf('Instagram') > -1) ? true : false
+if (isInstagram) {
+    alert("Opened in the Instagram browser")
+}
+
 // Initialize the default time range for data shown
 var timeRange = "short_term"
 window.timeRange = "short-term"
