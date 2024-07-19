@@ -163,6 +163,7 @@
   
   .p-load {
     font-family: "Ugly Dave";
+    letter-spacing: -0.15rem;
   }
   
   .content-container {
@@ -805,6 +806,10 @@
   }
   
   @media only screen and (min-width: 500px) { 
+
+    .p-load {
+      letter-spacing: -0.075rem;
+    }
   
     .logo-header {
       letter-spacing: -0.05rem;

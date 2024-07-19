@@ -683,6 +683,10 @@ a:visited {
 
 @media only screen and (min-width: 500px) { 
 
+  .p-load {
+    letter-spacing: -0.075rem;
+  }
+
   .content-container {
     /*flex-direction: row;*/
     margin-top: 0;
