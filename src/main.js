@@ -36,6 +36,7 @@ const code = params.get("code");
 // Instagram check:
 var ua = navigator.userAgent || navigator.vendor || window.opera
 var isInstagram = (ua.indexOf('Instagram') > -1) ? true : false
+var isSnapchat = (ua.indexOf('Snapchat') > -1) ? true : false
 
 if (isInstagram) {
     document.body.classList.add('show-insta')
