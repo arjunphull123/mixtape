@@ -64,8 +64,6 @@ exports.handler = async function (event, context) {
 
     console.log("Generating image from HTML content");
 
-    console.log("Executable path:", await puppeteer.executablePath())
-
     let browser;
     try {
         browser = await puppeteer.launch({
