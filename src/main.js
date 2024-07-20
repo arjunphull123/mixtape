@@ -16,10 +16,10 @@ import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyBhHdbyP7hy2V4xlG9S_i9G62emf9mvIfI",
   authDomain: "mixedify-40e2e.firebaseapp.com",
-  projectId: "mixedify-40e2e",
-  storageBucket: "mixedify-40e2e.appspot.com",
-  messagingSenderId: "1076825373232",
-  appId: "1:1076825373232:web:4c34f4277dd6f4bdc7cbf5"
+  projectId: "mixedify-40e2e.firebaseapp.com",
+  storageBucket: "mixedify-40e2e.firebaseapp.com",
+  messagingSenderId: "mixedify-40e2e.firebaseapp.com",
+  appId: "mixedify-40e2e.firebaseapp.com"
 };
 
 // Initialize Firebase
