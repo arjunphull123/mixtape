@@ -8,7 +8,7 @@
   included_files = ["netlify/functions/assets/**"]
 
 [functions.generator]
-  included_files = ["netlify/functions/assets/**"]
-  external_node_modules = ["chrome-aws-lambda", "puppeteer-core"]
+  included_files = ["netlify/functions/assets/**", "node_modules/puppeteer/.local-chromium/**"]
+  external_node_modules = ["puppeteer"]
   node_bundler = "esbuild"
   timeout = 60

@@ -1,9 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const nodeHtmlToImage = require('node-html-to-image');
+const puppeteer = require('puppeteer');
 const { initializeApp } = require('firebase/app');
 const { getFirestore, doc, getDoc } = require('firebase/firestore');
-
 
 // Initialize Firebase client SDK
 const firebaseConfig = {
@@ -13,21 +12,21 @@ const firebaseConfig = {
     storageBucket: "mixedify-40e2e.appspot.com",
     messagingSenderId: "1076825373232",
     appId: "1:1076825373232:web:4c34f4277dd6f4bdc7cbf5"
-  };
+};
 
-const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 async function getMixtapeData(mixtapeId) {
-    const mixtapeRef = doc(db, "mixtapes", mixtapeId); // Adjust "mixtapes" to your specific collection name
+    const mixtapeRef = doc(db, "mixtapes", mixtapeId);
     try {
         const mixtapeSnap = await getDoc(mixtapeRef);
         if (mixtapeSnap.exists()) {
-            mixtapeData = mixtapeSnap.data();
-            return mixtapeData
+            const mixtapeData = mixtapeSnap.data();
+            return mixtapeData;
         } else {
             console.log("No such document!");
-            return
+            return null;
         }
     } catch (error) {
         console.error("Error getting document:", error);
@@ -37,26 +36,26 @@ async function getMixtapeData(mixtapeId) {
 exports.handler = async function (event, context) {
     console.log("Starting function");
 
-    // Get the ID from the query string
     const id = event.queryStringParameters?.id;
     console.log("got id", id);
 
-    console.log("Retrieving mixtape data")
-    const mixtapeData = await getMixtapeData(id)
+    console.log("Retrieving mixtape data");
+    const mixtapeData = await getMixtapeData(id);
 
-    if (mixtapeData) {
-        console.log("Got mixtape data")
+    if (!mixtapeData) {
+        return {
+            statusCode: 404,
+            body: "Mixtape not found"
+        };
     }
 
-    // Construct the correct path to the HTML template
-    const templatePath = path.join(__dirname, 'assets', 'image.html');
+    console.log("Got mixtape data");
 
-    // Read the template HTML off of disk.
+    const templatePath = path.join(__dirname, 'assets', 'image.html');
     let content = fs.readFileSync(templatePath).toString();
     console.log("Template HTML read");
 
     content = populateTemplate(content, {
-        // Get the title out of the document data
         bgColor: mixtapeData.bgColor,
         activeColor: mixtapeData.activeColor,
         cardBg: mixtapeData.cardBg,
@@ -64,26 +63,42 @@ exports.handler = async function (event, context) {
     });
 
     console.log("Generating image from HTML content");
-    const image = await nodeHtmlToImage({
-        html: content,
-        puppeteerArgs: {
-            args: ['--no-sandbox']
+
+    let browser;
+    try {
+        browser = await puppeteer.launch({
+            args: ['--no-sandbox'],
+            headless: true,
+            defaultViewport: {height: 630, width: 1200},
+        });
+
+        const page = await browser.newPage();
+        await page.setContent(content, { waitUntil: 'networkidle0' });
+
+        const image = await page.screenshot({ type: 'png' });
+        console.log("Image generated");
+
+        return {
+            statusCode: 200,
+            headers: {
+                'Content-Type': 'image/png',
+                'Cache-Control': 's-maxage=86400',
+            },
+            body: image.toString('base64'),
+            isBase64Encoded: true,
+        };
+    } catch (error) {
+        console.error("Error generating image:", error);
+        return {
+            statusCode: 500,
+            body: "Internal Server Error"
+        };
+    } finally {
+        if (browser) {
+            await browser.close();
         }
-    });
-
-    console.log("Image generated");
-
-    return {
-        statusCode: 200,
-        headers: {
-            'Content-Type': 'image/png',
-            'Cache-Control': 's-maxage=86400',
-        },
-        body: image.toString('base64'),
-        isBase64Encoded: true,
-    };
-
-}
+    }
+};
 
 function populateTemplate(content, data) {
     for (const [key, value] of Object.entries(data)) {
