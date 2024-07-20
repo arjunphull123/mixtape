@@ -67,6 +67,7 @@ exports.handler = async function (event, context) {
     let browser;
     try {
         browser = await puppeteer.launch({
+            executablePath: puppeteer.executablePath(),
             args: ['--no-sandbox'],
             headless: true,
             defaultViewport: {height: 630, width: 1200},
