@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npm install && npm run build"
   publish = "dist"
 
 [functions]
@@ -9,6 +9,6 @@
 
 [functions.generator]
   included_files = ["netlify/functions/assets/**", "node_modules/puppeteer/.local-chromium/**"]
-  external_node_modules = ["puppeteer"]
+  external_node_modules = ["puppeteer-core", "puppeteer"]
   node_bundler = "esbuild"
   timeout = 60

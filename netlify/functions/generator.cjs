@@ -18,7 +18,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 async function getMixtapeData(mixtapeId) {
-    const mixtapeRef = doc(db, "mixtapes", mixtapeId);
+    const mixtapeRef = doc(db, "mixtapes", mixtapeId); 
     try {
         const mixtapeSnap = await getDoc(mixtapeRef);
         if (mixtapeSnap.exists()) {
