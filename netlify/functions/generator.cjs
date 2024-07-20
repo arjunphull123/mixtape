@@ -1,6 +1,6 @@
+const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
-const puppeteer = require('puppeteer');
 const { initializeApp } = require('firebase/app');
 const { getFirestore, doc, getDoc } = require('firebase/firestore');
 
@@ -18,7 +18,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 async function getMixtapeData(mixtapeId) {
-    const mixtapeRef = doc(db, "mixtapes", mixtapeId); 
+    const mixtapeRef = doc(db, "mixtapes", mixtapeId);
     try {
         const mixtapeSnap = await getDoc(mixtapeRef);
         if (mixtapeSnap.exists()) {
@@ -67,10 +67,10 @@ exports.handler = async function (event, context) {
     let browser;
     try {
         browser = await puppeteer.launch({
-            executablePath: puppeteer.executablePath(),
+            executablePath: await puppeteer.executablePath(), // Specify the path dynamically
             args: ['--no-sandbox'],
             headless: true,
-            defaultViewport: {height: 630, width: 1200},
+            defaultViewport: { height: 630, width: 1200 },
         });
 
         const page = await browser.newPage();

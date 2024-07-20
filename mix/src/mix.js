@@ -9,7 +9,7 @@ const firebaseConfig = {
     storageBucket: "mixedify-40e2e.appspot.com",
     messagingSenderId: "1076825373232",
     appId: "1:1076825373232:web:4c34f4277dd6f4bdc7cbf5"
-  };
+};
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);

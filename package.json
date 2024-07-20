@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "postinstall": "PUPPETEER_PRODUCT=chrome PUPPETEER_SKIP_DOWNLOAD=false npm install puppeteer"
+    "postinstall": "PUPPETEER_PRODUCT=chrome PUPPETEER_SKIP_DOWNLOAD=false node node_modules/puppeteer/install.js"
   },
   "devDependencies": {
     "vite": "^4.4.8"
