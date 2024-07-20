@@ -1,12 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const nodeHtmlToImage = require('node-html-to-image');
-const firebase = require('firebase/app');
-require('firebase/firestore');
-
-import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+const { initializeApp } = require('firebase/app');
+const { getFirestore, doc, getDoc } = require('firebase/firestore');
 
 
 // Initialize Firebase client SDK
