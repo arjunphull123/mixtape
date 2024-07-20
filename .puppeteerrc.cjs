@@ -3,7 +3,11 @@ const { join } = require('path');
 /**
  * @type {import("puppeteer").Configuration}
  */
-module.exports = {
-  // Changes the cache location for Puppeteer.
-  cacheDirectory: join(__dirname, '.cache', 'puppeteer'),
-};
+const config = {};
+
+// Conditionally set the cache directory if running in Netlify
+if (process.env.NETLIFY) {
+  config.cacheDirectory = join(__dirname, '.cache', 'puppeteer');
+}
+
+module.exports = config;
