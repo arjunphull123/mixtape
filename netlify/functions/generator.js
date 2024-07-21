@@ -1,18 +1,20 @@
 import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
+import mime from 'mime-types';
 
 // Define the path to the assets directory
 const assetsPath = path.join(__dirname, 'assets');
 
-// Helper function to get the base64 data URL of a font file
-const getFontDataURL = (fontPath) => {
-  const fontBuffer = fs.readFileSync(fontPath);
-  const mimeType = mime.lookup(fontPath);
-  const base64 = fontBuffer.toString('base64');
-  return `data:${mimeType};base64,${base64}`;
-};
+// Set environment variables for Fontconfig
+process.env.FONTCONFIG_PATH = __dirname;
+process.env.FONTCONFIG_FILE = path.join(__dirname, 'fonts.conf');
 
+// Ensure the cache directory exists
+const cacheDir = '/tmp/cache';
+if (!fs.existsSync(cacheDir)) {
+  fs.mkdirSync(cacheDir, { recursive: true });
+}
 
 export async function handler(event, context) {
   try {
