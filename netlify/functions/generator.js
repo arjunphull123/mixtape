@@ -8,7 +8,7 @@ const assetsPath = path.join(__dirname, 'assets');
 // Create a directory for Fontconfig cache if it doesn't exist
 const cacheDir = '/tmp/cache';
 if (!fs.existsSync(cacheDir)) {
-  fs.mkdirSync(cacheDir);
+  fs.mkdirSync(cacheDir, { recursive: true });
 }
 
 // Set environment variables for Fontconfig
@@ -27,7 +27,7 @@ export async function handler(event, context) {
               @font-face {
                   font-family: 'Ugly Dave';
                   src: url('${path.join(assetsPath, 'Ugly-Dave-Regular.woff2')}') format('woff2'),
-                  url('${path.join(assetsPath, 'Ugly-Dave-Regular.woff')}') format('woff');
+                       url('${path.join(assetsPath, 'Ugly-Dave-Regular.woff')}') format('woff');
                   font-weight: normal;
                   font-style: normal;
                   font-display: swap;
