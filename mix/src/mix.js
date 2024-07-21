@@ -88,6 +88,14 @@ closeInfoButton.addEventListener("click", function() {
     body.classList.remove('show-info')
 })
 
+// Logout handling
+// This function clears session storage, essentially wiping user data from browser
+function removesessionStorage() {
+    sessionStorage.clear()
+}
+document.getElementById('logout').addEventListener("click", removesessionStorage)
+document.getElementById('go-back').addEventListener("click", removesessionStorage)
+
 // color button handling
 if (!sessionStorage.getItem('cardBg')) {
     sessionStorage.setItem('cardBg', window.getComputedStyle(document.documentElement).getPropertyValue("--card-bg"))

@@ -61,6 +61,7 @@ function removesessionStorage() {
     sessionStorage.clear()
 }
 document.getElementById('logout').addEventListener("click", removesessionStorage)
+document.getElementById('go-back').addEventListener("click", removesessionStorage)
 
 // Info screen handling
 var infoButton = document.getElementById('info-button')

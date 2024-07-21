@@ -404,3 +404,11 @@ function showPopup(docId) {
     // Show the popup
     document.body.classList.add('show-popup');
 }
+
+// Logout handling
+// This function clears session storage, essentially wiping user data from browser
+function removesessionStorage() {
+    sessionStorage.clear()
+}
+document.getElementById('logout').addEventListener("click", removesessionStorage)
+document.getElementById('go-back').addEventListener("click", removesessionStorage)
