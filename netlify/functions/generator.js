@@ -16,21 +16,16 @@ if (!fs.existsSync(cacheDir)) {
 }
 
 // Set environment variables for Fontconfig
-process.env.FONTCONFIG_PATH = '/var/task/'
-process.env.FONTCONFIG_FILE = '/var/task/fonts/fonts.conf';
+process.env.FONTCONFIG_PATH = __dirname;
+process.env.FONTCONFIG_FILE = path.join(__dirname, 'assets/fonts.conf');
 process.env.XDG_CACHE_HOME = '/tmp/cache';
 
 console.log(`FONTCONFIG_PATH set to ${process.env.FONTCONFIG_PATH}`);
 console.log(`FONTCONFIG_FILE set to ${process.env.FONTCONFIG_FILE}`);
 console.log(`XDG_CACHE_HOME set to ${process.env.XDG_CACHE_HOME}`);
 
-
-const fontconfigDirContents = fs.readdirSync(process.env.FONTCONFIG_PATH);
-console.log(`Contents of FONTCONFIG_PATH (${process.env.FONTCONFIG_PATH}):`, fontconfigDirContents);
-
-
 // Verify the presence of fonts.conf and log its contents
-const fontsConfigPath = '/var/task/fonts/fonts.conf';
+const fontsConfigPath = path.join(__dirname, 'assets/fonts.conf');
 if (fs.existsSync(fontsConfigPath)) {
   console.log(`fonts.conf found at ${fontsConfigPath}`);
   const fontsConfigContent = fs.readFileSync(fontsConfigPath, 'utf-8');
@@ -38,6 +33,20 @@ if (fs.existsSync(fontsConfigPath)) {
 } else {
   console.log(`fonts.conf not found at ${fontsConfigPath}`);
 }
+
+// Helper function to get the base64 data URL of a font file
+const getFontDataURL = (fontPath) => {
+  const fontBuffer = fs.readFileSync(fontPath);
+  const mimeType = mime.lookup(fontPath);
+  const base64 = fontBuffer.toString('base64');
+  return `data:${mimeType};base64,${base64}`;
+};
+
+// Get the base64 data URLs for the font files
+const fontPathWoff2 = path.join(assetsPath, 'Ugly-Dave-Regular.woff2');
+const fontPathWoff = path.join(assetsPath, 'Ugly-Dave-Regular.woff');
+const fontDataURLWoff2 = getFontDataURL(fontPathWoff2);
+const fontDataURLWoff = getFontDataURL(fontPathWoff);
 
 export async function handler(event, context) {
   try {
@@ -50,8 +59,8 @@ export async function handler(event, context) {
           <style>
               @font-face {
                   font-family: 'Ugly Dave';
-                  src: url('/fonts/Ugly-Dave-Regular.woff2') format('woff2'),
-                       url('/fonts/Ugly-Dave-Regular.woff') format('woff');
+                  src: url('${fontDataURLWoff2}') format('woff2'),
+                       url('${fontDataURLWoff}') format('woff');
                   font-weight: normal;
                   font-style: normal;
                   font-display: swap;
