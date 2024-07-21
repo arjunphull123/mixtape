@@ -85,6 +85,8 @@ export async function handler(event, context) {
 
     const titleBuffer = Buffer.from(titleSVG);
 
+    console.log(`Generated SVG: ${titleSVG}`);
+
     // Define the path to the base image
     const baseImagePath = path.join(assetsPath, `${color}-base.png`);
     console.log(`Base image path set to ${baseImagePath}`);
