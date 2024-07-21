@@ -1,19 +1,24 @@
 import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
+import mime from 'mime-types';
 
 // Define the path to the assets directory
 const assetsPath = path.join(__dirname, 'assets');
 
-// Create a directory for Fontconfig cache if it doesn't exist
-const cacheDir = '/tmp/cache';
-if (!fs.existsSync(cacheDir)) {
-  fs.mkdirSync(cacheDir, { recursive: true });
-}
+// Helper function to get the base64 data URL of a font file
+const getFontDataURL = (fontPath) => {
+  const fontBuffer = fs.readFileSync(fontPath);
+  const mimeType = mime.lookup(fontPath);
+  const base64 = fontBuffer.toString('base64');
+  return `data:${mimeType};base64,${base64}`;
+};
 
-// Set environment variables for Fontconfig
-process.env.FONTCONFIG_PATH = __dirname;
-process.env.FONTCONFIG_FILE = path.join(__dirname, 'fonts.conf');
+// Get the base64 data URLs for the font files
+const fontPathWoff2 = path.join(assetsPath, 'Ugly-Dave-Regular.woff2');
+const fontPathWoff = path.join(assetsPath, 'Ugly-Dave-Regular.woff');
+const fontDataURLWoff2 = getFontDataURL(fontPathWoff2);
+const fontDataURLWoff = getFontDataURL(fontPathWoff);
 
 export async function handler(event, context) {
   try {
@@ -22,12 +27,12 @@ export async function handler(event, context) {
 
     // Create the SVG content
     const titleSVG = `
-      <svg width="1075" height="150">
+      <svg width="1075" height="150" xmlns="http://www.w3.org/2000/svg">
           <style>
               @font-face {
                   font-family: 'Ugly Dave';
-                  src: url('${path.join(assetsPath, 'Ugly-Dave-Regular.woff2')}') format('woff2'),
-                       url('${path.join(assetsPath, 'Ugly-Dave-Regular.woff')}') format('woff');
+                  src: url('${fontDataURLWoff2}') format('woff2'),
+                       url('${fontDataURLWoff}') format('woff');
                   font-weight: normal;
                   font-style: normal;
                   font-display: swap;
