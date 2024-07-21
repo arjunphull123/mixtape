@@ -17,7 +17,7 @@ if (!fs.existsSync(cacheDir)) {
 
 // Set environment variables for Fontconfig
 process.env.FONTCONFIG_PATH = __dirname;
-process.env.FONTCONFIG_FILE = path.join(__dirname, 'fonts.conf');
+process.env.FONTCONFIG_FILE = path.join(__dirname, '/assets/fonts.conf');
 process.env.XDG_CACHE_HOME = '/tmp/cache';
 
 console.log(`FONTCONFIG_PATH set to ${process.env.FONTCONFIG_PATH}`);
