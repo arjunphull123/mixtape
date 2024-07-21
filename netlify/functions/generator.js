@@ -48,6 +48,11 @@ const fontPathWoff = path.join(assetsPath, 'Ugly-Dave-Regular.woff');
 const fontDataURLWoff2 = getFontDataURL(fontPathWoff2);
 const fontDataURLWoff = getFontDataURL(fontPathWoff);
 
+console.log(`fontPathWoff2: ${fontPathWoff2}`);
+console.log(`fontPathWoff: ${fontPathWoff}`);
+console.log(`fontDataURLWoff2: ${fontDataURLWoff2.substring(0, 50)}...`);
+console.log(`fontDataURLWoff: ${fontDataURLWoff.substring(0, 50)}...`);
+
 export async function handler(event, context) {
   try {
     // Extract title and color from the query parameters
