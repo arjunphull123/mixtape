@@ -24,6 +24,11 @@ console.log(`FONTCONFIG_PATH set to ${process.env.FONTCONFIG_PATH}`);
 console.log(`FONTCONFIG_FILE set to ${process.env.FONTCONFIG_FILE}`);
 console.log(`XDG_CACHE_HOME set to ${process.env.XDG_CACHE_HOME}`);
 
+
+const fontconfigDirContents = fs.readdirSync(process.env.FONTCONFIG_PATH);
+console.log(`Contents of FONTCONFIG_PATH (${process.env.FONTCONFIG_PATH}):`, fontconfigDirContents);
+
+
 // Verify the presence of fonts.conf and log its contents
 const fontsConfigPath = '/var/task/fonts/fonts.conf';
 if (fs.existsSync(fontsConfigPath)) {
