@@ -16,8 +16,8 @@ if (!fs.existsSync(cacheDir)) {
 }
 
 // Set environment variables for Fontconfig
-process.env.FONTCONFIG_PATH = __dirname
-process.env.FONTCONFIG_FILE = path.join(__dirname, 'fonts/fonts.conf');
+process.env.FONTCONFIG_PATH = '/var/task/'
+process.env.FONTCONFIG_FILE = '/var/task/fonts/fonts.conf';
 process.env.XDG_CACHE_HOME = '/tmp/cache';
 
 console.log(`FONTCONFIG_PATH set to ${process.env.FONTCONFIG_PATH}`);
@@ -25,7 +25,7 @@ console.log(`FONTCONFIG_FILE set to ${process.env.FONTCONFIG_FILE}`);
 console.log(`XDG_CACHE_HOME set to ${process.env.XDG_CACHE_HOME}`);
 
 // Verify the presence of fonts.conf and log its contents
-const fontsConfigPath = path.join(__dirname, 'fonts/fonts.conf');
+const fontsConfigPath = '/var/task/fonts/fonts.conf';
 if (fs.existsSync(fontsConfigPath)) {
   console.log(`fonts.conf found at ${fontsConfigPath}`);
   const fontsConfigContent = fs.readFileSync(fontsConfigPath, 'utf-8');
