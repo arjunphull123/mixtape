@@ -45,8 +45,8 @@ export async function handler(event, context) {
           <style>
               @font-face {
                   font-family: 'Ugly Dave';
-                  src: url('https://mixedify.netlify.app/fonts/Ugly-Dave-Regular.woff2') format('woff2'),
-                       url('https://mixedify.netlify.app/fonts/Ugly-Dave-Regular.woff') format('woff');
+                  src: url('/assets/Ugly-Dave-Regular.woff2') format('woff2'),
+                       url('/assets/Ugly-Dave-Regular.woff') format('woff');
                   font-weight: normal;
                   font-style: normal;
                   font-display: swap;
