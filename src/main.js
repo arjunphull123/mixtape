@@ -507,14 +507,10 @@ document.querySelectorAll('.color-button').forEach(btn => {
 })
 
 // non-mobile: save image handling
-function downloadImage() {
+async function downloadImage() {
     var card = document.getElementById("mixtape-container")
 
-    document.getElementById('tracklist').classList.toggle('hide')
-    document.getElementById('mix-tag').classList.toggle('hide')
-    document.getElementById('mix-head').classList.toggle('hide')
-
-    htmlToImage.toPng(card, {
+    return htmlToImage.toPng(card, {
         ignoreElements: function( element ) {
             if( 'mix-head' == element.id ) {
                 return true;
@@ -522,19 +518,34 @@ function downloadImage() {
         }
         }
     )
-    .then(function (dataUrl) {
-        console.log(dataUrl);
-        var link = document.createElement('a');
-        link.download = 'preview.jpeg';
-        link.href = dataUrl;
-        link.click();
-        document.getElementById('tracklist').classList.toggle('hide')
-        document.getElementById('mix-tag').classList.toggle('hide')
-        document.getElementById('mix-head').classList.toggle('hide')
-      });
 }
 
-document.getElementById('download').addEventListener("click", downloadImage)
+async function getPreview() {
+    document.getElementById('tracklist').classList.toggle('hide')
+
+    if (window.innerWidth < 500) {
+        document.getElementById("mix-head").style.display = "none"
+        document.getElementById("mix-tag").style.display = "none"
+    }
+
+    await downloadImage()
+    await downloadImage()
+    await downloadImage()
+
+    const dataUrl = await downloadImage()
+    console.log(dataUrl);
+    var link = document.createElement('a');
+    link.download = 'preview.jpeg';
+    link.href = dataUrl;
+    link.click();
+
+    if (window.innerWidth < 500) {
+        document.getElementById("mix-head").style.display = "block"
+        document.getElementById("mix-tag").style.display = "block"
+    }
+}
+
+document.getElementById('download').addEventListener("click", getPreview)
 
 
 // Firebase handling
