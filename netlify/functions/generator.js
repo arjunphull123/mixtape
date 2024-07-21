@@ -6,15 +6,20 @@ import mime from 'mime-types';
 // Define the path to the assets directory
 const assetsPath = path.join(__dirname, 'assets');
 
-// Set environment variables for Fontconfig
-process.env.FONTCONFIG_PATH = __dirname;
-process.env.FONTCONFIG_FILE = path.join(__dirname, 'fonts.conf');
-
 // Ensure the cache directory exists
 const cacheDir = '/tmp/cache';
 if (!fs.existsSync(cacheDir)) {
   fs.mkdirSync(cacheDir, { recursive: true });
+  console.log(`Cache directory created at ${cacheDir}`);
+} else {
+  console.log(`Cache directory already exists at ${cacheDir}`);
 }
+
+// Set environment variables for Fontconfig
+process.env.FONTCONFIG_PATH = __dirname;
+process.env.FONTCONFIG_FILE = path.join(__dirname, 'fonts.conf');
+console.log(`FONTCONFIG_PATH set to ${process.env.FONTCONFIG_PATH}`);
+console.log(`FONTCONFIG_FILE set to ${process.env.FONTCONFIG_FILE}`);
 
 export async function handler(event, context) {
   try {
@@ -50,6 +55,7 @@ export async function handler(event, context) {
 
     // Define the path to the base image
     const baseImagePath = path.join(assetsPath, `${color}-base.png`);
+    console.log(`Base image path set to ${baseImagePath}`);
 
     // Check if the base image exists
     if (!fs.existsSync(baseImagePath)) {
@@ -78,6 +84,7 @@ export async function handler(event, context) {
       isBase64Encoded: true,
     };
   } catch (error) {
+    console.error(`Error: ${error.message}`);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
