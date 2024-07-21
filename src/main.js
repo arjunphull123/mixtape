@@ -1,5 +1,5 @@
-import domtoimage from 'dom-to-image'
-
+import * as htmlToImage from 'html-to-image';
+import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 // Firebase init:
 
@@ -78,7 +78,7 @@ closeInfoButton.addEventListener("click", function() {
 })
 
 document.getElementById('create-mix').addEventListener("click", function() {
-    window.location.href = "https://mixedify.netlify.app/create"
+    window.location.href = "http://localhost:5173/create"
 })
 
 // Auth flow and API calls
@@ -172,7 +172,7 @@ async function redirectToAuthCodeFlow(clientId) {
     const params = new URLSearchParams();
     params.append("client_id", clientId);
     params.append("response_type", "code");
-    params.append("redirect_uri", "https://mixedify.netlify.app");
+    params.append("redirect_uri", "http://localhost:5173");
     params.append("scope", "user-top-read playlist-modify-private");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
@@ -209,7 +209,7 @@ async function getAccessToken(clientId, code) {
     params.append("client_id", clientId);
     params.append("grant_type", "authorization_code");
     params.append("code", code);
-    params.append("redirect_uri", "https://mixedify.netlify.app");
+    params.append("redirect_uri", "http://localhost:5173");
     params.append("code_verifier", verifier);
 
     const result = await fetch("https://accounts.spotify.com/api/token", {
@@ -509,11 +509,31 @@ document.querySelectorAll('.color-button').forEach(btn => {
 // non-mobile: save image handling
 function downloadImage() {
     var card = document.getElementById("mixtape-container")
-    domtoimage.toBlob(card).then(function (blob) {
-            window.saveAs(blob, 'mixtape.png');
+
+    document.getElementById('tracklist').classList.toggle('hide')
+    document.getElementById('mix-tag').classList.toggle('hide')
+    document.getElementById('mix-head').classList.toggle('hide')
+
+    htmlToImage.toPng(card, {
+        ignoreElements: function( element ) {
+            if( 'mix-head' == element.id ) {
+                return true;
+            }
         }
-    );
+        }
+    )
+    .then(function (dataUrl) {
+        console.log(dataUrl);
+        var link = document.createElement('a');
+        link.download = 'preview.jpeg';
+        link.href = dataUrl;
+        link.click();
+        document.getElementById('tracklist').classList.toggle('hide')
+        document.getElementById('mix-tag').classList.toggle('hide')
+        document.getElementById('mix-head').classList.toggle('hide')
+      });
 }
+
 document.getElementById('download').addEventListener("click", downloadImage)
 
 
@@ -607,14 +627,14 @@ function collectMixtapeData() {
 
 function showPopup(docId) {
     const popup = document.createElement('div');
-    const link = "https://mixedify.netlify.app/mix/?id=" + docId
+    const link = "http://localhost:5173/mix/?id=" + docId
     popup.className = 'share-popup';
 
     const content = `
         <div class="popup-content">
                 <p class="info-head">Nice mix!</p>
                 <p class="info-text">Copy the link below and share with a friend:</p>
-                <input type="text" id="mixtape-link" value="https://mixedify.netlify.app/mix/?id=${docId}" readonly>
+                <input type="text" id="mixtape-link" value="http://localhost:5173/mix/?id=${docId}" readonly>
                 <div class='download-options'>
                     <div class='download' id="copy">Copy Link</div>
                     <div class='download' id="close-popup">Close</div>

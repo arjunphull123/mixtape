@@ -31,6 +31,10 @@ E0b0d5 - lavender - 224, 176, 213
 143109 - green - 20, 49, 9
 */
 
+.hide {
+  display: none;
+}
+
 :root {
   --card-bg: var(--color-1);
   --mw: min(85vw, 650px);
@@ -385,6 +389,10 @@ input {
   font-weight: 700;
   line-height: normal;
   cursor: pointer;
+}
+
+#download {
+  display: flex;
 }
 
 .download-options {
