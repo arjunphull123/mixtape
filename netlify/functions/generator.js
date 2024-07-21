@@ -6,6 +6,34 @@ import mime from 'mime-types';
 // Define the path to the assets directory
 const assetsPath = path.join(__dirname, 'assets');
 
+// Ensure the cache directory exists
+const cacheDir = '/tmp/cache';
+if (!fs.existsSync(cacheDir)) {
+  fs.mkdirSync(cacheDir, { recursive: true });
+  console.log(`Cache directory created at ${cacheDir}`);
+} else {
+  console.log(`Cache directory already exists at ${cacheDir}`);
+}
+
+// Set environment variables for Fontconfig
+process.env.FONTCONFIG_PATH = __dirname;
+process.env.FONTCONFIG_FILE = path.join(__dirname, 'assets/fonts.conf');
+process.env.XDG_CACHE_HOME = '/tmp/cache';
+
+console.log(`FONTCONFIG_PATH set to ${process.env.FONTCONFIG_PATH}`);
+console.log(`FONTCONFIG_FILE set to ${process.env.FONTCONFIG_FILE}`);
+console.log(`XDG_CACHE_HOME set to ${process.env.XDG_CACHE_HOME}`);
+
+// Verify the presence of fonts.conf and log its contents
+const fontsConfigPath = path.join(__dirname, 'assets/fonts.conf');
+if (fs.existsSync(fontsConfigPath)) {
+  console.log(`fonts.conf found at ${fontsConfigPath}`);
+  const fontsConfigContent = fs.readFileSync(fontsConfigPath, 'utf-8');
+  console.log(`fonts.conf contents: ${fontsConfigContent}`);
+} else {
+  console.log(`fonts.conf not found at ${fontsConfigPath}`);
+}
+
 export async function handler(event, context) {
   try {
     // Extract title and color from the query parameters
