@@ -1,7 +1,6 @@
 import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
-import mime from 'mime-types';
 
 // Define the path to the assets directory
 const assetsPath = path.join(__dirname, 'assets');
@@ -14,11 +13,6 @@ const getFontDataURL = (fontPath) => {
   return `data:${mimeType};base64,${base64}`;
 };
 
-// Get the base64 data URLs for the font files
-const fontPathWoff2 = path.join(assetsPath, 'Ugly-Dave-Regular.woff2');
-const fontPathWoff = path.join(assetsPath, 'Ugly-Dave-Regular.woff');
-const fontDataURLWoff2 = getFontDataURL(fontPathWoff2);
-const fontDataURLWoff = getFontDataURL(fontPathWoff);
 
 export async function handler(event, context) {
   try {
@@ -31,8 +25,8 @@ export async function handler(event, context) {
           <style>
               @font-face {
                   font-family: 'Ugly Dave';
-                  src: url('${fontDataURLWoff2}') format('woff2'),
-                       url('${fontDataURLWoff}') format('woff');
+                  src: url('https://mixedify.netlify.app/fonts/Ugly-Dave-Regular.woff2') format('woff2'),
+                       url('https://mixedify.netlify.app/fonts/Ugly-Dave-Regular.woff') format('woff');
                   font-weight: normal;
                   font-style: normal;
                   font-display: swap;
