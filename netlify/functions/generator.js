@@ -2,13 +2,23 @@ import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 
+// Define the path to the assets directory
+const assetsPath = path.join(__dirname, 'assets');
+
+// Create a directory for Fontconfig cache if it doesn't exist
+const cacheDir = '/tmp/cache';
+if (!fs.existsSync(cacheDir)) {
+  fs.mkdirSync(cacheDir);
+}
+
+// Set environment variables for Fontconfig
+process.env.FONTCONFIG_PATH = __dirname;
+process.env.FONTCONFIG_FILE = path.join(__dirname, 'fonts.conf');
+
 export async function handler(event, context) {
   try {
     // Extract title and color from the query parameters
     const { title = "awesome mix vol. 1", color = "color-1" } = event.queryStringParameters;
-
-    // Define the path to the assets directory
-    const assetsPath = path.join(__dirname, 'assets');
 
     // Create the SVG content
     const titleSVG = `
