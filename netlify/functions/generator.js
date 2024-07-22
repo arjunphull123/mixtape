@@ -18,7 +18,7 @@ export const handler = async (event, context) => {
   let id = event.queryStringParameters.id;
 
   if (!id) {
-    id = 'default';
+    id = 'default.jpg';
   }
 
   try {
@@ -29,7 +29,7 @@ export const handler = async (event, context) => {
     try {
       imageDownloadUrl = await getDownloadURL(imageRef);
     } catch (error) {
-      if (id !== 'default') {
+      if (id !== 'default.jpg') {
         const defaultImageRef = ref(storage, 'covers/default.jpg');
         imageDownloadUrl = await getDownloadURL(defaultImageRef);
       } else {
