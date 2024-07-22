@@ -1,5 +1,6 @@
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
+import 'dotenv/config'
 import { experimentalSetDeliveryMetricsExportedToBigQueryEnabled } from "firebase/messaging/sw";
 
 const firebaseConfig = {

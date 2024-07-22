@@ -1,6 +1,7 @@
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import domtoimage from 'dom-to-image'
+import 'dotenv/config'
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {

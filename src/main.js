@@ -1,4 +1,5 @@
 import * as htmlToImage from 'html-to-image';
+import 'dotenv/config'
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
 // Firebase init:
