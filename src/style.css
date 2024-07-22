@@ -392,10 +392,6 @@ input {
   cursor: pointer;
 }
 
-#download {
-  display: flex;
-}
-
 .download-options {
   display: flex;
   gap: 0.75rem;

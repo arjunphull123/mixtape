@@ -555,7 +555,7 @@ async function getPreview() {
     return dataUrl
 }
 
-document.getElementById('download').addEventListener("click", getPreview)
+document.getElementById('download').addEventListener("click", console.log("Downloading"))
 
 
 // Firebase handling
