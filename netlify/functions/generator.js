@@ -1,7 +1,9 @@
 import { initializeApp } from 'firebase/app';
+import dotenv from 'dotenv';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import fetch from 'node-fetch';  // You need to install node-fetch
-import 'dotenv/config'
+
+dotenv.config()
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,

@@ -1,7 +1,9 @@
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
-import 'dotenv/config'
+import dotenv from 'dotenv';
 import { experimentalSetDeliveryMetricsExportedToBigQueryEnabled } from "firebase/messaging/sw";
+
+dotenv.config()
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,

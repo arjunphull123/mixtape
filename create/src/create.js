@@ -1,8 +1,10 @@
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import domtoimage from 'dom-to-image'
-import 'dotenv/config'
+import dotenv from 'dotenv';
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+
+dotenv.config()
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
