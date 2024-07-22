@@ -8,8 +8,8 @@ export default async (request, context) => {
     // Look for the OG image generator path.
     const search = 'Check out my mixtape'
     // Replace it with the path plus the querystring.
-    console.log(url.searchParams.toString())
-    const replace = `ID: ${url.searchParams.toString()}`
+    console.log(url.searchParams.get('id'))
+    const replace = `ID: ${url.searchParams.get('id')}`
     
     return new Response(page.replaceAll(search, replace), response);
 }
