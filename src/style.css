@@ -359,12 +359,13 @@ input {
   color: #fff;
   display: none;
   font-weight: 400;
-  letter-spacing: 0;
-  font-size: calc(var(--mw) * 0.05);
+  font-family: 'Ugly Dave';
+  font-size: calc(var(--mw) * 0.0375);
   padding: 0;
-  padding: calc(var(--mw) * 0.02);
+  padding: calc(var(--mw) * 0);
   white-space: nowrap;
-  inline-size: min-content;
+  text-align: center;
+  justify-content: center;
 }
 
 .scroll-down {
@@ -416,6 +417,7 @@ input {
   height: auto;
   padding: calc(0.0375 * var(--mw));
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: calc(0.025 * var(--mw));
   border-radius: calc(0.05 * var(--mw));

@@ -6,6 +6,7 @@ import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage, ref, uploadString } from "firebase/storage";
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -24,6 +25,8 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
+const storage = getStorage(app)
+
 
 // Regular functionality:
 
@@ -145,8 +148,9 @@ if (!code) { // on first login - if there is no code object
     populateUI(window.profile, window.tracksShort);
 
     // control mobile tag text (mobile breakpoints)
+    
     if (window.innerWidth < 500) {
-        document.getElementById("mix-head").style.display = "block"
+        //document.getElementById("mix-head").style.display = "block"
         document.getElementById("mix-tag").style.display = "block"
         //document.getElementById("mixtape-container").style.aspectRatio = "9/16"
     }
@@ -521,27 +525,34 @@ async function downloadImage() {
 
 async function getPreview() {
     document.getElementById('tracklist').classList.toggle('hide')
-
+    
     if (window.innerWidth < 500) {
-        document.getElementById("mix-head").style.display = "none"
+        //document.getElementById("mix-head").style.display = "none"
         document.getElementById("mix-tag").style.display = "none"
     }
-
+    
     await downloadImage()
     await downloadImage()
     await downloadImage()
 
     const dataUrl = await downloadImage()
     console.log(dataUrl);
+
+    /*
     var link = document.createElement('a');
     link.download = 'preview.jpeg';
     link.href = dataUrl;
     link.click();
-
+    */
+    
     if (window.innerWidth < 500) {
-        document.getElementById("mix-head").style.display = "block"
+        //document.getElementById("mix-head").style.display = "block"
         document.getElementById("mix-tag").style.display = "block"
     }
+
+    document.getElementById('tracklist').classList.toggle('hide')
+
+    return dataUrl
 }
 
 document.getElementById('download').addEventListener("click", getPreview)
@@ -571,6 +582,8 @@ burnAndShare.forEach(btn => {
         const mixtapeData = collectMixtapeData();
         const mixtapeHash = await generateHash(mixtapeData);  // Assuming generateHash() returns a hash string
         const isDuplicate = await checkForDuplicate(mixtapeHash, db);
+        const cover = await getPreview()
+        // console.log(cover)
         let docId;
 
         if (!isDuplicate) {
@@ -581,6 +594,12 @@ burnAndShare.forEach(btn => {
             docId = await getExistingDocumentId(mixtapeHash, db);
             console.log("Existing document ID: ", docId);
         }
+
+        const coverRef = ref(storage, `covers/${docId}`)
+
+        uploadString(coverRef, cover, 'data_url').then((snapshot) => {
+            console.log('Uploaded cover with filename', docId);
+          });
 
         btn.innerHTML = "Burn and share"
         showPopup(docId);  // Call to show the popup
