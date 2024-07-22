@@ -3,13 +3,13 @@ import { initializeApp } from "firebase/app";
 import { experimentalSetDeliveryMetricsExportedToBigQueryEnabled } from "firebase/messaging/sw";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBhHdbyP7hy2V4xlG9S_i9G62emf9mvIfI",
-    authDomain: "mixedify-40e2e.firebaseapp.com",
-    projectId: "mixedify-40e2e",
-    storageBucket: "mixedify-40e2e.appspot.com",
-    messagingSenderId: "1076825373232",
-    appId: "1:1076825373232:web:4c34f4277dd6f4bdc7cbf5"
-};
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.FIREBASE_APP_ID
+  };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
