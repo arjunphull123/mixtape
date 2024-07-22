@@ -1,79 +1,62 @@
-import sharp from 'sharp';
-import fs from 'fs';
-import path from 'path';
-import mime from 'mime-types';
+import { initializeApp } from 'firebase/app';
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
+import fetch from 'node-fetch';  // You need to install node-fetch
 
-// Define the path to the assets directory
-const assetsPath = path.join(__dirname, 'assets');
+const firebaseConfig = {
+  apiKey: "AIzaSyBhHdbyP7hy2V4xlG9S_i9G62emf9mvIfI",
+  authDomain: "mixedify-40e2e.firebaseapp.com",
+  projectId: "mixedify-40e2e",
+  storageBucket: "mixedify-40e2e.appspot.com",
+  messagingSenderId: "1076825373232",
+  appId: "1:1076825373232:web:4c34f4277dd6f4bdc7cbf5"
+};
 
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
 
-export async function handler(event, context) {
+export const handler = async (event, context) => {
+  let id = event.queryStringParameters.id;
+
+  if (!id) {
+    id = 'default';
+  }
+
   try {
-    // Extract title and color from the query parameters
-    const { title = "awesome mix vol. 1", color = "color-1" } = event.queryStringParameters;
+    const imageUrl = `covers/${id}`;
+    const imageRef = ref(storage, imageUrl);
+    let imageDownloadUrl;
 
-    // Create the SVG content
-    const titleSVG = `
-      <svg width="1075" height="150" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <style type="text/css">
-              @import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&amp;display=swap');
-            </style>
-          </defs>
-
-          <style>
-              .title {
-                  fill: black;
-                  font-size: 75px;
-                  font-family: "Gloria Hallelujah", cursive;
-                  font-weight: 600;
-                  opacity: 77.5%;
-                  letter-spacing: -.35%;
-              }
-          </style>
-          <text x="0" y="100" text-anchor="left" transform="rotate(-0.75)" class="title">${title}</text>
-      </svg>
-    `;
-
-    const titleBuffer = Buffer.from(titleSVG);
-
-    console.log(`Generated SVG: ${titleSVG}`);
-
-    // Define the path to the base image
-    const baseImagePath = path.join(assetsPath, `${color}-base.png`);
-    console.log(`Base image path set to ${baseImagePath}`);
-
-    // Check if the base image exists
-    if (!fs.existsSync(baseImagePath)) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: `Base image for color '${color}' not found.` }),
-      };
+    try {
+      imageDownloadUrl = await getDownloadURL(imageRef);
+    } catch (error) {
+      if (id !== 'default') {
+        const defaultImageRef = ref(storage, 'covers/default.jpg');
+        imageDownloadUrl = await getDownloadURL(defaultImageRef);
+      } else {
+        throw error;  // If default image is also not found, throw the error
+      }
     }
 
-    // Composite the titleBuffer onto the base image
-    const outputBuffer = await sharp(baseImagePath)
-      .composite([{
-        input: titleBuffer,
-        top: 185,
-        left: 375,
-      }])
-      .png()
-      .toBuffer();
+    const response = await fetch(imageDownloadUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch image: ${response.statusText}`);
+    }
+
+    const imageBuffer = await response.buffer();
 
     return {
       statusCode: 200,
       headers: {
-        'Content-Type': 'image/png',
+        'Content-Type': response.headers.get('content-type'),
+        'Content-Length': imageBuffer.length.toString(),
       },
-      body: outputBuffer.toString('base64'),
+      body: imageBuffer.toString('base64'),
       isBase64Encoded: true,
     };
   } catch (error) {
-    console.error(`Error: ${error.message}`);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
     };
   }
-}
+};

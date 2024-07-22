@@ -12,6 +12,7 @@
     "vite": "^4.4.8"
   },
   "dependencies": {
+    "@netlify/functions": "^2.8.1",
     "dom-to-image": "^2.6.0",
     "dotenv": "^16.4.5",
     "file-saver": "^2.0.5",

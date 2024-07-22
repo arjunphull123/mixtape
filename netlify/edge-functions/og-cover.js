@@ -6,10 +6,9 @@ export default async (request, context) => {
     const page = await response.text()
     
     // Look for the OG image generator path.
-    const search = 'Check out my mixtape'
+    const search = ".netlify/functions/generator"
     // Replace it with the path plus the querystring.
-    console.log(url.searchParams.get('id'))
-    const replace = `ID: ${url.searchParams.get('id')}`
+    const replace = `.netlify/functions/generator?id=${url.searchParams.get('id')}`
     
     return new Response(page.replaceAll(search, replace), response);
 }
