@@ -31,7 +31,7 @@ const storage = getStorage(app)
 // Regular functionality:
 
 // Setting up API key and params for Spotify API
-const clientId = process.env.SPOTIFY_CLIENT_ID; // Replace with your client ID
+const clientId = "4b027ab3c8dd4b1f9ef6d083d0b51fb5"; // Replace with your client ID
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 

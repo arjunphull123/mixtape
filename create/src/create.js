@@ -57,7 +57,7 @@ document.addEventListener('keydown', function(event) {
 */
 
 async function getAccessToken() {
-    const clientId = process.env.SPOTIFY_CLIENT_ID;
+    const clientId = "4b027ab3c8dd4b1f9ef6d083d0b51fb5";
     const clientSecret = await getClientSecret();
 
     const params = new URLSearchParams();
