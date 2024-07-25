@@ -4,7 +4,6 @@ import domtoimage from 'dom-to-image'
 import dotenv from 'dotenv';
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { getStorage, ref, uploadString } from "firebase/storage";
-import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBhHdbyP7hy2V4xlG9S_i9G62emf9mvIfI",
