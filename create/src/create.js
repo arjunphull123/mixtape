@@ -1,6 +1,7 @@
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import domtoimage from 'dom-to-image'
+import * as htmlToImage from 'html-to-image';
 import dotenv from 'dotenv';
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { getStorage, ref, uploadString } from "firebase/storage";
@@ -282,16 +283,6 @@ document.querySelectorAll('.color-button').forEach(btn => {
     })
 })
 
-// non-mobile: save image handling
-function downloadImage() {
-    var card = document.getElementById("mixtape-container")
-    domtoimage.toBlob(card).then(function (blob) {
-            window.saveAs(blob, 'mixtape.png');
-        }
-    );
-}
-document.getElementById('download').addEventListener("click", downloadImage)
-
 
 // Firebase handling
 
@@ -340,6 +331,20 @@ burnAndShare.forEach(btn => {
         showPopup(docId);  // Call to show the popup
     })
 });
+
+// non-mobile: save image handling
+async function downloadImage() {
+    var card = document.getElementById("mixtape-container")
+
+    return htmlToImage.toPng(card, {
+        ignoreElements: function( element ) {
+            if( 'mix-head' == element.id ) {
+                return true;
+            }
+        }
+        }
+    )
+}
 
 async function getPreview() {
     document.getElementById('tracklist').classList.toggle('hide')
@@ -423,14 +428,14 @@ function collectMixtapeData() {
 
 function showPopup(docId) {
     const popup = document.createElement('div');
-    const link = "https://mixedify.netlify.app/mix/?id=" + docId
+    const link = "http://localhost:5173/mix/?id=" + docId
     popup.className = 'share-popup';
 
     const content = `
         <div class="popup-content">
                 <p class="info-head">Nice mix!</p>
                 <p class="info-text">Copy the link below and share with a friend:</p>
-                <input type="text" id="mixtape-link" value="https://mixedify.netlify.app/mix/?id=${docId}" readonly>
+                <input type="text" id="mixtape-link" value="http://localhost:5173/mix/?id=${docId}" readonly>
                 <div class='download-options'>
                     <div class='download' id="copy">Copy Link</div>
                     <div class='download' id="close-popup">Close</div>
