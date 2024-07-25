@@ -16,7 +16,7 @@
       }
   
   * {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Satoshi', sans-serif;
     margin: 0;
   }
   /*
@@ -197,7 +197,6 @@
   }
   
   h1 {
-    font-family: 'DM Sans', sans-serif;
     font-size: 2.3rem;
     font-style: normal;
     font-weight: 700;
@@ -266,7 +265,6 @@
   
     color: #FFF;
     text-align: center;
-    font-family: 'DM Sans';
     font-size: 0.75rem;
     font-style: normal;
     font-weight: 700;
@@ -326,7 +324,6 @@
     background: rgba(255, 255, 255, 0.30);
     color: #FFF;
     text-align: center;
-    font-family: 'DM Sans';
     font-size: 0.75rem;
     font-style: normal;
     font-weight: 700;
@@ -382,7 +379,6 @@
     background: #FFF;
     color: var(--card-bg);
     text-align: center;
-    font-family: 'DM Sans';
     font-size: 0.75rem;
     font-style: normal;
     font-weight: 700;
