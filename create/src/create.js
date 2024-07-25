@@ -413,3 +413,18 @@ function removesessionStorage() {
 }
 document.getElementById('logout').addEventListener("click", removesessionStorage)
 document.getElementById('go-back').addEventListener("click", removesessionStorage)
+
+// Story preview handling
+const preview = document.getElementById("story-preview")
+const mixPreview = document.getElementById('mixtape-preview')
+
+document.getElementById('story-mobile').addEventListener('click', function () {
+    console.log("Sharing to story")
+    preview.style.display = "flex"
+    mixPreview.innerHTML = document.getElementById("mixtape-container").innerHTML
+})
+
+document.getElementById('close-preview').addEventListener('click', function () {
+    preview.style.display = "none"
+    mixPreview.innerHTML = ""
+})
