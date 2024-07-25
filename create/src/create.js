@@ -57,6 +57,8 @@ document.addEventListener('keydown', function(event) {
 });
 */
 
+
+
 async function getAccessToken() {
     const clientId = "4b027ab3c8dd4b1f9ef6d083d0b51fb5";
     const clientSecret = await getClientSecret();
@@ -93,6 +95,14 @@ async function searchForTrack(term) {
 
 const searchButton = document.getElementById('searchButton')
 const searchField = document.getElementById('search-for-tracks')
+
+// Marvins room easter egg
+searchButton.addEventListener("click", function () {
+    if (searchField.value == "marvinsroom") {
+        dummyData()
+        mixtapeFull()
+    }
+})
 
 // Wipe all tracks on reload
 var tracksBurned = 0
@@ -206,8 +216,8 @@ function dummyData() {
     for (let i = 1; i < 21; i++) {
         const trackLink = document.getElementById(`track-link-${i}`)
         const trackLabel = document.getElementById(`track-${i}`)
-        trackLink.href = "https://apple.com"
-        trackLabel.innerText = `TRACK ${i}`
+        trackLink.href = "https://open.spotify.com/track/047fCsbO4NdmwCBn8pcUXl?si=bbea6b2a0a2f496d"
+        trackLabel.innerText = `Marvins Room - Drake`
     }
 }
 
