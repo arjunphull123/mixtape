@@ -3,6 +3,8 @@ import { initializeApp } from "firebase/app";
 import domtoimage from 'dom-to-image'
 import dotenv from 'dotenv';
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import { getStorage, ref, uploadString } from "firebase/storage";
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBhHdbyP7hy2V4xlG9S_i9G62emf9mvIfI",
@@ -15,6 +17,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app)
 
 // Write handling that will add tracks one by one to the mixtape
 // Write API calls to search for a track
@@ -57,7 +60,11 @@ document.addEventListener('keydown', function(event) {
 });
 */
 
-
+if (window.innerWidth < 500) {
+    //document.getElementById("mix-head").style.display = "block"
+    document.getElementById("mix-tag").style.display = "block"
+    //document.getElementById("mixtape-container").style.aspectRatio = "9/16"
+}
 
 async function getAccessToken() {
     const clientId = "4b027ab3c8dd4b1f9ef6d083d0b51fb5";
@@ -207,7 +214,7 @@ function mixtapeFull() {
     
     document.querySelector('body').classList.remove('creating')
 
-    document.querySelectorAll(".search, .search-results").forEach(e => {
+    document.querySelectorAll(".search, .search-results, .search-desc").forEach(e => {
         e.style.display = "none"
     })
 }
@@ -307,9 +314,12 @@ function generateHash(mixtapeData) {
 
 burnAndShare.forEach(btn => {
     btn.addEventListener('click', async function () {
+        btn.innerHTML = "Burning..."
         const mixtapeData = collectMixtapeData();
         const mixtapeHash = await generateHash(mixtapeData);  // Assuming generateHash() returns a hash string
         const isDuplicate = await checkForDuplicate(mixtapeHash, db);
+        const cover = await getPreview()
+        // console.log(cover)
         let docId;
 
         if (!isDuplicate) {
@@ -321,9 +331,48 @@ burnAndShare.forEach(btn => {
             console.log("Existing document ID: ", docId);
         }
 
+        const coverRef = ref(storage, `covers/${docId}`)
+
+        uploadString(coverRef, cover, 'data_url').then((snapshot) => {
+            console.log('Uploaded cover with filename', docId);
+          });
+
+        btn.innerHTML = "Burn and share"
         showPopup(docId);  // Call to show the popup
     })
 });
+
+async function getPreview() {
+    document.getElementById('tracklist').classList.toggle('hide')
+    
+    if (window.innerWidth < 500) {
+        //document.getElementById("mix-head").style.display = "none"
+        document.getElementById("mix-tag").style.display = "none"
+    }
+    
+    await downloadImage()
+    await downloadImage()
+    await downloadImage()
+
+    const dataUrl = await downloadImage()
+    console.log(dataUrl);
+
+    /*
+    var link = document.createElement('a');
+    link.download = 'preview.jpeg';
+    link.href = dataUrl;
+    link.click();
+    */
+    
+    if (window.innerWidth < 500) {
+        //document.getElementById("mix-head").style.display = "block"
+        document.getElementById("mix-tag").style.display = "block"
+    }
+
+    document.getElementById('tracklist').classList.toggle('hide')
+
+    return dataUrl
+}
 
 async function checkForDuplicate(mixtapeHash, db) {
     const mixtapesCollection = collection(db, "mixtapes");
