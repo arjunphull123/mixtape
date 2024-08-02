@@ -428,14 +428,14 @@ function collectMixtapeData() {
 
 function showPopup(docId) {
     const popup = document.createElement('div');
-    const link = "http://localhost:5173/mix/?id=" + docId
+    const link = "https://mixedify.netlify.app/mix/?id=" + docId
     popup.className = 'share-popup';
 
     const content = `
         <div class="popup-content">
                 <p class="info-head">Nice mix!</p>
                 <p class="info-text">Copy the link below and share with a friend:</p>
-                <input type="text" id="mixtape-link" value="http://localhost:5173/mix/?id=${docId}" readonly>
+                <input type="text" id="mixtape-link" value="https://mixedify.netlify.app/mix/?id=${docId}" readonly>
                 <div class='download-options'>
                     <div class='download' id="copy">Copy Link</div>
                     <div class='download' id="close-popup">Close</div>
