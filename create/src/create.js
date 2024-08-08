@@ -154,7 +154,7 @@ async function runSearch() {
     const art = track.album.images[0].url;
     var explicit = "";
     if (track.explicit) {
-      var explicit = "🅴 ";
+      var explicit = "🅴  ";
     }
     const artistsList = [];
     track.artists.forEach((artist) => {
