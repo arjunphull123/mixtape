@@ -154,7 +154,7 @@ async function runSearch() {
     const art = track.album.images[0].url;
     var explicit = "";
     if (track.explicit) {
-      var explicit = "🅴  ";
+      var explicit = "🅴";
     }
     const artistsList = [];
     track.artists.forEach((artist) => {
@@ -162,7 +162,8 @@ async function runSearch() {
     });
     const artists = artistsList.join(", ");
     output.push({
-      string: explicit + name + " - " + artists,
+      string: `${explicit} ${name} - ${artists}`,
+      label: `${name} - ${artists}`,
       url: url,
       art: art,
     });
@@ -185,7 +186,7 @@ function updateResultsSection(results) {
     var newHTML = ``;
     var i = 0;
     results.forEach((result) => {
-      newHTML += `<div class="search-result" url="${result.url}" id="${i}"> <img src="${result.art}" class="cover-art" alt="cover-art"> <p>${result.string}</p>   </div>`;
+      newHTML += `<div class="search-result" url="${result.url}" label="${result.label}" id="${i}"> <img src="${result.art}" class="cover-art" alt="cover-art"> <span id="result-string">${result.string}</span>   </div>`;
       i += 1;
     });
     document.getElementById("search-results").innerHTML = newHTML;
@@ -202,7 +203,7 @@ function burnTrack(result) {
   const trackLink = document.getElementById(`track-link-${tracksBurned + 1}`);
   const trackLabel = document.getElementById(`track-${tracksBurned + 1}`);
   trackLink.href = result.getAttribute("url");
-  trackLabel.innerText = result.innerHTML;
+  trackLabel.innerText = result.getAttribute("label")
 
   tracksBurned += 1;
   document.getElementById("tracks-left").innerHTML = `${
