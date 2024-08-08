@@ -1,29 +1,30 @@
 @font-face {
-    font-family: 'Ugly Dave';
-    src: url('/fonts/Ugly-Dave-Regular.woff2') format('woff2'),
+  font-family: 'Ugly Dave';
+  src: url('/fonts/Ugly-Dave-Regular.woff2') format('woff2'),
     url('/fonts/Ugly-Dave-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-    }
-  
-    @font-face {
-      font-family: 'Inter';
-      src: url('/fonts/inter.ttf') format('ttf');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-      }
-  
-      .hide {
-        display: none;
-      }
-      
-  * {
-    font-family: 'Satoshi', sans-serif;
-    margin: 0;
-  }
-  /*
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.hide {
+  display: none;
+}
+
+* {
+  font-family: 'Satoshi', sans-serif;
+  margin: 0;
+}
+
+/*
   028391 - teal - 2, 131, 145
   F6dcac - cream - 246, 220, 172
   261447 - purple - 38, 20, 71
@@ -34,956 +35,988 @@
   E0b0d5 - lavender - 224, 176, 213
   143109 - green - 20, 49, 9
   */
-  
-  :root {
-    --card-bg: var(--color-1);
-    --mw: min(85vw, 650px);
-    --bg-color: var(--bg-color-1); 
-    --color-1: rgba(173, 151, 129, 1);
-    --color-2: rgba(2, 131, 145, 1);
-    --color-3: rgba(205, 154, 193, 1);
-    --color-4: rgba(239, 35, 60, 1);
-    --color-5: rgba(38, 20, 71, 1);
-    --color-6: rgba(0, 0, 0, 1);
-  
-    --bg-color-1: rgb(218,200,182);
-    --bg-color-2: rgb(53,156,167);
-    --bg-color-3: rgb(215,174,205);
-    --bg-color-4: rgb(242,79,99);
-    --bg-color-5: rgb(60,43,89);
-    --bg-color-6: rgb(25,25,25);
-  }
-  
-  img {
-    pointer-events: none;
-  }
-  
-  .color-1 {
-    fill: var(--color-1)
-  }
-  
-  .color-2 {
-    fill: var(--color-2)
-  }
-  
-  .color-3 {
-    fill: var(--color-3)
-  }
-  
-  .color-4 {
-    fill: var(--color-4)
-  }
-  
-  .color-5 {
-    fill: var(--color-5)
-  }
-  
-  .color-6 {
-    fill: var(--color-6)
-  }
-  
-  body {
-    background-color: var(--bg-color);
-    background-image: url(data:image/png;base64,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);
-  }
-  
-  .body-container {
+
+:root {
+  --card-bg: var(--color-1);
+  --mw: min(85vw, 650px);
+  --bg-color: var(--bg-color-1);
+  --color-1: rgba(173, 151, 129, 1);
+  --color-2: rgba(2, 131, 145, 1);
+  --color-3: rgba(205, 154, 193, 1);
+  --color-4: rgba(239, 35, 60, 1);
+  --color-5: rgba(38, 20, 71, 1);
+  --color-6: rgba(0, 0, 0, 1);
+
+  --bg-color-1: rgb(218, 200, 182);
+  --bg-color-2: rgb(53, 156, 167);
+  --bg-color-3: rgb(215, 174, 205);
+  --bg-color-4: rgb(242, 79, 99);
+  --bg-color-5: rgb(60, 43, 89);
+  --bg-color-6: rgb(25, 25, 25);
+}
+
+img {
+  pointer-events: none;
+}
+
+.color-1 {
+  fill: var(--color-1)
+}
+
+.color-2 {
+  fill: var(--color-2)
+}
+
+.color-3 {
+  fill: var(--color-3)
+}
+
+.color-4 {
+  fill: var(--color-4)
+}
+
+.color-5 {
+  fill: var(--color-5)
+}
+
+.color-6 {
+  fill: var(--color-6)
+}
+
+body {
+  background-color: var(--bg-color);
+  background-image: url(data:image/png;base64,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);
+}
+
+.body-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-bottom: 1rem;
+  align-items: center;
+  gap: 1.25rem;
+  align-self: stretch;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.header,
+.mobile-header {
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.info {
+  display: flex;
+  padding-right: 0px;
+  align-items: center;
+  gap: 0.625rem;
+  cursor: pointer;
+}
+
+.logout {
+  display: flex;
+  padding: 0rem 0.04375rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+  cursor: pointer;
+}
+
+.logo-header {
+  color: #fff;
+  text-align: center;
+  font-family: "Ugly Dave";
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -0.05rem;
+  line-height: normal;
+}
+
+.ss-me {
+  font-size: 0.75rem;
+  font-family: "DM Sans";
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 125%;
+  padding: 0.63rem;
+}
+
+.loading {
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: var(--bg-color);
+  color: white;
+  font-family: "Ugly Dave";
+  font-weight: 700;
+  font-size: 1.5rem;
+  z-index: 1000;
+  backdrop-filter: blur(0.5rem);
+  -webkit-backdrop-filter: blur(0.5rem);
+}
+
+.p-load {
+  font-family: "Ugly Dave";
+  letter-spacing: -0.15rem;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 5vh;
+
+}
+
+.start-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  align-self: stretch;
+  margin-top: 1vh;
+}
+
+.hero {
+  display: flex;
+  align-self: stretch;
+  color: #FFF;
+  text-align: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 2.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 110%;
+  /* 2.0625rem */
+  letter-spacing: -2%;
+  width: 100%;
+  max-width: 400px;
+  color: #FFF;
+  text-align: center;
+}
+
+.bg-color {
+  fill: var(--card-bg);
+}
+
+.spotify-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.log-in-button {
+  display: flex;
+  padding: 0.5rem 0.625rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 2.5rem;
+  background: #FFF;
+  cursor: pointer;
+
+  color: var(--card-bg);
+  text-align: center;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.customize-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  align-self: stretch;
+}
+
+.customize {
+  font-size: 2rem;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.time-range-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+
+  color: #FFF;
+  text-align: center;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.time-range-option,
+.refresh,
+.search-result {
+  display: flex;
+  padding: 0.5rem 0.625rem;
+  justify-content: left;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 2.5rem;
+  border: 1px solid #FFF;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: white;
+  width: 75vw;
+  max-width: 400px;
+}
+
+.search-result {
+  display: flex;
+  padding: 0.5rem 0.625rem;
+  justify-content: left;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 2.5rem;
+  border: 1px solid #FFF;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: white;
+  width: 75vw;
+  max-width: 400px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.time-range-option.active,
+.refresh.active,
+.search-result:active {
+  background: #FFF;
+  color: var(--card-bg);
+}
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.color-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.color-button {
+  display: flex;
+  padding: 0.175rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 1.5625rem;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.30);
+}
+
+.color-button.active {
+  background: #FFF;
+}
+
+input {
+  display: flex;
+  width: 15rem;
+  padding: 0.5rem 0.625rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.625rem;
+  border: 1px solid #FFF;
+  background: rgba(255, 255, 255, 0.30);
+  color: #FFF;
+  text-align: center;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.mix-head {
+  display: none;
+  width: 100%;
+  font-size: calc(var(--mw) * 150/1000);
+  letter-spacing: 0;
+  line-height: 95%;
+  padding: 0;
+  padding-top: calc(var(--mw) * 0.04);
+  white-space: nowrap;
+  inline-size: min-content;
+  margin: 0;
+}
+
+.mix-tag {
+  color: #fff;
+  display: none;
+  font-weight: 500;
+  font-size: calc(var(--mw) * 0.0375);
+  padding: 0;
+  padding: calc(var(--mw) * 0);
+  white-space: nowrap;
+  text-align: center;
+  justify-content: center;
+}
+
+.scroll-down {
+  display: auto;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.subtitle {
+  color: white;
+  text-align: center;
+  max-width: 80vw;
+}
+
+.shown {
+  display: flex;
+}
+
+.download,
+.mobile-create-playlist {
+  display: none;
+  padding: 0.5rem 0.625rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 2.5rem;
+  background: #FFF;
+  color: var(--card-bg);
+  text-align: center;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.download-options {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.mobile-download-options {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.mobile-create-playlist {
+  display: flex;
+}
+
+.mixtape-container {
+  display: flex;
+  position: relative;
+  width: var(--mw);
+  height: auto;
+  padding: calc(0.0375 * var(--mw));
+  flex-direction: column;
+  align-items: center;
+  gap: calc(0.025 * var(--mw));
+  border-radius: calc(0.05 * var(--mw));
+  background-image: url(data:image/png;base64,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);
+  background-color: var(--card-bg);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2rem;
+  /*border: calc(var(--mw) * 5/1000) solid #FFF;*/
+}
+
+#story-preview {
+  display: none;
+  position: fixed;
+  z-index: 5000;
+  height: 100vh;
+  width: 100vw;
+  background-image: url(data:image/png;base64,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);
+  background-color: var(--bg-color);
+  backdrop-filter: opacity(0%);
+  -webkit-backdrop-filter: opacity(0%);
+  top: 0;
+  left: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#close-preview {
+  position: absolute;
+  top: 0.75rem;
+  right: 1.25rem;
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+#mixtape-preview {
+  pointer-events: none;
+}
+
+.cassette-container {
+  position: relative;
+}
+
+.cassette {
+  position: relative;
+  aspect-ratio: 21.875/14;
+  width: 100%;
+  background-color: fff;
+  mix-blend-mode: hard-light;
+}
+
+.cassette-title {
+  position: absolute;
+  text-align: left;
+  font-size: calc(var(--mw) * 5/100);
+  top: calc(var(--mw) * 8/100);
+  left: calc(var(--mw) * 19/100);
+  max-width: calc(var(--mw) * 0.75);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  font-family: "Ugly Dave";
+  opacity: 77.5%;
+  transform: rotate(-0.75deg);
+}
+
+.tracklist {
+  position: relative;
+  width: 100%;
+  mix-blend-mode: hard-light;
+  box-sizing: border-box;
+}
+
+.case,
+.texture {
+  width: 100%;
+  aspect-ratio: 1829/1159;
+}
+
+.case {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.blank-tracklist {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.track-card {
+  position: absolute;
+  opacity: 77.5%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: var(--mw);
+  box-sizing: border-box;
+  background-clip: content-box;
+  padding: calc(var(--mw)*21/1000) calc(var(--mw)*35/1000) calc(var(--mw)*48/1000) calc(var(--mw)*35/1000);
+}
+
+.top-section {
+  display: flex;
+  height: calc(var(--mw)*87/1000);
+  padding: calc(var(--mw)*16/1000) calc(var(--mw)*25/1000);
+  justify-content: center;
+  align-items: flex-start;
+  gap: calc(var(--mw)*80/1000);
+  flex-shrink: 0;
+  align-self: stretch;
+  box-sizing: border-box;
+}
+
+.a-side,
+.b-side {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 1 0 0;
+}
+
+.side-label {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  color: #000;
+  text-overflow: ellipsis;
+  font-family: 'Inter';
+  font-size: calc(var(--mw) * 38/1000);
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  opacity: 0%;
+}
+
+.date-time {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.b-side-meta {
+  color: #000;
+  text-overflow: ellipsis;
+  font-family: 'Ugly Dave';
+  font-size: calc(var(--mw) * 24/1000);
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: calc(var(--mw) * 1.2/1000);
+}
+
+.row {
+  display: flex;
+  height: calc(var(--mw) * 47.8/1000);
+  padding: calc(var(--mw) * 0.75/1000) calc(var(--mw) * 20/1000);
+  align-items: center;
+  gap: calc(var(--mw) * 80 / 1000);
+  flex: 1 0 0;
+  align-self: stretch;
+  box-sizing: content-box;
+}
+
+.track,
+a.track-link,
+a.track-link:visited {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  flex: 1 0 0;
+  overflow: hidden;
+  color: #000;
+  text-overflow: ellipsis;
+  /* track text */
+  text-align: left;
+  font-family: 'Ugly Dave';
+  font-size: calc(var(--mw) * 24/1000);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 105%;
+  /* 19.2px */
+  text-decoration: none;
+}
+
+.texture {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.texture.white {
+  mix-blend-mode: multiply;
+}
+
+.texture.black {
+  mix-blend-mode: screen;
+}
+
+.mixtape-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.spotify-logo {
+  /*width: 4.99106rem;
+    height: 1.5rem;*/
+  width: calc(var(--mw)*0.075*2.75);
+  height: auto;
+  fill: #fff;
+}
+
+.logo-footer {
+  /*width: 4.99106rem;
+    height: 1.5rem;*/
+  width: calc(var(--mw)*0.075*2.25);
+  height: auto;
+  fill: #fff;
+}
+
+.logo {
+  color: #FFF;
+  text-align: center;
+  font-family: 'Ugly Dave';
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.logo {
+  aspect-ratio: auto;
+  height: 3rem;
+}
+
+.logo.small {
+  font-size: calc(var(--mw)*0.55 / 10);
+  letter-spacing: calc(var(--mw)*0.55 / 10 * -0.05 / 1.75);
+  height: auto;
+}
+
+.footer {
+  display: none;
+  padding: 0.5rem 1rem;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.footer-text {
+  color: white;
+  font-size: 1rem;
+}
+
+.info-screen {
+  position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  color: white;
+  z-index: 1000;
+  backdrop-filter: blur(0.5rem);
+  -webkit-backdrop-filter: blur(0.5rem);
+}
+
+::placeholder {
+  color: white;
+}
+
+.info-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  box-sizing: border-box;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 90%;
+  max-width: 400px;
+}
+
+.info-head {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.15rem;
+  font-family: "Ugly Dave";
+}
+
+.info-text {
+  font-size: 1.15rem;
+  color: white;
+}
+
+.privacy-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  color: white;
+}
+
+p.privacy-text {
+  display: inline;
+  font-size: 1rem;
+}
+
+a.p-link,
+a.p-link:visited {
+  color: #fff;
+}
+
+a.back-button,
+a.back-button:visited {
+  color: var(--card-bg);
+  padding: 0.75rem 1rem;
+  background-color: #fff;
+  text-decoration: none;
+  border-radius: 10rem;
+  font-weight: 600;
+}
+
+.made-by {
+  font-family: "Ugly Dave";
+  color: #fff;
+}
+
+a:visited {
+  color: #fff;
+}
+
+.close-button {
+  color: var(--card-bg);
+  background-color: #fff;
+  max-width: 100px;
+  padding: 0.5rem 2rem;
+  border-radius: 10rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.search {
+  display: flex;
+  gap: 0.5rem;
+  width: 75vw;
+  max-width: 400px;
+}
+
+#search-for-tracks {
+  text-align: left;
+  width: 25rem;
+}
+
+.search-button {
+  display: flex;
+  justify-content: center;
+  color: var(--card-bg);
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.625rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 20%;
+}
+
+
+.show-info {
+  .info-screen {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-bottom: 1rem;
-    align-items: center;
-    gap: 1.25rem;
-    align-self: stretch;
-    height: 100%;
-    min-height: 100vh;
   }
-  
-  .header, .mobile-header {
-    display: flex;
-    padding: 0.5rem 1rem;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
+
+  .header,
+  .start-container,
+  .customize-container,
+  .mixtape-container {
+    opacity: 15%;
   }
-  
-  .info {
-    display: flex;
-    padding-right: 0px;
-    align-items: center;
-    gap: 0.625rem;
-    cursor: pointer;
-  }
-  
-  .logout {
-    display: flex;
-    padding: 0rem 0.04375rem;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.625rem;
-    cursor: pointer;
-  }
-  
-  .logo-header {
-    color: #fff;
-    text-align: center;
-    font-family: "Ugly Dave";
-    font-size: 1.75rem;
-    font-style: normal;
-    font-weight: 700;
-    letter-spacing: -0.05rem;
-    line-height: normal;
-  }
-  
-  .ss-me {
-    font-size: 0.75rem;
-    font-family: "DM Sans";
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 125%;
-    padding: 0.63rem;
-  }
-  
-  .loading {
-    position: fixed;
+}
+
+.creating {
+
+  .color-options,
+  .mobile-download-options,
+  .download-options,
+  #mixtape-name-input {
     display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background-color: var(--bg-color);
-    color: white;
-    font-family: "Ugly Dave";
-    font-weight: 700;
-    font-size: 1.5rem;
-    z-index: 1000;
-    backdrop-filter: blur(0.5rem);
-    -webkit-backdrop-filter: blur(0.5rem);
   }
-  
+}
+
+@media only screen and (min-width: 500px) {
+
+  .subtitle {
+    max-width: 30vw;
+  }
+
   .p-load {
-    font-family: "Ugly Dave";
-    letter-spacing: -0.15rem;
+    letter-spacing: -0.075rem;
   }
-  
+
+  .logo-header {
+    letter-spacing: -0.05rem;
+  }
+
   .content-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    gap: 5vh;
-    
+    /*flex-direction: row;*/
+    margin-top: 0;
   }
-  
-  .start-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    align-self: stretch;
-    margin-top: 1vh;
+
+  .mixtape-container {
+    aspect-ratio: auto;
   }
-  
-  .hero {
-    display: flex;
-    align-self: stretch;
-    color: #FFF;
-    text-align: center;
-    justify-content: center;
-  }
-  
+
   h1 {
-    font-size: 2.75rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 110%; /* 2.0625rem */
-    letter-spacing: -2%;
-    width: 100%;
-    max-width: 400px;
-    color: #FFF;
-    text-align: center;
+    width: var(--mw);
+    font-size: 3.5rem;
   }
-  
-  .bg-color {
-    fill: var(--card-bg);
+
+  .customize,
+  .mix-head {
+    font-size: 2.5rem;
   }
-  
+
   .spotify-icon {
-    width: 1rem;
-    height: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
-  
+
   .log-in-button {
-    display: flex;
-    padding: 0.5rem 0.625rem;
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
-    border-radius: 2.5rem;
-    background: #FFF;
-    cursor: pointer;
-  
-    color: var(--card-bg);
-    text-align: center;
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
+    font-size: 1rem;
   }
-  
-  .customize-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    align-self: stretch;
+
+  .body-container {
+    height: 100vh;
+    justify-content: space-between;
   }
-  
-  .customize {
-    font-size: 2rem;
-  }
-  
-  .controls {
+
+  .download {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
+    font-size: 1rem;
   }
-  
-  .time-range-options {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
-  
-    color: #FFF;
-    text-align: center;
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-  }
-  
-  .time-range-option, .refresh, .search-result {
-    display: flex;
-    padding: 0.5rem 0.625rem;
-    justify-content: left;
-    align-items: center;
-    gap: 0.625rem;
-    border-radius: 2.5rem;
-    border: 1px solid #FFF;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 0.75rem;
-    color: white;
-    width: 75vw;
-    max-width: 400px;
+
+  .time-range-option,
+  .refresh,
+  .search-result {
+    font-size: 1rem;
   }
 
   .search-result {
-    display: flex;
-    padding: 0.5rem 0.625rem;
-    justify-content: left;
-    align-items: center;
-    gap: 0.625rem;
-    border-radius: 2.5rem;
-    border: 1px solid #FFF;
-    cursor: pointer;
-    font-weight: 700;
     font-size: 0.75rem;
-    color: white;
-    width: 75vw;
-    max-width: 400px;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  
-  .time-range-option.active, .refresh.active, .search-result:active {
-    background: #FFF;
-    color: var(--card-bg);
-  }
-  
-  .search-results {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
   }
 
-  .color-options {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
-  }
-  
-  .color-button {
-    display: flex;
-    padding: 0.175rem;
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
-    border-radius: 1.5625rem;
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.30);
-  }
-  
-  .color-button.active {
-    background: #FFF;
-  }
-  
   input {
-    display: flex;
-    width: 15rem;
-    padding: 0.5rem 0.625rem;
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
-    border-radius: 0.625rem;
-    border: 1px solid #FFF;
-    background: rgba(255, 255, 255, 0.30);
-    color: #FFF;
-    text-align: center;
     font-size: 1rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-  }
-  
-  .mix-head {
-    display: none;
-    width: 100%;
-    font-size: calc(var(--mw) * 150/1000);
-    letter-spacing: 0;
-    line-height: 95%;
-    padding: 0;
-    padding-top: calc(var(--mw) * 0.04);
-    white-space: nowrap;
-    inline-size: min-content;
-    margin: 0;
-  }
-  
-  .mix-tag {
-    color: #fff;
-    display: none;
-    font-weight: 500;
-    font-size: calc(var(--mw) * 0.0375);
-    padding: 0;
-    padding: calc(var(--mw) * 0);
-    white-space: nowrap;
-    text-align: center;
-    justify-content: center;
-  }
-  
-  .scroll-down {
-    display: auto;
-    color: #fff;
-    font-size: 0.75rem;
-  }
-
-  .subtitle {
     color: white;
-    text-align: center;
-    max-width: 80vw;
-  }
-
-  .shown {
-    display: flex;
-  }
-  
-  .download, .mobile-create-playlist {
-    display: none;
-    padding: 0.5rem 0.625rem;
-    justify-content: center;
-    align-items: center;
-    gap: 0.625rem;
-    border-radius: 2.5rem;
-    background: #FFF;
-    color: var(--card-bg);
-    text-align: center;
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    cursor: pointer;
-  }
-  
-  .download-options {
-    display: flex;
-    gap: 0.75rem;
-  }
-  
-  .mobile-download-options {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .mobile-create-playlist {
-    display: flex;
-  }
-  
-  .mixtape-container {
-    display: flex;
-    position: relative;
-    width: var(--mw);
-    height: auto;
-    padding: calc(0.0375 * var(--mw));
-    flex-direction: column;
-    align-items: center;
-    gap: calc(0.025 * var(--mw));
-    border-radius: calc(0.05 * var(--mw));
-    background-image: url(data:image/png;base64,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);
-    background-color: var(--card-bg);
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
-    margin-bottom: 2rem;
-    /*border: calc(var(--mw) * 5/1000) solid #FFF;*/
-  }
-  
-  #story-preview {
-    display: none;
-    position: fixed;
-    z-index: 5000;
-    height: 100vh;
-    width: 100vw;
-    background-image: url(data:image/png;base64,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);
-    background-color: var(--bg-color);
-    backdrop-filter: opacity(0%);
-    -webkit-backdrop-filter: opacity(0%);
-    top: 0;
-    left: 0;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  #close-preview {
-    position: absolute;
-    top: 0.75rem;
-    right: 1.25rem;
-    color: #ffffff;
-    font-size: 1.5rem;
-  }
-  
-  #mixtape-preview {
-    pointer-events: none;
-  }
-
-  .cassette-container {
-    position: relative;
-  }
-  
-  .cassette {
-    position: relative;
-    aspect-ratio: 21.875/14;
-    width: 100%;
-    background-color: fff;
-    mix-blend-mode: hard-light;
-  }
-  
-  .cassette-title {
-    position: absolute;
-    text-align: left;
-    font-size: calc(var(--mw) * 5/100);
-    top: calc(var(--mw) * 8/100);
-    left: calc(var(--mw) * 19/100);
-    max-width: calc(var(--mw) * 0.75);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-weight: 600;
-    font-family: "Ugly Dave";
-    opacity: 77.5%;
-    transform: rotate(-0.75deg);
-  }
-  
-  .tracklist {
-    position: relative;
-    width: 100%;
-    mix-blend-mode: hard-light;
-    box-sizing: border-box;
-  }
-  
-  .case, .texture {
-    width: 100%;
-    aspect-ratio: 1829/1159;
-  }
-  
-  .case {
-    position: relative;
-    top: 0;
-    left: 0;
-  }
-  
-  .blank-tracklist {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-  }
-  
-  .track-card {
-    position: absolute;
-    opacity: 77.5%;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    width: var(--mw);
-    box-sizing: border-box;
-    background-clip: content-box;
-    padding: calc(var(--mw)*21/1000) calc(var(--mw)*35/1000) calc(var(--mw)*48/1000) calc(var(--mw)*35/1000);
-  }
-  
-  .top-section {
-    display: flex;
-    height: calc(var(--mw)*87/1000);
-    padding: calc(var(--mw)*16/1000) calc(var(--mw)*25/1000);
-    justify-content: center;
-    align-items: flex-start;
-    gap: calc(var(--mw)*80/1000);
-    flex-shrink: 0;
-    align-self: stretch;
-    box-sizing: border-box;
-  }
-  
-  .a-side, .b-side {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex: 1 0 0;
-  }
-  
-  .side-label {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    color: #000;
-    text-overflow: ellipsis;
-    font-family: 'Inter';
-    font-size: calc(var(--mw) * 38/1000);
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    opacity: 0%;
-  }
-  
-  .date-time {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-  
-  .b-side-meta {
-    color: #000;
-    text-overflow: ellipsis;
-    font-family: 'Ugly Dave';
-    font-size: calc(var(--mw) * 24/1000);
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: calc(var(--mw) * 1.2/1000);
-  }
-  
-  .row {
-    display: flex;
-    height: calc(var(--mw) * 47.8/1000);
-    padding: calc(var(--mw) * 0.75/1000) calc(var(--mw) * 20/1000);
-    align-items: center;
-    gap: calc(var(--mw) * 80 / 1000);
-    flex: 1 0 0;
-    align-self: stretch;
-    box-sizing: content-box;
-  }
-  
-  .track, a.track-link, a.track-link:visited {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    flex: 1 0 0;
-    overflow: hidden;
-    color: #000;
-    text-overflow: ellipsis;
-    /* track text */
-    text-align: left;
-    font-family: 'Ugly Dave';
-    font-size: calc(var(--mw) * 24/1000);
-    font-style: normal;
-    font-weight: 400;
-    line-height: 105%; /* 19.2px */
-    text-decoration: none;
-  }
-  
-  .texture {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-  }
-  
-  .texture.white {
-    mix-blend-mode: multiply;
-  }
-  
-  .texture.black {
-    mix-blend-mode: screen;
-  }
-  
-  .mixtape-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-  }
-  
-  .spotify-logo {
-    /*width: 4.99106rem;
-    height: 1.5rem;*/
-    width: calc(var(--mw)*0.075*2.75);
-    height: auto;
-    fill: #fff;
-  }
-
-  .logo-footer {
-    /*width: 4.99106rem;
-    height: 1.5rem;*/
-    width: calc(var(--mw)*0.075*2.25);
-    height: auto;
-    fill: #fff;
-  }
-  
-  .logo {
-    color: #FFF;
-    text-align: center;
-    font-family: 'Ugly Dave';
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-  }
-
-  .logo {
-    aspect-ratio: auto;
-    height: 3rem;
-  }
-  
-  .logo.small {
-    font-size: calc(var(--mw)*0.55 / 10);
-    letter-spacing: calc(var(--mw)*0.55 / 10 * -0.05 / 1.75);
-    height: auto;
-  }
-  
-  .footer {
-    display: none;
-    padding: 0.5rem 1rem;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-  }
-  
-  .footer-text {
-    color: white;
-    font-size: 1rem;
-  }
-  
-  .info-screen {
-    position: fixed;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    color: white;
-    z-index: 1000;
-    backdrop-filter: blur(0.5rem);
-    -webkit-backdrop-filter: blur(0.5rem);
   }
 
   ::placeholder {
     color: white;
   }
-  
-  .info-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+
+  .mix-link {
     display: flex;
-    padding: 0.5rem 1rem;
-    justify-content: space-between;
-    align-items: center;
-    align-self: stretch;
-    box-sizing: border-box;
+    gap: 0.75rem;
   }
-  
-  .info-content {
+
+  .mobile-create-playlist {
+    display: none;
+  }
+
+  .scroll-down {
+    display: none;
+  }
+
+  .footer {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 90%;
-    max-width: 400px;
   }
-  
+
   .info-head {
-    font-size: 2rem;
-    font-weight: 600;
-    letter-spacing: -0.15rem;
-    font-family: "Ugly Dave";
+    letter-spacing: -0.075rem;
   }
-  
-  .info-text {
-    font-size: 1.15rem;
-    color: white;
-  }
-  
-  .privacy-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    width: 90%;
-    max-width: 600px;
-    text-align: center;
-    color: white;
-  }
-  
-  p.privacy-text {
-    display: inline;
-    font-size: 1rem;
-  }
-  
-  a.p-link, a.p-link:visited {
-    color: #fff;
-  }
-  
-  a.back-button, a.back-button:visited {
-    color: var(--card-bg);
-    padding: 0.75rem 1rem;
-    background-color: #fff;
-    text-decoration: none;
-    border-radius: 10rem;
-    font-weight: 600;
-  }
-  
-  .made-by {
-    font-family: "Ugly Dave";
-    color: #fff;
-  }
-  
-  a:visited {
-    color: #fff;
-  }
-  
-  .close-button {
-    color: var(--card-bg);
-    background-color: #fff;
-    max-width: 100px;
-    padding: 0.5rem 2rem;
-    border-radius: 10rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 0.5rem;
-  }
+}
 
-  .search {
-    display: flex;
-    gap: 0.5rem;
-    width: 75vw;
-    max-width: 400px;
-  }
+input.link {
+  width: 20rem;
+  font-size: 0.85rem;
+}
 
-  #search-for-tracks {
-    text-align: left;
-    width: 25rem;
-  }
+.share-popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
+  /* Hide by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* Ensure it's on top */
+  backdrop-filter: blur(0.5rem);
+  -webkit-backdrop-filter: blur(0.5rem);
+}
 
-  .search-button {
-    display: flex;
-    justify-content: center;
-    color: var(--card-bg);
-    background-color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 0.625rem;
-    font-weight: 600;
-    cursor: pointer;
-    width: 20%;
-  }
-  
-  
-  .show-info {
-    .info-screen {
-      display: flex;
-    }
-  
-    .header, .start-container, .customize-container, .mixtape-container {
-      opacity: 15%;
-    }
-  }
+.show-popup .share-popup {
+  display: flex;
+}
 
-  .creating {
-    .color-options, .mobile-download-options, .download-options, #mixtape-name-input {
-      display: none;
-    }
-  }
-  
-  @media only screen and (min-width: 500px) { 
+.show-popup .header,
+.show-popup .start-container,
+.show-popup .customize-container,
+.show-popup .mixtape-container {
+  opacity: 0.3;
+  /* Dim the content behind the popup */
+}
 
-    .subtitle {
-      max-width: 30vw;
-    }
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: white;
+  /* Text color */
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
 
-    .p-load {
-      letter-spacing: -0.075rem;
-    }
-  
-    .logo-header {
-      letter-spacing: -0.05rem;
-    }
 
-    .content-container {
-      /*flex-direction: row;*/
-      margin-top: 0;
-    }
-  
-    .mixtape-container {
-      aspect-ratio: auto;
-    }
-  
-    h1 {
-      width: var(--mw);
-      font-size: 3.5rem;
-    }
-  
-    .customize, .mix-head {
-      font-size: 2.5rem;
-    }
-  
-    .spotify-icon {
-      width: 1.5rem;
-      height: 1.5rem;
-    }
-  
-    .log-in-button {
-      font-size: 1rem;
-    }
-  
-    .body-container {
-      height: 100vh;
-      justify-content: space-between;
-    }
-  
-    .download {
-      display: flex;
-      font-size: 1rem;
-    }
-  
-    .time-range-option, .refresh, .search-result {
-      font-size: 1rem;
-    }
+.close-popup {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 24px;
+  color: white;
+  /* Ensure it is visible on the background */
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  /* Optional: enhances visibility */
+}
 
-    .search-result {
-      font-size: 0.75rem;
-    }
-  
-    input {
-      font-size: 1rem;
-      color: white;
-    }
 
-    ::placeholder {
-      color: white;
-    }
-  
-    .mix-link {
-      display: flex;
-      gap: 0.75rem;
-    }
-  
-    .mobile-create-playlist {
-      display: none;
-    }
-  
-    .scroll-down {
-      display: none;
-    }
-  
-    .footer {
-      display: flex;
-    }
-
-    .info-head {
-      letter-spacing: -0.075rem;
-    }
+@media only screen and (min-width: 1024px) {
+  h1 {
+    font-size: 3.5rem;
   }
-  
-  input.link {
-    width: 20rem;
-    font-size: 0.85rem;
-  }
-  
-  .share-popup {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    display: none; /* Hide by default */
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Ensure it's on top */
-    backdrop-filter: blur(0.5rem);
-    -webkit-backdrop-filter: blur(0.5rem);
-  }
-  
-  .show-popup .share-popup {
-    display: flex;
-  }
-  
-  .show-popup .header, .show-popup .start-container, .show-popup .customize-container, .show-popup .mixtape-container {
-    opacity: 0.3; /* Dim the content behind the popup */
-  }
-  
-  .popup-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    color: white; /* Text color */
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    width: 90%;
-    max-width: 400px;
-  }
-  
-  
-  .close-popup {
-    cursor: pointer;
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    font-size: 24px;
-    color: white; /* Ensure it is visible on the background */
-    text-shadow: 0 0 10px rgba(0,0,0,0.5); /* Optional: enhances visibility */
-  }
-  
-
-  @media only screen and (min-width: 1024px) {
-    h1 {
-      font-size: 3.5rem;
-    }
-  }
-  
+}

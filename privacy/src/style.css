@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'Ugly Dave';
   src: url('/fonts/Ugly-Dave-Regular.woff2') format('woff2'),
-  url('/fonts/Ugly-Dave-Regular.woff') format('woff');
+    url('/fonts/Ugly-Dave-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
-  }
+}
 
 * {
   font-family: 'Satoshi', sans-serif;
@@ -15,7 +15,7 @@
 :root {
   --card-bg: var(--color-1);
   --mw: min(85vw, 650px);
-  --bg-color: var(--bg-color-1); 
+  --bg-color: var(--bg-color-1);
   --color-1: rgba(173, 151, 129, 1);
   --color-2: rgba(2, 131, 145, 1);
   --color-3: rgba(205, 154, 193, 1);
@@ -23,12 +23,12 @@
   --color-5: rgba(38, 20, 71, 1);
   --color-6: rgba(0, 0, 0, 1);
 
-  --bg-color-1: rgb(218,200,182);
-  --bg-color-2: rgb(53,156,167);
-  --bg-color-3: rgb(215,174,205);
-  --bg-color-4: rgb(242,79,99);
-  --bg-color-5: rgb(60,43,89);
-  --bg-color-6: rgb(25,25,25);
+  --bg-color-1: rgb(218, 200, 182);
+  --bg-color-2: rgb(53, 156, 167);
+  --bg-color-3: rgb(215, 174, 205);
+  --bg-color-4: rgb(242, 79, 99);
+  --bg-color-5: rgb(60, 43, 89);
+  --bg-color-6: rgb(25, 25, 25);
 }
 
 img {
@@ -76,7 +76,8 @@ body {
   min-height: 100vh;
 }
 
-.header, .mobile-header {
+.header,
+.mobile-header {
   display: flex;
   padding: 0.5rem 1rem;
   justify-content: space-between;
@@ -147,7 +148,7 @@ body {
   align-items: center;
   width: 100%;
   gap: 5vh;
-  
+
 }
 
 .start-container {
@@ -172,7 +173,8 @@ h1 {
   font-size: 2.75rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 110%; /* 2.0625rem */
+  line-height: 110%;
+  /* 2.0625rem */
   letter-spacing: -0.05625rem;
   width: 100%;
   max-width: 400px;
@@ -364,7 +366,7 @@ input {
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
   margin-bottom: 2rem;
   /*border: calc(var(--mw) * 5/1000) solid #FFF;*/
-  
+
 }
 
 .cassette-container {
@@ -398,7 +400,8 @@ input {
   box-sizing: border-box;
 }
 
-.case, .texture {
+.case,
+.texture {
   width: 100%;
   aspect-ratio: 1829/1159;
 }
@@ -441,7 +444,8 @@ input {
   box-sizing: border-box;
 }
 
-.a-side, .b-side {
+.a-side,
+.b-side {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -489,7 +493,9 @@ input {
   box-sizing: content-box;
 }
 
-.track, a.track-link, a.track-link:visited {
+.track,
+a.track-link,
+a.track-link:visited {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -503,7 +509,8 @@ input {
   font-size: calc(var(--mw) * 24/1000);
   font-style: normal;
   font-weight: 400;
-  line-height: 100%; /* 19.2px */
+  line-height: 100%;
+  /* 19.2px */
   text-decoration: none;
 }
 
@@ -632,11 +639,13 @@ p.privacy-text {
   font-size: 1rem;
 }
 
-a.p-link, a.p-link:visited {
+a.p-link,
+a.p-link:visited {
   color: #fff;
 }
 
-a.back-button, a.back-button:visited {
+a.back-button,
+a.back-button:visited {
   color: var(--card-bg);
   padding: 0.75rem 1rem;
   background-color: #fff;
@@ -671,12 +680,15 @@ a:visited {
     display: flex;
   }
 
-  .header, .start-container, .customize-container, .mixtape-container {
+  .header,
+  .start-container,
+  .customize-container,
+  .mixtape-container {
     opacity: 15%;
   }
 }
 
-@media only screen and (min-width: 500px) { 
+@media only screen and (min-width: 500px) {
 
   .p-load {
     letter-spacing: -0.075rem;
@@ -693,7 +705,8 @@ a:visited {
     font-size: 3.5rem;
   }
 
-  .customize, .mix-head {
+  .customize,
+  .mix-head {
     font-size: 2.5rem;
   }
 
