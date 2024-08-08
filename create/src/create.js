@@ -151,14 +151,20 @@ async function runSearch() {
   results.tracks.items.forEach((track) => {
     const name = track.name;
     const url = track.external_urls.spotify;
+    const art = track.album.images[0].url;
+    var explicit = "";
+    if (track.explicit) {
+      var explicit = "🅴 ";
+    }
     const artistsList = [];
     track.artists.forEach((artist) => {
       artistsList.push(artist.name);
     });
     const artists = artistsList.join(", ");
     output.push({
-      string: name + " - " + artists,
+      string: explicit + name + " - " + artists,
       url: url,
+      art: art,
     });
   });
 
@@ -179,7 +185,7 @@ function updateResultsSection(results) {
     var newHTML = ``;
     var i = 0;
     results.forEach((result) => {
-      newHTML += `<div class="search-result" url="${result.url}" id="${i}">${result.string}</div>`;
+      newHTML += `<div class="search-result" url="${result.url}" id="${i}"> <img src="${result.art}" class="cover-art" alt="cover-art"> <p>${result.string}</p>   </div>`;
       i += 1;
     });
     document.getElementById("search-results").innerHTML = newHTML;

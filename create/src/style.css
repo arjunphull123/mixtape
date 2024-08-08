@@ -311,6 +311,14 @@ h1 {
   white-space: nowrap;
 }
 
+.cover-art {
+  aspect-ratio: 1;
+  height: 1.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #FFF;
+  margin-left: 0.5rem;
+}
+
 .time-range-option.active,
 .refresh.active,
 .search-result:active {
