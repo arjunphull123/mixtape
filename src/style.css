@@ -42,14 +42,14 @@ E0b0d5 - lavender - 224, 176, 213
   --bg-color: var(--bg-color-1);
   --color-1: rgba(173, 151, 129, 1);
   --color-2: rgba(2, 131, 145, 1);
-  --color-3: rgba(205, 154, 193, 1);
+  --color-3: rgba(128, 191, 2, 1);
   --color-4: rgba(239, 35, 60, 1);
   --color-5: rgba(38, 20, 71, 1);
   --color-6: rgba(0, 0, 0, 1);
 
   --bg-color-1: rgb(218, 200, 182);
   --bg-color-2: rgb(53, 156, 167);
-  --bg-color-3: rgb(215, 174, 205);
+  --bg-color-3: rgb(138, 206, 0);
   --bg-color-4: rgb(242, 79, 99);
   --bg-color-5: rgb(60, 43, 89);
   --bg-color-6: rgb(25, 25, 25);
