@@ -18,6 +18,7 @@
 * {
   font-family: 'Satoshi', sans-serif;
   margin: 0;
+  font-feature-settings: 'ss03' on;
 }
 
 /*
