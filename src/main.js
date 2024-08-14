@@ -33,21 +33,38 @@ const clientId = "4b027ab3c8dd4b1f9ef6d083d0b51fb5"; // Replace with your client
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 
-window.onload = function () {
-  // Instagram check:
-  var ua = navigator.userAgent || navigator.vendor || window.opera;
-  console.log("User Agent:", ua);
-  var isInstagram = ua.indexOf("Instagram") > -1 ? true : false;
-  var isSnapchat = ua.indexOf("Snapchat") > -1 ? true : false;
+(function () {
+  // Save a reference to the original console.log method
+  var originalLog = console.log;
 
-  if (isInstagram) {
-    document.body.classList.add("show-insta");
-  }
+  // Override the console.log method
+  console.log = function (message) {
+    // Check if the message contains "FBNav"
+    if (
+      typeof message === "string" &&
+      message.includes("FBNav")
+    ) {
+      document.body.classList.add("show-insta");
+    }
 
-  if (isSnapchat) {
-    document.body.classList.add("show-snap");
-  }
-};
+    // Call the original console.log method with the original arguments
+    originalLog.apply(console, arguments);
+  };
+})();
+
+// Instagram check:
+var ua = navigator.userAgent || navigator.vendor || window.opera;
+//console.log("User Agent:", ua);
+var isInstagram = ua.indexOf("Instagram") > -1 ? true : false;
+var isSnapchat = ua.indexOf("Snapchat") > -1 ? true : false;
+
+if (isInstagram) {
+  document.body.classList.add("show-insta");
+}
+
+if (isSnapchat) {
+  document.body.classList.add("show-snap");
+}
 
 // Initialize the default time range for data shown
 var timeRange = "short_term";
