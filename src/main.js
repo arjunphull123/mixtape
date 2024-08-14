@@ -33,19 +33,21 @@ const clientId = "4b027ab3c8dd4b1f9ef6d083d0b51fb5"; // Replace with your client
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
 
-// Instagram check:
-var ua = navigator.userAgent || navigator.vendor || window.opera;
-console.log(ua)
-var isInstagram = ua.indexOf("Instagram") > -1 ? true : false;
-var isSnapchat = ua.indexOf("Snapchat") > -1 ? true : false;
+window.onload = function () {
+  // Instagram check:
+  var ua = navigator.userAgent || navigator.vendor || window.opera;
+  console.log(ua);
+  var isInstagram = ua.indexOf("Instagram") > -1 ? true : false;
+  var isSnapchat = ua.indexOf("Snapchat") > -1 ? true : false;
 
-if (isInstagram) {
-  document.body.classList.add("show-insta");
-}
+  if (isInstagram) {
+    document.body.classList.add("show-insta");
+  }
 
-if (isSnapchat) {
-  document.body.classList.add("show-snap");
-}
+  if (isSnapchat) {
+    document.body.classList.add("show-snap");
+  }
+};
 
 // Initialize the default time range for data shown
 var timeRange = "short_term";
@@ -660,7 +662,6 @@ async function getPreview() {
 
   return dataUrl;
 }
-
 
 // Firebase handling
 
