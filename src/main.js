@@ -36,7 +36,7 @@ const code = params.get("code");
 window.onload = function () {
   // Instagram check:
   var ua = navigator.userAgent || navigator.vendor || window.opera;
-  console.log(ua);
+  console.log("User Agent:", ua);
   var isInstagram = ua.indexOf("Instagram") > -1 ? true : false;
   var isSnapchat = ua.indexOf("Snapchat") > -1 ? true : false;
 
