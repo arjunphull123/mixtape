@@ -40,10 +40,7 @@ const code = params.get("code");
   // Override the console.log method
   console.log = function (message) {
     // Check if the message contains "FBNav"
-    if (
-      typeof message === "string" &&
-      message.includes("FBNav")
-    ) {
+    if (typeof message === "string" && message.includes("FBNav")) {
       document.body.classList.add("show-insta");
     }
 
