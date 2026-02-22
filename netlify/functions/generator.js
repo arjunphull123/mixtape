@@ -16,9 +16,30 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
 export const handler = async (event, context) => {
-  let id = event.queryStringParameters.id;
+  const query = event.queryStringParameters || {};
+  let id = query.id;
+
+  // Temporary debug logging for crawler behavior (Apple Messages, etc.)
+  console.log(
+    JSON.stringify({
+      tag: "generator-request",
+      requestId: context?.awsRequestId,
+      rawUrl: event.rawUrl,
+      path: event.path,
+      rawQuery: event.rawQuery,
+      queryStringParameters: query,
+      headers: {
+        "user-agent": event.headers?.["user-agent"],
+        "x-forwarded-for": event.headers?.["x-forwarded-for"],
+        "x-forwarded-host": event.headers?.["x-forwarded-host"],
+        "x-forwarded-proto": event.headers?.["x-forwarded-proto"],
+        referer: event.headers?.referer,
+      },
+    })
+  );
 
   if (!id) {
+    console.log('No id found in query; falling back to default.jpg');
     id = 'default.jpg';
   }
 
@@ -29,7 +50,9 @@ export const handler = async (event, context) => {
 
     try {
       imageDownloadUrl = await getDownloadURL(imageRef);
+      console.log(`Found cover in storage for id=${id}`);
     } catch (error) {
+      console.log(`Primary cover missing for id=${id}; attempting default fallback`);
       if (id !== 'default.jpg') {
         const defaultImageRef = ref(storage, 'covers/default.jpg');
         imageDownloadUrl = await getDownloadURL(defaultImageRef);
@@ -55,6 +78,7 @@ export const handler = async (event, context) => {
       isBase64Encoded: true,
     };
   } catch (error) {
+    console.error('generator-error', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),

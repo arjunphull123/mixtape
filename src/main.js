@@ -160,7 +160,7 @@ if (!code) {
   window.tracksLong = JSON.parse(sessionStorage.getItem("tracksLong"));
 
   if (sessionStorage.getItem("recommended")) {
-    recommended = JSON.parse(sessionStorage.getItem("tracksLong"));
+    recommended = JSON.parse(sessionStorage.getItem("recommended"));
   } else {
     recommended = await fetchRecommended(
       accessToken,
